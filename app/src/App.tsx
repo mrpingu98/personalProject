@@ -1,11 +1,16 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { HomeRoute } from "./Routes/HomeRoutes";
 import { BrowserRouter } from "react-router-dom";
+import {DrumAndBassRoute} from "./Routes/DrumAndBassRoutes";
 
 function AppRoutes() {
-  return <HomeRoute />;
+  return (
+  <>
+    <HomeRoute />
+    <DrumAndBassRoute />
+</>
+  )
 }
 
 function App() {
