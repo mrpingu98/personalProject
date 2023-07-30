@@ -5,7 +5,7 @@ import {DrumAndBass} from "../Pages/DrumAndBass";
 export const DrumAndBassRoute: React.FC = () => {
   return (
     <Routes>
-      <Route path="/dnb" element={<DrumAndBass />} />
+      <Route path="/music/dnb" element={<DrumAndBass />} />
     </Routes>
   );
 };
