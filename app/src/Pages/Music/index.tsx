@@ -1,20 +1,43 @@
 import React from "react";
-import logo from "../../logo.svg";
 import "../../App.css";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { TopSongsList } from "./TopSongsList";
+import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import createTheme from "@mui/material/styles/createTheme";
 
 const Music: React.FC = () => {
+  const { t } = useTranslation("spotifyEmbedLinks");
+  const styles = useStyles();
 
-  const { t } = useTranslation('spotifyEmbedLinks');
+  const songList2023 = [
+    t("imanuOfTwoMinds"),
+    t("gyrofieldFemmeFatale"),
+    t("yaanoHadEnough"),
+    t('signalHowWillIKnow')
+  ];
 
   return (
-    <div className="App">
-        <iframe src="https://open.spotify.com/embed/track/7Btth4NK0ICZC9DjYZPxgg?utm_source=generator&theme=0" width="50%" height="152" allowFullScreen={false} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src={t('gyrofieldFemmeFatale')} width="50%" height="152" allowFullScreen={false}  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src="https://open.spotify.com/embed/track/0mkLZOX8LXsag3qrUWPRkF?utm_source=generator" width="50%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        {t('gyrofieldFemmeFatale')}
-    </div>
+
+    <Box className={styles.listContainer}>
+      <Box width='40%'>
+      {songList2023.map(song => (
+      <TopSongsList url={song} />
+      ))}
+      </Box>
+    </Box>
+  
   );
 };
+
+const theme = createTheme();
+const useStyles = makeStyles({
+  listContainer: {
+    padding: theme.spacing(4),
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+});
 
 export { Music };

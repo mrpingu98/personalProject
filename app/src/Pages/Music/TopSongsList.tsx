@@ -1,15 +1,30 @@
 import React from "react";
-import logo from "../../logo.svg";
 import "../../App.css";
+import { makeStyles } from "@mui/styles";
+interface TopSongsListProps {
+  url: string;
+}
 
-const TopSongsList: React.FC = () => {
+const TopSongsList: React.FC<TopSongsListProps> = ({ url }) => {
+  const styles = useStyles();
+
   return (
-    <div className="App">
-        <iframe src="https://open.spotify.com/embed/track/7Btth4NK0ICZC9DjYZPxgg?utm_source=generator&theme=0" width="50%" height="152" allowFullScreen={false} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src="https://open.spotify.com/embed/track/0nya7xFhh5Or0cfsc3wVCU?utm_source=generator" width="50%" height="152" allowFullScreen={false}  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src="https://open.spotify.com/embed/track/0mkLZOX8LXsag3qrUWPRkF?utm_source=generator" width="50%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div>
+      <iframe
+        className={styles.spotifyElement}
+        src={url}
+        title="Spotify Track"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      />
     </div>
   );
 };
+
+const useStyles = makeStyles({
+  spotifyElement: {
+    height: 152,
+  },
+});
 
 export { TopSongsList };
