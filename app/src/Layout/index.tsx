@@ -26,6 +26,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
     minHeight: "100vh",
     position: "relative",
+    backgroundColor: "#282c34",
+    marginTop: 65
   },
   children: {
     marginBottom: theme.spacing(5),

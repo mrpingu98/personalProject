@@ -7,11 +7,13 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
 
 const pages = ["Muzik", "Merch", "Blog"];
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
+  const styles = useStyles();
 
   const handleNavbarNavigation = (page: string) => {
     if (page === "Muzik") {
@@ -22,7 +24,7 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className={styles.navBar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -59,4 +61,10 @@ const NavBar: React.FC = () => {
     </AppBar>
   );
 };
+
+
+const useStyles = makeStyles({
+  navBar: {
+    height: 65  },
+});
 export default NavBar;
