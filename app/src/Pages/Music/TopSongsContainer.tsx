@@ -25,6 +25,7 @@ const TopSongsContainer: React.FC<TopSongsContainerProps> = ({ url }) => {
 const useStyles = makeStyles({
   spotifyElement: {
     height: 152,
+    borderRadius: '15px',
   },
 });
 

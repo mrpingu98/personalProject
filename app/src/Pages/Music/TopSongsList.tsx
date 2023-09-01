@@ -25,7 +25,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
           bgcolor: "#282c34",
           position: "relative",
           overflow: "auto",
-          maxHeight: 350,
+          maxHeight: 700,
           "& ul": { padding: 0 },
         }}
       >
