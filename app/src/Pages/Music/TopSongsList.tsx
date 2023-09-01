@@ -1,30 +1,40 @@
-import React from "react";
-import "../../App.css";
-import { makeStyles } from "@mui/styles";
+import * as React from "react";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import { TopSongsContainer } from "./TopSongsContainer";
+import { Typography } from "@mui/material";
+
 interface TopSongsListProps {
-  url: string;
+  songUrlList: string[];
+  title: string;
 }
 
-const TopSongsList: React.FC<TopSongsListProps> = ({ url }) => {
-  const styles = useStyles();
-
+export const TopSongsList: React.FC<TopSongsListProps> = ({
+  songUrlList,
+  title,
+}) => {
   return (
-    <div>
-      <iframe
-        className={styles.spotifyElement}
-        src={url}
-        title="Spotify Track"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      />
-    </div>
+    <>
+      <Typography variant="h1" marginBottom={2} color={"#7FFFD4"}>
+        {title}
+      </Typography>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "#282c34",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: 350,
+          "& ul": { padding: 0 },
+        }}
+      >
+        {songUrlList.map((x) => (
+          <ListItem>
+            <TopSongsContainer url={x} />
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
-
-const useStyles = makeStyles({
-  spotifyElement: {
-    height: 152,
-  },
-});
-
-export { TopSongsList };
