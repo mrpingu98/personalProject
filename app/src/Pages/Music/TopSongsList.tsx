@@ -1,15 +1,40 @@
-import React from "react";
-import logo from "../../logo.svg";
-import "../../App.css";
+import * as React from "react";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import { TopSongsContainer } from "./TopSongsContainer";
+import { Typography } from "@mui/material";
 
-const TopSongsList: React.FC = () => {
+interface TopSongsListProps {
+  songUrlList: string[];
+  title: string;
+}
+
+export const TopSongsList: React.FC<TopSongsListProps> = ({
+  songUrlList,
+  title,
+}) => {
   return (
-    <div className="App">
-        <iframe src="https://open.spotify.com/embed/track/7Btth4NK0ICZC9DjYZPxgg?utm_source=generator&theme=0" width="50%" height="152" allowFullScreen={false} allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src="https://open.spotify.com/embed/track/0nya7xFhh5Or0cfsc3wVCU?utm_source=generator" width="50%" height="152" allowFullScreen={false}  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe src="https://open.spotify.com/embed/track/0mkLZOX8LXsag3qrUWPRkF?utm_source=generator" width="50%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    <>
+      <Typography variant="h1" marginBottom={2} color={"#7FFFD4"}>
+        {title}
+      </Typography>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "#282c34",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: 700,
+          "& ul": { padding: 0 },
+        }}
+      >
+        {songUrlList.map((x) => (
+          <ListItem>
+            <TopSongsContainer url={x} />
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
-
-export { TopSongsList };
