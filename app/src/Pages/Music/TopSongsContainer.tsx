@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   spotifyElement: {
     height: 152,
     borderRadius: '15px',
+    border: 'none'
   },
 });
 

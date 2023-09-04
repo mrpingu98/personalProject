@@ -27,7 +27,8 @@ const useStyles = makeStyles({
     minHeight: "100vh",
     position: "relative",
     backgroundColor: "#282c34",
-    marginTop: 65
+    marginTop: 65,
+    padding: theme.spacing(4)
   },
   children: {
     marginBottom: theme.spacing(5),

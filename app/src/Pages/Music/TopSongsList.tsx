@@ -15,7 +15,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
 }) => {
   return (
     <>
-      <Typography variant="h1" marginBottom={2} color={"#7FFFD4"}>
+      <Typography variant="h2" marginBottom={2} color={"#7FFFD4"}>
         {title}
       </Typography>
       <List
@@ -25,7 +25,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
           bgcolor: "#282c34",
           position: "relative",
           overflow: "auto",
-          maxHeight: 700,
+          maxHeight: 675,
           "& ul": { padding: 0 },
         }}
       >
