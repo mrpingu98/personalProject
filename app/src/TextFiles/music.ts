@@ -1,4 +1,4 @@
 export const music = {
     dnb: 'Dnb',
-    rockMetal: 'Rock / Metal'
+    rockMetal: 'Rock'
 }
