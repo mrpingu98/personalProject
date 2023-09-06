@@ -16,7 +16,7 @@ const Music: React.FC = () => {
   return (
     <Box className={styles.pageParameters}>
       <Box className={styles.title}>
-    <Typography variant="h1" color={"#7FFFD4"}>{tyear('2023')}</Typography>
+    <Typography variant="h1">{tyear('2023')}</Typography>
     </Box>
     <Box className={styles.mainContainer}>
     <Box className={styles.listContainer}>
