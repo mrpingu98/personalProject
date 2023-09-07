@@ -1,24 +1,22 @@
-import { TypographyClassKey } from '@mui/material';
-import { CSSProperties } from '@mui/styles';
+import { TypographyStyleOptions, Variant } from '@mui/material/styles/createTypography';
 
-export const typographyOverrides: Partial<Record<TypographyClassKey, CSSProperties>> = {
+export const typographyOverrides: Partial<Record<Variant, TypographyStyleOptions>> = {
   h1: {
     fontSize: 55,
     fontWeight: 500,
-    color: "#453939"
+    color: "#656565",
+    fontFamily: 'Arial',
   },
   h2: {
     fontSize: 40,
     fontWeight: 500,
-    color: "#453939",
+    color: "#656565",
+    fontFamily: 'Arial',
   },
   body2: {
     fontSize: 18,
     lineHeight: 1.2,
-    color: "#453939",
-    fontFamily: 'Arial',
-  },
-  root: {
+    color: "#656565",
     fontFamily: 'Arial',
   },
 };
