@@ -27,7 +27,6 @@ const NavBar: React.FC = () => {
     <AppBar className={styles.navBar}  sx={{ backgroundColor: '#858585' }} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -50,7 +49,7 @@ const NavBar: React.FC = () => {
               <Button
                 key={page}
                 onClick={() => handleNavbarNavigation(page)}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "white", display: "block"}}
               >
                 {page}
               </Button>
