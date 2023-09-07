@@ -7,6 +7,11 @@ import Layout from "./Layout";
 import { MusicRoute } from "./Routes/MusicRoute";
 import './Configuration/configurei18n';
 //to allow the useTranslation to work, seem to just have to import the configuration here - not wrap it around anything
+import { createTheme, ThemeProvider } from "@mui/material";
+import { theme } from "./Theme";
+
+
+const muiTheme = createTheme(theme)
 
 function AppRoutes() {
   return (
@@ -22,7 +27,9 @@ function App() {
   return (
     <BrowserRouter>
     <Layout>
+      <ThemeProvider theme={muiTheme}>
       <AppRoutes />
+      </ThemeProvider>
     </Layout>
     </BrowserRouter>
   );

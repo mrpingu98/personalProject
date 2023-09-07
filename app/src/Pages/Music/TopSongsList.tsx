@@ -15,17 +15,17 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
 }) => {
   return (
     <>
-      <Typography variant="h1" marginBottom={2} color={"#7FFFD4"}>
+      <Typography variant="h2" marginBottom={2}>
         {title}
       </Typography>
       <List
         sx={{
           width: "100%",
           maxWidth: 360,
-          bgcolor: "#282c34",
+          bgcolor: "#f3efeb",
           position: "relative",
           overflow: "auto",
-          maxHeight: 700,
+          maxHeight: 675,
           "& ul": { padding: 0 },
         }}
       >

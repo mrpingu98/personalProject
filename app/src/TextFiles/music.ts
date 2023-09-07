@@ -1,3 +1,4 @@
 export const music = {
-    topDnb2023: 'Dnb 2023'
+    dnb: 'Dnb',
+    rockMetal: 'Rock'
 }
