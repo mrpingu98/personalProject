@@ -19,7 +19,8 @@ export function TopDnb2023 (): string[] {
         t('gyrofieldFallenInDeep'),
         t('imanuSkinToSkin'),
         t('skrillexSupersonic'),
-        t('skylarkCobalt')
+        t('skylarkCobalt'),
+        t('visagesMKULTRA')
       ];
     return songList
 }
@@ -41,7 +42,7 @@ export function TopRockMetal2023 (): string[] {
       t('roloTomassiAFloodOfLight'),
       t('spiritboxJaded'),
       t('pvrisDontwannaDoThisAnymore'),
-
+      t('deftonesDriveFarAwayAcoustic'),
     ];
   return songList
 }
