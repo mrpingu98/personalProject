@@ -9,7 +9,8 @@ import './Configuration/configurei18n';
 //to allow the useTranslation to work, seem to just have to import the configuration here - not wrap it around anything
 import { createTheme, ThemeProvider } from "@mui/material";
 import { theme } from "./Theme";
-
+import { store } from "./Store/configureStore";
+import { Provider } from 'react-redux'
 
 const muiTheme = createTheme(theme)
 
@@ -26,11 +27,13 @@ function AppRoutes() {
 function App() {
   return (
     <BrowserRouter>
+    <Provider store={store}>
     <Layout>
       <ThemeProvider theme={muiTheme}>
       <AppRoutes />
       </ThemeProvider>
     </Layout>
+    </Provider>
     </BrowserRouter>
   );
 }

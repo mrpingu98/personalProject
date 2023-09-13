@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div>
       <NavBar />
       <main className={styles.content}>
-        <div>{children}</div>
+        <div className={styles.children}>{children}</div>
       </main>
     </div>
   );
@@ -28,10 +28,12 @@ const useStyles = makeStyles({
     position: "relative",
     backgroundColor: "#f3efeb",
     marginTop: 65,
-    padding: theme.spacing(4)
+    padding: theme.spacing(6)
   },
   children: {
     marginBottom: theme.spacing(5),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
 });
 export default Layout;

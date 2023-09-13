@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
-import { TopDnb2023, TopRockMetal2023 } from "../../Constants/TopSongsLists";
+import { TopDnb2023, TopRockMetal2023 } from "../../Constants/topSongsLists";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 

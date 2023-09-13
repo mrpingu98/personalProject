@@ -5,18 +5,22 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import AdbIcon from "@mui/icons-material/Adb";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-
-const pages = ["Muzik", "Merch", "Blog"];
+import { useUserName } from "../Store/Username/hooks";
+import { useTranslation } from "react-i18next";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const styles = useStyles();
+  const { userName } = useUserName();
+  const { t } = useTranslation("navbar");
+
+  const pages = [t("Muzik"), t("Merch")];
 
   const handleNavbarNavigation = (page: string) => {
-    if (page === "Muzik") {
+    if (page === t('Muzik')) {
       navigate("/music");
     } else {
       console.log(`Page URL not found for: ${page}`);
@@ -24,7 +28,7 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <AppBar className={styles.navBar}  sx={{ backgroundColor: '#858585' }} >
+    <AppBar className={styles.navBar} sx={{ backgroundColor: "#858585" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -49,11 +53,15 @@ const NavBar: React.FC = () => {
               <Button
                 key={page}
                 onClick={() => handleNavbarNavigation(page)}
-                sx={{ my: 2, color: "white", display: "block"}}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
             ))}
+          </Box>
+          <Box className={styles.userName}>
+            <AccountCircleIcon />
+            <Typography marginLeft={2}>{userName}</Typography>
           </Box>
         </Toolbar>
       </Container>
@@ -61,11 +69,14 @@ const NavBar: React.FC = () => {
   );
 };
 
-
 const useStyles = makeStyles({
   navBar: {
     height: 65,
     position: "fixed",
+  },
+  userName: {
+    display: "flex",
+    justifyContent: "flex-end",
   },
 });
 export default NavBar;
