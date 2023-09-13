@@ -10,5 +10,5 @@ export const enResources = {
   music: music,
   numbersAndDates: numbersAndDates,
   home: home,
-  navbr: navbar
+  navbar: navbar
 };
