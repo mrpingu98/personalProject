@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useUserName } from "../../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
+import { PrimaryButton } from "../../Components/PrimaryButton";
 
 const Home: React.FC = () => {
   const styles = useStyles();
@@ -29,10 +30,14 @@ const Home: React.FC = () => {
             value={userNameEntered}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setUserNameEntered(event.target.value);
+              
             }}
           />
           <Box marginLeft={'10%'} marginTop={'3%'}>
-          <Button onClick={onClickUpdateUserName}>{t('update')}</Button>
+          <PrimaryButton
+          onClick={onClickUpdateUserName}
+          text={t('update')}
+          />
           </Box>
         </Box>
       </Box>
