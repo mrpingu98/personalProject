@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useUserName } from "../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
+import { NavBarButton } from "./NavBarButton";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const NavBar: React.FC = () => {
   const pages = [t("Muzik"), t("Merch")];
 
   const handleNavbarNavigation = (page: string) => {
-    if (page === t('Muzik')) {
+    if (page === t("Muzik")) {
       navigate("/music");
     } else {
       console.log(`Page URL not found for: ${page}`);
@@ -46,17 +46,14 @@ const NavBar: React.FC = () => {
               textDecoration: "none",
             }}
           >
-            MRPINGU98
+            {t("mrpingu98")}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
+              <NavBarButton
                 onClick={() => handleNavbarNavigation(page)}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+                text={page}
+              />
             ))}
           </Box>
           <Box className={styles.userName}>

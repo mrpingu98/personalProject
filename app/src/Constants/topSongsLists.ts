@@ -20,7 +20,9 @@ export function TopDnb2023 (): string[] {
         t('imanuSkinToSkin'),
         t('skrillexSupersonic'),
         t('skylarkCobalt'),
-        t('visagesMKULTRA')
+        t('visagesMKULTRA'),
+        t('koherentStabTrilogy'),
+        t('buunshinMakeMoney'),
       ];
     return songList
 }

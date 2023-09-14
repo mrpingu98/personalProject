@@ -32,4 +32,6 @@ export const spotifyEmbedLinks = {
     spiritboxJaded: "https://open.spotify.com/embed/track/1ZdDr1zM46JxFu2ugQc1mE?utm_source=generator",
     deftonesDriveFarAwayAcoustic: "https://open.spotify.com/embed/track/38EwsVqVQnTnHn90LzDaIf?utm_source=generator",
     visagesMKULTRA: "https://open.spotify.com/embed/track/6FqZvu8UGPSWW3Efpgt18N?utm_source=generator",
+    koherentStabTrilogy: "https://open.spotify.com/embed/track/3ySnXn4FogZrbh8auoPbcZ?utm_source=generator",
+    buunshinMakeMoney: "https://open.spotify.com/embed/track/7F9nLS3zCwdcmoSamxstzE?utm_source=generator",
 }
