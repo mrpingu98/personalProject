@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Music } from "../Pages/Music";
+import { routes } from "../Constants/Routes";
 
 
 export const MusicRoute: React.FC = () => {
   return (
     <Routes>
-      <Route path="/music" element={<Music />} />
+      <Route path={routes.music}element={<Music />} />
     </Routes>
   );
 };

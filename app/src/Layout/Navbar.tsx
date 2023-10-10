@@ -10,6 +10,7 @@ import { makeStyles } from "@mui/styles";
 import { useUserName } from "../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
 import { NavBarButton } from "./NavBarButton";
+import { routes } from "../Constants/Routes";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const NavBar: React.FC = () => {
 
   const handleNavbarNavigation = (page: string) => {
     if (page === t("Muzik")) {
-      navigate("/music");
+      navigate(routes.music);
     } else {
       console.log(`Page URL not found for: ${page}`);
     }

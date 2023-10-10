@@ -5,6 +5,8 @@ import createTheme from "@mui/material/styles/createTheme";
 import { TopDnb2023, TopRockMetal2023 } from "../../Constants/topSongsLists";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
+import { LinkButton } from "../../Components/LinkButton";
+import { routes } from "../../Constants/Routes";
 
 const Music: React.FC = () => {
   const styles = useStyles();
@@ -14,6 +16,13 @@ const Music: React.FC = () => {
   const{t:tyear} = useTranslation("numbersAndDates")
 
   return (
+    <>
+     <Box className={styles.links}>
+        <LinkButton 
+        href={routes.personalisedSpotify}
+        text={t('spotifyApi')}
+        />
+      </Box>
     <Box className={styles.pageParameters}>
       <Box className={styles.title}>
     <Typography variant="h1">{tyear('2023')}</Typography>
@@ -27,6 +36,7 @@ const Music: React.FC = () => {
     </Box>
     </Box>
     </Box>
+    </>
   );
 };
 
@@ -51,6 +61,12 @@ const useStyles = makeStyles({
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
+  },
+  links: {
+    alignItems: "flex-start",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

@@ -4,18 +4,20 @@ import React from "react";
 interface LinkButtonProps {
   onClick?: () => void;
   text?: string;
+  href: string;
 }
 
-const PrimaryButton: React.FC<LinkButtonProps> = ({ onClick, text }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ onClick, text, href }) => {
   return (
     <Button
       onClick={onClick}
+      href={href}
       sx={{
-        color: "#f3efeb",
+        color: "#656565",
         display: "block",
-        bgcolor:  "#656565",
+        bgcolor: "#f3efeb",
         ":hover": {
-          bgcolor:"#858585",
+          bgcolor: "#858585",
           color: "white",
         },
       }}
@@ -25,4 +27,4 @@ const PrimaryButton: React.FC<LinkButtonProps> = ({ onClick, text }) => {
   );
 };
 
-export { PrimaryButton };
+export { LinkButton };
