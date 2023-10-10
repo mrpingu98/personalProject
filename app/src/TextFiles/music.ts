@@ -1,4 +1,5 @@
 export const music = {
     dnb: 'Dnb',
-    rockMetal: 'Rock'
+    rockMetal: 'Rock',
+    spotifyApi: 'spotify api'
 }

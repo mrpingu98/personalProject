@@ -3,6 +3,7 @@ import { music } from "./music";
 import { numbersAndDates } from "./numbersAndDates";
 import { home } from "./home";
 import {navbar} from './navbar'
+import { personalisedSpotify } from "./personalisedSpotify";
 
 
 export const enResources = {
@@ -10,5 +11,6 @@ export const enResources = {
   music: music,
   numbersAndDates: numbersAndDates,
   home: home,
-  navbar: navbar
+  navbar: navbar,
+  personalisedSpotify: personalisedSpotify,
 };
