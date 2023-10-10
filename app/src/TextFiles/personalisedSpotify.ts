@@ -1,5 +1,5 @@
 export const personalisedSpotify = {
 refreshToken: "Refresh Token",
-getData: "Get Data",
+getProfile: "Get Profile",
 initialAuthorisation: "Initial Authorisation"
 }

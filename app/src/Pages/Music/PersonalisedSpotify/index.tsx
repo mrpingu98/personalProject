@@ -31,7 +31,7 @@ const PersonalisedSpotify: React.FC = () => {
     <Box className={styles.pageParameters}>
       <Button onClick={initalAuthorisaton}>{t("initialAuthorisation")}</Button>
 
-      <Button onClick={getUserProfile}>{t("getData")}</Button>
+      <Button onClick={getUserProfile}>{t("getProfile")}</Button>
 
       <Button onClick={refreshToken}>{t("refreshToken")}</Button>
     </Box>
