@@ -2,10 +2,9 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
-// import { fetchSpotifyApiAuthorisation } from "../../../Store/SpotifyAPI/tokenRequest";
 import { getProfile } from "../../../Store/SpotifyAPI/getProfile";
 import { refreshAccessToken } from "../../../Store/SpotifyAPI/refreshAccessToken";
-import { CodeVerifier } from "../../../Store/SpotifyAPI/authorisationRequest";
+import { AuthorisationRequest } from "../../../Store/SpotifyAPI/authorisationRequest";
 import { useTranslation } from "react-i18next";
 
 const PersonalisedSpotify: React.FC = () => {
@@ -16,7 +15,7 @@ const PersonalisedSpotify: React.FC = () => {
   //refresh api calls to happen automatically 
 
   const initalAuthorisaton = React.useCallback(() => {
-    CodeVerifier();
+    AuthorisationRequest();
   }, []);
 
   const getUserProfile = React.useCallback(() => {
@@ -27,13 +26,25 @@ const PersonalisedSpotify: React.FC = () => {
     refreshAccessToken();
   }, []);
 
+  const hasUserAuthorised = localStorage.getItem('access_token')
+  
+
+
   return (
     <Box className={styles.pageParameters}>
+      {hasUserAuthorised  ?
+       <>
+       <Button onClick={getUserProfile}>{t("getProfile")}</Button>
+       <Button onClick={refreshToken}>{t("refreshToken")}</Button>
+       </>
+       :
+      <>
       <Button onClick={initalAuthorisaton}>{t("initialAuthorisation")}</Button>
+      </>
+      
+}
 
-      <Button onClick={getUserProfile}>{t("getProfile")}</Button>
-
-      <Button onClick={refreshToken}>{t("refreshToken")}</Button>
+  
     </Box>
   );
 };
