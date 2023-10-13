@@ -2,9 +2,8 @@ import { spotifyAPI } from "../../Constants/SpotifyAPI";
 
 export const fetchTokenRequest = () => {
   const searchParams = new URLSearchParams(window.location.search);
-  console.log('no code')
+  
   if (searchParams.has("code")) {
-    console.log('code')
     const codeVerifiers = localStorage.getItem("code_verifier");
     const code = searchParams.get('code')
 
@@ -34,3 +33,6 @@ export const fetchTokenRequest = () => {
       })
   }
 };
+
+//first we check if the url has a query parameter 'code' - if it does, extract it and save to local storage 
+//then pass this in the body of our token request 
