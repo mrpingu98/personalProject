@@ -2,13 +2,12 @@ import { apiEndpoints } from "../../Constants/Endpoints";
 
 export const refreshAccessToken = () => {
     const refreshToken = localStorage.getItem('refresh_token');
-    let body = new URLSearchParams({
+    const tokenUrl = apiEndpoints.spotifyTokenRequest
+    const body = new URLSearchParams({
         grant_type: 'refresh_token',
         refresh_token: refreshToken == null ? '' : refreshToken,
         client_id: '44deba64e2b04230a4e7c818ca419918'
     })
-
-    const tokenUrl = apiEndpoints.spotifyTokenRequest
 
 fetch(tokenUrl, {
   method: 'POST',
@@ -30,5 +29,4 @@ fetch(tokenUrl, {
   .catch(error => {
     console.error('Error:', error);
   });
-
 }

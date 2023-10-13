@@ -7,6 +7,7 @@ import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
 import { routes } from "../../Constants/Routes";
+import { fetchTokenRequest } from "../../Store/SpotifyAPI/fetchTokenRequest";
 
 const Music: React.FC = () => {
   const styles = useStyles();
@@ -15,12 +16,16 @@ const Music: React.FC = () => {
   const { t } = useTranslation("music");
   const{t:tyear} = useTranslation("numbersAndDates")
 
+  React.useEffect(() => {
+    fetchTokenRequest()
+  },[])
+
   return (
     <>
      <Box className={styles.links}>
         <LinkButton 
-        href={routes.personalisedSpotify}
         text={t('spotifyApi')}
+        route={routes.personalisedSpotify}
         />
       </Box>
     <Box className={styles.pageParameters}>
