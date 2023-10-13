@@ -1,17 +1,23 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../Constants/Routes";
 
 interface LinkButtonProps {
-  onClick?: () => void;
   text?: string;
-  href: string;
+  route: string;
 }
 
-const LinkButton: React.FC<LinkButtonProps> = ({ onClick, text, href }) => {
+const LinkButton: React.FC<LinkButtonProps> = ({ text, route }) => {
+
+  const navigate = useNavigate();
+  const onClickButton = () => {
+    navigate(route);
+  }
+
   return (
     <Button
-      onClick={onClick}
-      href={href}
+      onClick={onClickButton}
       sx={{
         color: "#656565",
         display: "block",
