@@ -2,9 +2,8 @@ import { apiEndpoints } from "../../Constants/Endpoints";
 
 async function getProfile() {
     let accessToken = localStorage.getItem('access_token');
-    const topTracksUrl = apiEndpoints.spotifyUserProfile
-  
-    const response = await fetch(topTracksUrl, {
+    const userProfileUrl = apiEndpoints.spotifyUserProfile
+    const response = await fetch(userProfileUrl, {
       headers: {
         Authorization: 'Bearer ' + accessToken
       }
@@ -13,5 +12,3 @@ async function getProfile() {
     return data
   }
   export {getProfile}
-
-  //most played track, favourite genres, favourite artists

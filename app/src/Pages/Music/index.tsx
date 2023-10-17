@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
 import { TopDnb2023, TopRockMetal2023 } from "../../Constants/topSongsLists";
@@ -16,6 +16,7 @@ const Music: React.FC = () => {
   const { t } = useTranslation("music");
   const{t:tyear} = useTranslation("numbersAndDates")
 
+  //only works in prod - comment out and use button below for dev
   React.useEffect(() => {
     fetchTokenRequest()
   },[])
@@ -28,6 +29,7 @@ const Music: React.FC = () => {
         route={routes.personalisedSpotify}
         />
       </Box>
+      {/* <Button onClick = {() => {fetchTokenRequest()}}></Button> */}
     <Box className={styles.pageParameters}>
       <Box className={styles.title}>
     <Typography variant="h1">{tyear('2023')}</Typography>
