@@ -86,7 +86,4 @@ const useStyles = makeStyles({
 });
 
 export { PersonalisedSpotify };
-  function getUserSpotifyData() {
-    throw new Error("Function not implemented.");
-  }
 
