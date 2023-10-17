@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 const PersonalisedSpotify: React.FC = () => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
+  const hasUserAuthorised = localStorage.getItem('access_token')
 
   //this is just an initial setup for me to messa around with - will need to be updated and styled properly +
   //refresh api calls to happen automatically 
@@ -26,7 +27,12 @@ const PersonalisedSpotify: React.FC = () => {
     refreshAccessToken();
   }, []);
 
-  const hasUserAuthorised = localStorage.getItem('access_token')
+  //only works in prod - comment out and use buttons below for dev
+  // React.useEffect (() => {
+  //   if (hasUserAuthorised){
+  //     refreshAccessToken()
+  //   }
+  // },[hasUserAuthorised])
   
 
 
@@ -80,3 +86,4 @@ const useStyles = makeStyles({
 });
 
 export { PersonalisedSpotify };
+
