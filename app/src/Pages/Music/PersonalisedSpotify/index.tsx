@@ -6,6 +6,7 @@ import { getProfile } from "../../../Store/SpotifyAPI/getProfile";
 import { refreshAccessToken } from "../../../Store/SpotifyAPI/refreshAccessToken";
 import { AuthorisationRequest } from "../../../Store/SpotifyAPI/authorisationRequest";
 import { useTranslation } from "react-i18next";
+import { fetchPersonalisedSpotifyData } from "../../../Store/SpotifyAPI/fetchPersonalisedSpotifyData";
 
 const PersonalisedSpotify: React.FC = () => {
   const styles = useStyles();
@@ -27,12 +28,12 @@ const PersonalisedSpotify: React.FC = () => {
     refreshAccessToken();
   }, []);
 
-  //only works in prod - comment out and use buttons below for dev
-  // React.useEffect (() => {
-  //   if (hasUserAuthorised){
-  //     refreshAccessToken()
-  //   }
-  // },[hasUserAuthorised])
+  // only works in prod - comment out and use buttons below for dev
+  React.useEffect (() => {
+    if (hasUserAuthorised){
+      fetchPersonalisedSpotifyData()
+    }
+  },[hasUserAuthorised])
   
 
 
