@@ -28,10 +28,10 @@ const spotifyDataSlice = createSlice({
             state.refreshLoading = false
             state.refreshFetched = true
         },
-        fetchUserPersonalData(state: SpotifyDataState) {
+        fetchUserProfile(state: SpotifyDataState) {
             state.loading = true
         },
-        fetchUserPersonalDataSuccess(state: SpotifyDataState, action:PayloadAction<spotifyUserData>) {
+        fetchUserProfileSuccess(state: SpotifyDataState, action:PayloadAction<spotifyUserData>) {
             state.loading = false
             state.fetched = true
             state.userPersonalData = action.payload

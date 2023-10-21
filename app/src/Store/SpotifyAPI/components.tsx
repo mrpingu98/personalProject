@@ -2,47 +2,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { spotifyDataActions } from "./state";
 import { AppState } from "../rootReducer";
 import React from "react";
-import { refresh } from "./refresh";
-
-
-
 
 export const withRefreshAccessToken = () => (Component: React.ComponentType<any>) => {
-  return (props: any) => {
-    const dispatch = useDispatch();
-    const { refreshFetched, refreshLoading } = useSelector(
-      (state: AppState) => state.spotifyData
-    );
-    
-    React.useEffect(() => {
-      if (!refreshFetched) {
-        dispatch(spotifyDataActions.fetchRefreshToken());
-      }
-  }, [dispatch, refreshFetched])
+    return (props: any) => {
+      const dispatch = useDispatch();
+      const { refreshFetched, refreshLoading } = useSelector((state: AppState) => state.spotifyData);
 
-  if (refreshLoading || !refreshFetched) return <div />;
-    return <Component {...props} />;
+      React.useEffect(() => {
+        if (!refreshFetched) {
+          dispatch(spotifyDataActions.fetchRefreshToken());
+        }
+      }, [dispatch, refreshFetched]);
+
+      if (refreshLoading || !refreshFetched) return <div />;
+      return <Component {...props} />;
+    };
   };
-};
 
 export const withSpotifyUserPersonalData = () => (Component: React.ComponentType<any>) => {
-  return (props: any) => {
-    const dispatch = useDispatch();
-    const { fetched, loading } = useSelector(
-      (state: AppState) => state.spotifyData
-    );
+    return (props: any) => {
+      const dispatch = useDispatch();
+      const { fetched, loading } = useSelector((state: AppState) => state.spotifyData);
 
-    React.useEffect(() => {
-      console.log('hits personal data')
+      React.useEffect(() => {
         if (!fetched) {
-          dispatch(spotifyDataActions.fetchUserPersonalData());
+          dispatch(spotifyDataActions.fetchUserProfile());
         }
-    }, [dispatch, fetched])
+      }, [dispatch, fetched]);
 
-    if (loading || !fetched) return <div />;
-    return <Component {...props} />;
+      if (loading || !fetched) return <div />;
+      return <Component {...props} />;
+    };
   };
-};
 
 //explain HOC's
 //used to enhance react components

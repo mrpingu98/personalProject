@@ -1,25 +1,25 @@
-import { getUserPersonalData } from "./getUserPersonalData";
-import { refresh } from "./refresh";
+import { getSpotifyUserProfile } from "./getUserPersonalData";
+import { refreshToken } from "./refreshToken";
 import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
 
 function* fetchRefreshTokenWorker() {
   try {
-        yield refresh()
-        yield put(spotifyDataActions.fetchRefreshTokenSuccess())
-  } catch(error) {
-    console.log(error)
+    yield refreshToken();
+    yield put(spotifyDataActions.fetchRefreshTokenSuccess());
+  } catch (error) {
+    throw new Error("Error" + error);
   }
 }
 
-function* fetchUserPersonalDataWorker() {
+function* fetchUserProfileWorker() {
   try {
     // @ts-ignore
-    const response = yield getUserPersonalData();
+    const response = yield getSpotifyUserProfile();
     // @ts-ignore
     const data = yield response;
     yield put(
-      spotifyDataActions.fetchUserPersonalDataSuccess({
+      spotifyDataActions.fetchUserProfileSuccess({
         name: data.display_name,
         email: data.email,
         image: data.images[1].url,
@@ -28,14 +28,20 @@ function* fetchUserPersonalDataWorker() {
         explicitContent: data.explicit_content.filter_enabled,
       })
     );
-  } catch (error){
-    // console.log('Error:', error)
+  } catch (error) {
+    throw new Error("Error" + error);
   }
 }
-export function* spotifyRefreshTokenWatcher () {
-  yield takeLatest(spotifyDataActions.fetchRefreshToken.toString(), fetchRefreshTokenWorker);
+export function* spotifyRefreshTokenWatcher() {
+  yield takeLatest(
+    spotifyDataActions.fetchRefreshToken.toString(),
+    fetchRefreshTokenWorker
+  );
 }
 
-export function* spotifyUserPersonalDataWatcher() {
-  yield takeLatest(spotifyDataActions.fetchUserPersonalData.toString(),fetchUserPersonalDataWorker);
+export function* spotifyUserProfileWatcher() {
+  yield takeLatest(
+    spotifyDataActions.fetchUserProfile.toString(),
+    fetchUserProfileWorker
+  );
 }

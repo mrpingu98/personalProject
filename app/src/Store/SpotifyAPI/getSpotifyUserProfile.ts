@@ -1,6 +1,6 @@
 import { apiEndpoints } from "../../Constants/Endpoints";
 
-async function getProfile() {
+async function getSpotifyUserProfile() {
     let accessToken = localStorage.getItem('access_token');
     const userProfileUrl = apiEndpoints.spotifyUserProfile
     const response = await fetch(userProfileUrl, {
@@ -11,4 +11,4 @@ async function getProfile() {
     const data = await response.json();
     return data
   }
-  export {getProfile}
+  export {getSpotifyUserProfile}
