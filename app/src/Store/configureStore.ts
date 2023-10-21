@@ -1,8 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
+import { rootSaga } from "./rootSaga";
+import createSagaMiddleware from 'redux-saga';
 
+const sagaMiddleWare = createSagaMiddleware()
 
-export const store = configureStore({reducer: rootReducer})
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleWare),
+})
+
+sagaMiddleWare.run(rootSaga); 
 
 //This part is us actually creating the Redux store
 //All you have to do is pass in your rootReducer to its reducer property 

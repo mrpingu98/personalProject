@@ -2,13 +2,18 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
-import { getProfile } from "../../../Store/SpotifyAPI/getProfile";
+import { getSpotifyUserProfile} from "../../../Store/SpotifyAPI/getSpotifyUserProfile";
 import { refreshAccessToken } from "../../../Store/SpotifyAPI/refreshAccessToken";
 import { AuthorisationRequest } from "../../../Store/SpotifyAPI/authorisationRequest";
 import { useTranslation } from "react-i18next";
+import { withRefreshAccessToken, withSpotifyUserPersonalData } from "../../../Store/SpotifyAPI/components";
+import { compose } from 'redux';
 import { fetchPersonalisedSpotifyData } from "../../../Store/SpotifyAPI/fetchPersonalisedSpotifyData";
 
-const PersonalisedSpotify: React.FC = () => {
+const PersonalisedSpotify = compose<React.FC> (
+  withRefreshAccessToken(),
+  withSpotifyUserPersonalData()
+) (() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
   const hasUserAuthorised = localStorage.getItem('access_token')
@@ -21,7 +26,7 @@ const PersonalisedSpotify: React.FC = () => {
   }, []);
 
   const getUserProfile = React.useCallback(() => {
-    getProfile();
+    getSpotifyUserProfile();
   }, []);
 
   const refreshToken = React.useCallback(() => {
@@ -29,11 +34,11 @@ const PersonalisedSpotify: React.FC = () => {
   }, []);
 
   // only works in prod - comment out and use buttons below for dev
-  React.useEffect (() => {
-    if (hasUserAuthorised){
-      fetchPersonalisedSpotifyData()
-    }
-  },[hasUserAuthorised])
+  // React.useEffect (() => {
+  //   if (hasUserAuthorised){
+  //     fetchPersonalisedSpotifyData()
+  //   }
+  // },[hasUserAuthorised])
   
 
 
@@ -54,7 +59,7 @@ const PersonalisedSpotify: React.FC = () => {
   
     </Box>
   );
-};
+});
 
 const theme = createTheme();
 const useStyles = makeStyles({

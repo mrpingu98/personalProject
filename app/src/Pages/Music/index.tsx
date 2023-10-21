@@ -17,9 +17,9 @@ const Music: React.FC = () => {
   const{t:tyear} = useTranslation("numbersAndDates")
 
   //only works in prod - comment out and use button below for dev
-  React.useEffect(() => {
-    fetchTokenRequest()
-  },[])
+  // React.useEffect(() => {
+  //   fetchTokenRequest()
+  // },[])
 
   return (
     <>
