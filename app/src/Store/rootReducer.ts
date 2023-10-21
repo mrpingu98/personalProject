@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { userNameSlice } from "./Username/state";
+import { spotifyDataSlice } from "./SpotifyAPI/state";
 
 export const rootReducer = combineReducers ({
-    userName: userNameSlice.reducer
+    userName: userNameSlice.reducer,
+    spotifyData: spotifyDataSlice.reducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>
