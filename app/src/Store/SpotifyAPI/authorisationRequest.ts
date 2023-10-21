@@ -1,7 +1,6 @@
 import { generateRandomString } from "./codeVerifier";
 import { generateCodeChallenge } from "./codeChallenger";
 import { spotifyAPI } from "../../Constants/SpotifyAPI";
-import { apiEndpoints } from "../../Constants/Endpoints";
 
 export const AuthorisationRequest = () => {
 let codeVerifier = generateRandomString(128);
