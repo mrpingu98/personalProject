@@ -1,21 +1,23 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-interface LinkButtonProps {
+interface PrimaryButtonProps {
   onClick?: () => void;
   text?: string;
+  disabled?: boolean;
 }
 
-const PrimaryButton: React.FC<LinkButtonProps> = ({ onClick, text }) => {
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({ onClick, text, disabled }) => {
   return (
     <Button
       onClick={onClick}
+      disabled={disabled}
       sx={{
-        color: "#f3efeb",
+        color: "white",
         display: "block",
-        bgcolor:  "#656565",
+        bgcolor: "#858585",
         ":hover": {
-          bgcolor:"#858585",
+          bgcolor: "#858585",
           color: "white",
         },
       }}
