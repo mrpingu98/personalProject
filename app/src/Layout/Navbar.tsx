@@ -28,6 +28,10 @@ const NavBar: React.FC = () => {
     }
   };
 
+  const navigateMyProfile = React.useCallback(() => {
+    navigate(routes.myProfile)
+  }, [navigate])
+
   return (
     <AppBar className={styles.navBar} sx={{ backgroundColor: "#858585" }}>
       <Container maxWidth="xl">
@@ -58,7 +62,9 @@ const NavBar: React.FC = () => {
             ))}
           </Box>
           <Box className={styles.userName}>
-            <AccountCircleIcon />
+            <AccountCircleIcon 
+            onClick= {navigateMyProfile}
+            />
             <Typography marginLeft={2}>{userName}</Typography>
           </Box>
         </Toolbar>
