@@ -7,7 +7,7 @@ export const fetchTokenRequest = () => {
     const codeVerifiers = localStorage.getItem("code_verifier");
     const code = searchParams.get("code");
 
-    fetch("https://accounts.spotify.com/api/token", {
+    return fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -32,4 +32,8 @@ export const fetchTokenRequest = () => {
         localStorage.setItem("refresh_token", data.refresh_token);
       });
   }
+  return Promise.resolve();
+  //just returning an empty promise here - so that even if there is no code in url, a promise of some sort is returned 
+  //if didn't have this, can' append .then() to fetchTokenRequest, as it can return either a Promise or undefined
+  //and can't apply .then() to something that returns undefined - only async operations that return a  promise
 };
