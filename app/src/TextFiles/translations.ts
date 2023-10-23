@@ -4,6 +4,7 @@ import { numbersAndDates } from "./numbersAndDates";
 import { home } from "./home";
 import {navbar} from './navbar'
 import { personalisedSpotify } from "./personalisedSpotify";
+import { myProfile } from "./myProfile";
 
 
 export const enResources = {
@@ -13,4 +14,5 @@ export const enResources = {
   home: home,
   navbar: navbar,
   personalisedSpotify: personalisedSpotify,
+  myProfile: myProfile
 };

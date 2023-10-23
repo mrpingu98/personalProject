@@ -4,7 +4,6 @@ import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
 import { getSpotifyUserProfile} from "../../../Store/SpotifyAPI/getSpotifyUserProfile";
 import { refreshAccessToken } from "../../../Store/SpotifyAPI/refreshAccessToken";
-import { AuthorisationRequest } from "../../../Store/SpotifyAPI/authorisationRequest";
 import { useTranslation } from "react-i18next";
 import { withRefreshAccessToken, withSpotifyUserPersonalData } from "../../../Store/SpotifyAPI/components";
 import { compose } from 'redux';
@@ -16,14 +15,9 @@ const PersonalisedSpotify = compose<React.FC> (
 ) (() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
-  const hasUserAuthorised = localStorage.getItem('access_token')
 
   //this is just an initial setup for me to messa around with - will need to be updated and styled properly +
   //refresh api calls to happen automatically 
-
-  const initalAuthorisaton = React.useCallback(() => {
-    AuthorisationRequest();
-  }, []);
 
   const getUserProfile = React.useCallback(() => {
     getSpotifyUserProfile();
@@ -40,23 +34,10 @@ const PersonalisedSpotify = compose<React.FC> (
   //   }
   // },[hasUserAuthorised])
   
-
-
   return (
     <Box className={styles.pageParameters}>
-      {hasUserAuthorised  ?
-       <>
        <Button onClick={getUserProfile}>{t("getProfile")}</Button>
        <Button onClick={refreshToken}>{t("refreshToken")}</Button>
-       </>
-       :
-      <>
-      <Button onClick={initalAuthorisaton}>{t("initialAuthorisation")}</Button>
-      </>
-      
-}
-
-  
     </Box>
   );
 });
