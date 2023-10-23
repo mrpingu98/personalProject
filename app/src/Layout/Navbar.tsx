@@ -62,8 +62,10 @@ const NavBar: React.FC = () => {
             ))}
           </Box>
           <Box className={styles.userName}>
-            <AccountCircleIcon 
-            onClick= {navigateMyProfile}
+            <NavBarButton 
+            onClick={navigateMyProfile}
+            text={t('myProfile')}
+            icon = {<AccountCircleIcon/>}
             />
             <Typography marginLeft={2}>{userName}</Typography>
           </Box>
