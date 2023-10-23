@@ -2,7 +2,7 @@ import { generateRandomString } from "./codeVerifier";
 import { generateCodeChallenge } from "./codeChallenger";
 import { spotifyAPI } from "../../Constants/SpotifyAPI";
 
-export const AuthorisationRequest = () => {
+export const authorisationRequest = () => {
 let codeVerifier = generateRandomString(128);
 
 generateCodeChallenge(codeVerifier).then(codeChallenge => {

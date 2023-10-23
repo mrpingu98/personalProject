@@ -23,9 +23,7 @@ const Music: React.FC = () => {
   // },[])
 
   React.useEffect(() => {
-    const checkAccessToken = localStorage.getItem("access_token")
-      ? true
-      : false;
+    const checkAccessToken = localStorage.getItem("access_token") ? true : false;
     setHaveAccessToken(checkAccessToken);
   }, []);
 

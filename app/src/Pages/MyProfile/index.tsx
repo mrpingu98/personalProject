@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PrimaryButton } from "../../Components/PrimaryButton";
-import { AuthorisationRequest } from "../../Store/SpotifyAPI/authorisationRequest";
+import { authorisationRequest } from "../../Store/SpotifyAPI/authorisationRequest";
 import { fetchTokenRequest } from "../../Store/SpotifyAPI/fetchTokenRequest";
 
 export const MyProfile: React.FC = () => {
@@ -12,14 +12,12 @@ export const MyProfile: React.FC = () => {
   const [haveAccessToken, setHaveAccessToken] = React.useState<boolean>(false);
 
   const fetchAuthorisation = React.useCallback(() => {
-    AuthorisationRequest();
+    authorisationRequest();
   }, []);
 
   React.useEffect(() => {
     fetchTokenRequest().then(() => {
-      const checkAccessToken = localStorage.getItem("access_token")
-        ? true
-        : false;
+      const checkAccessToken = localStorage.getItem("access_token") ? true : false;
       setHaveAccessToken(checkAccessToken);
     });
   }, []);
