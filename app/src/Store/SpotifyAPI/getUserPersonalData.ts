@@ -6,6 +6,7 @@ function* getSpotifyUserProfile() {
   try {
     // @ts-ignore
     const response = yield fetch(userProfileUrl, {
+      method: 'GET',
       headers: {
         Authorization: "Bearer " + accessToken,
       },
