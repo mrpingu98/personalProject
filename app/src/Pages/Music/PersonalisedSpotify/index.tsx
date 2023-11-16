@@ -1,23 +1,24 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import createTheme from "@mui/material/styles/createTheme";
-import { getSpotifyUserProfile} from "../../../Store/SpotifyAPI/getSpotifyUserProfile";
+import { getSpotifyUserProfile } from "../../../Store/SpotifyAPI/getSpotifyUserProfile";
 import { refreshAccessToken } from "../../../Store/SpotifyAPI/refreshAccessToken";
 import { useTranslation } from "react-i18next";
-import { withRefreshAccessToken, withSpotifyUserPersonalData } from "../../../Store/SpotifyAPI/components";
-import { compose } from 'redux';
+import {
+  withRefreshAccessToken,
+  withSpotifyUserPersonalData,
+} from "../../../Store/SpotifyAPI/components";
+import { compose } from "redux";
 import { fetchPersonalisedSpotifyData } from "../../../Store/SpotifyAPI/fetchPersonalisedSpotifyData";
+import { PrimaryButton } from "../../../Components/PrimaryButton";
+import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
 
-const PersonalisedSpotify = compose<React.FC> (
+const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
   withSpotifyUserPersonalData()
-) (() => {
+)(() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
-
-  //this is just an initial setup for me to messa around with - will need to be updated and styled properly +
-  //refresh api calls to happen automatically 
 
   const getUserProfile = React.useCallback(() => {
     getSpotifyUserProfile();
@@ -27,50 +28,54 @@ const PersonalisedSpotify = compose<React.FC> (
     refreshAccessToken();
   }, []);
 
+  const { spotifyUserData } = useSpotifyData();
+
   // only works in prod - comment out and use buttons below for dev
   // React.useEffect (() => {
   //   if (hasUserAuthorised){
   //     fetchPersonalisedSpotifyData()
   //   }
   // },[hasUserAuthorised])
-  
+
   return (
-    <Box className={styles.pageParameters}>
-       <Button onClick={getUserProfile}>{t("getProfile")}</Button>
-       <Button onClick={refreshToken}>{t("refreshToken")}</Button>
+    <Box className={styles.mainContainer}>
+      <Box className={styles.row} marginBottom={4}>
+        <Typography variant="h1">
+          {`${t("hello")} ${spotifyUserData?.name}`}
+        </Typography>
+        <Box marginLeft={4}>
+          <img
+            src={spotifyUserData?.image}
+            alt="Profile"
+            height={100}
+            width={100}
+          />
+        </Box>
+      </Box>
+      <Typography variant="h3">{t("welcomeMessage")}</Typography>
+      <Box marginTop={4} className={styles.row}>
+        <Typography variant="body1">{`${t("followers")} ${spotifyUserData?.followers}`}</Typography>
+      </Box>
     </Box>
   );
 });
 
-const theme = createTheme();
 const useStyles = makeStyles({
-  pageParameters: {
-    width: "80%",
-    marginLeft: "10%",
-  },
-  title: {
-    justifyContent: "center",
-    display: "flex",
-  },
-  mainContainer: {
+  row: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
   },
-  listContainer: {
-    padding: theme.spacing(4),
-    alignItems: "center",
+  mainContainer: {
+    alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
   },
-  links: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+  image: {
+    height: 100,
+    width: 100,
   },
 });
 
 export { PersonalisedSpotify };
-
