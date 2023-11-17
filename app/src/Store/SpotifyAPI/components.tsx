@@ -35,7 +35,50 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
     };
   };
 
-//explain HOC's
-//used to enhance react components
-//props is used to pass through any props that may be used for the react component to be rendered
-//Can pass multiple HOC's, and order they are put in is the order they are called in
+  export const withSpotifyUserTopArtists = () => (Component: React.ComponentType<any>) => {
+    return (props: any) => {
+      const dispatch = useDispatch();
+      const { topArtistsFetched, topArtistsLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!topArtistsFetched) {
+          dispatch(spotifyDataActions.fetchUserTopArtists());
+        }
+      }, [dispatch, topArtistsFetched]);
+
+      if (topArtistsLoading || !topArtistsFetched) return <div />;
+      return <Component {...props} />;
+    };
+  };
+
+  export const withSpotifyUserTopTracks = () => (Component: React.ComponentType<any>) => {
+    return (props: any) => {
+      const dispatch = useDispatch();
+      const { topTracksFetched, topTracksLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!topTracksFetched) {
+          dispatch(spotifyDataActions.fetchUserTopTracks());
+        }
+      }, [dispatch, topTracksFetched]);
+
+      if (topTracksLoading || !topTracksFetched) return <div />;
+      return <Component {...props} />;
+    };
+  };
+
+  export const withSpotifyUserPlaylists = () => (Component: React.ComponentType<any>) => {
+    return (props: any) => {
+      const dispatch = useDispatch();
+      const { playlistsFetched, playlistsLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!playlistsFetched) {
+          dispatch(spotifyDataActions.fetchUserPlaylists());
+        }
+      }, [dispatch, playlistsFetched]);
+
+      if (playlistsLoading || !playlistsFetched) return <div />;
+      return <Component {...props} />;
+    };
+  };
