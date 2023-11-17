@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -7,6 +8,9 @@ import { useTranslation } from "react-i18next";
 import {
   withRefreshAccessToken,
   withSpotifyUserPersonalData,
+  withSpotifyUserTopArtists,
+  withSpotifyUserTopTracks,
+  withSpotifyUserPlaylists,
 } from "../../../Store/SpotifyAPI/components";
 import { compose } from "redux";
 import { fetchPersonalisedSpotifyData } from "../../../Store/SpotifyAPI/fetchPersonalisedSpotifyData";
@@ -15,7 +19,10 @@ import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
 
 const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
-  withSpotifyUserPersonalData()
+  withSpotifyUserPersonalData(),
+  withSpotifyUserTopArtists(),
+  withSpotifyUserTopTracks(),
+  withSpotifyUserPlaylists()
 )(() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
@@ -28,7 +35,8 @@ const PersonalisedSpotify = compose<React.FC>(
     refreshAccessToken();
   }, []);
 
-  const { spotifyUserData } = useSpotifyData();
+  const { spotifyUserData, userTopArtists, userTopTracks, userPlaylists } =
+    useSpotifyData();
 
   // only works in prod - comment out and use buttons below for dev
   // React.useEffect (() => {
@@ -47,14 +55,47 @@ const PersonalisedSpotify = compose<React.FC>(
           <img
             src={spotifyUserData?.image}
             alt="Profile"
-            height={100}
-            width={100}
+            className={styles.profilePic}
           />
         </Box>
       </Box>
       <Typography variant="h3">{t("welcomeMessage")}</Typography>
-      <Box marginTop={4} className={styles.row}>
-        <Typography variant="body1">{`${t("followers")} ${spotifyUserData?.followers}`}</Typography>
+      <Typography variant="h4" marginTop={6}>
+        {t("topArtistsSixMonths")}:
+      </Typography>
+      <Box marginTop={2} className={styles.row}>
+        <Typography variant="body1">
+          {userTopArtists?.name.join(", ")}
+        </Typography>
+      </Box>
+      <Typography variant="h4" marginTop={6}>
+        {t("topTracksSixMonths")}:
+      </Typography>
+      <Box marginTop={2}>
+        {userTopTracks?.map((x) => (
+          <Box marginTop={0.5}>
+            <Typography>
+              {x.artist}: {x.song}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+      <Box marginTop={6}>
+        <Typography variant="h4">{t("recentPlaylists")}:</Typography>
+        {userPlaylists?.map((x) => (
+          <Box className={styles.row} marginTop={4}>
+            <Box marginTop={0.5}>
+              <Typography>{x.name}:</Typography>
+            </Box>
+            <Box marginLeft={5}>
+              <img
+                src={x.imageUrl}
+                alt="No picture available"
+                className={styles.playlistPic}
+              />
+            </Box>
+          </Box>
+        ))}
       </Box>
     </Box>
   );
@@ -72,9 +113,15 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
-  image: {
-    height: 100,
-    width: 100,
+  profilePic: {
+    height: 150,
+    width: 150,
+    borderRadius: "20%",
+  },
+  playlistPic: {
+    height: 200,
+    width: 200,
+    borderRadius: "20%",
   },
 });
 
