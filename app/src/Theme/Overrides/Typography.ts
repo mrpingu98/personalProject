@@ -19,6 +19,12 @@ export const typographyOverrides: Partial<Record<Variant, TypographyStyleOptions
     color: "#656565",
     fontFamily: 'Arial',
   },
+  h4: {
+    fontSize: 25,
+    fontWeight: 400,
+    color: "#656565",
+    fontFamily: 'Arial',
+  },
   body1: {
     fontSize: 20,
     lineHeight: 1.2,

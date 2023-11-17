@@ -1,11 +1,11 @@
 import { apiEndpoints } from "../../Constants/Endpoints";
 
-function* getSpotifyUserProfile() {
+function* getUserPlaylists() {
   const accessToken = localStorage.getItem("access_token");
-  const userProfileUrl = apiEndpoints.spotifyUserProfile;
+  const userPlaylistsUrl = apiEndpoints.spotifyUserPlaylists;
   try {
     // @ts-ignore
-    const response = yield fetch(userProfileUrl, {
+    const response = yield fetch(userPlaylistsUrl, {
       method: 'GET',
       headers: {
         Authorization: "Bearer " + accessToken,
@@ -19,4 +19,4 @@ function* getSpotifyUserProfile() {
   }
 }
 
-export { getSpotifyUserProfile };
+export { getUserPlaylists };

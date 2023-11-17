@@ -46,10 +46,10 @@ export const MyProfile: React.FC = () => {
 
 const useStyles = makeStyles({
   container: {
-    alignItems: "flex-start",
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
   },
   listContainer: {
     alignItems: "flex-start",
