@@ -34,6 +34,6 @@ export const fetchTokenRequest = () => {
   }
   return Promise.resolve();
   //just returning an empty promise here - so that even if there is no code in url, a promise of some sort is returned 
-  //if didn't have this, can' append .then() to fetchTokenRequest, as it can return either a Promise or undefined
+  //if didn't have this, can't append .then() to fetchTokenRequest, as it can return either a Promise or undefined
   //and can't apply .then() to something that returns undefined - only async operations that return a  promise
 };

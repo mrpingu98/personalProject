@@ -7,7 +7,6 @@ import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
 import { routes } from "../../Constants/Routes";
-import { fetchTokenRequest } from "../../Store/SpotifyAPI/fetchTokenRequest";
 
 const Music: React.FC = () => {
   const styles = useStyles();
@@ -16,11 +15,6 @@ const Music: React.FC = () => {
   const { t } = useTranslation("music");
   const { t: tyear } = useTranslation("numbersAndDates");
   const [haveAccessToken, setHaveAccessToken] = React.useState<boolean>(false);
-
-  //only works in prod - comment out and use button below for dev
-  // React.useEffect(() => {
-  //   fetchTokenRequest()
-  // },[])
 
   React.useEffect(() => {
     const checkAccessToken = localStorage.getItem("access_token") ? true : false;
@@ -49,7 +43,6 @@ const Music: React.FC = () => {
           />
         )}
       </Box>
-      {/* <Button onClick = {() => {fetchTokenRequest()}}></Button> */}
       <Box className={styles.pageParameters}>
         <Box className={styles.title}>
           <Typography variant="h1">{tyear("2023")}</Typography>
