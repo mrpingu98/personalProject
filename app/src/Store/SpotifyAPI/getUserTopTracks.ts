@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { apiEndpoints } from "../../Constants/Endpoints";
 
 function* getUserTopTracks() {

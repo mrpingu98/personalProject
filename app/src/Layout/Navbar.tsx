@@ -1,9 +1,9 @@
+/* eslint-disable react/jsx-key */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
@@ -11,7 +11,6 @@ import { useUserName } from "../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
 import { NavBarButton } from "./NavBarButton";
 import { routes } from "../Constants/Routes";
-import { Button } from "@mui/material";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();

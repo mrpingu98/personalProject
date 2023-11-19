@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { Box, TextField, ThemeProvider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
