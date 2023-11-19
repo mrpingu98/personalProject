@@ -13,10 +13,12 @@ const Home: React.FC = () => {
 
   const [userNameEntered, setUserNameEntered] = React.useState<string>("");
 
-  const onClickUpdateUserName = React.useCallback(() => {
-    updateUserName(userNameEntered);
-    setUserNameEntered("");
-  }, [updateUserName, userNameEntered]);
+  // const onClickUpdateUserName = React.useCallback(() => {
+  //   updateUserName(userNameEntered);
+  //   setUserNameEntered("");
+  // }, [updateUserName, userNameEntered]);
+
+  //commented out ability to put a username for now - might delete at later point if not needed
 
   return (
     <Box className={styles.container}>
@@ -25,7 +27,7 @@ const Home: React.FC = () => {
         <Box marginTop={"5%"}>
           <Typography variant="body1">{t("welcomeMessage")}</Typography>
         </Box>
-        <Box className={styles.username}>
+        {/* <Box className={styles.username}>
           <ThemeProvider theme={textFieldTheme}>
             <TextField
               variant="outlined"
@@ -39,7 +41,7 @@ const Home: React.FC = () => {
           <Box marginLeft={"10%"} marginTop={"3%"}>
             <PrimaryButton onClick={onClickUpdateUserName} text={t("update")} />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
