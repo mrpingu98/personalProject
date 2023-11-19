@@ -23,8 +23,9 @@ const Music: React.FC = () => {
 
   return (
     <>
-      <Box className={styles.links}>
-        {!haveAccessToken && (
+      {!haveAccessToken && (
+        <>
+        <Box className={styles.links}>
           <Tooltip title='Authorise Spotify access in the "My Profile" area'>
             <span>
               <LinkButton
@@ -34,31 +35,39 @@ const Music: React.FC = () => {
               />
             </span>
           </Tooltip>
-        )}
-        {haveAccessToken && (
-          <LinkButton
-            text={t("yourSpotify")}
-            route={routes.personalisedSpotify}
-            disabled={!haveAccessToken}
-          />
-        )}
-      </Box>
-      <Box className={styles.pageParameters}>
-        <Box className={styles.title}>
-          <Typography variant="h1">{tyear("2023")}</Typography>
         </Box>
-        <Box className={styles.mainContainer}>
-          <Box className={styles.listContainer}>
-            <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
-          </Box>
-          <Box className={styles.listContainer}>
-            <TopSongsList
-              songUrlList={topRockMetal2023}
-              title={t("rockMetal")}
+          <Box marginTop={"5%"} className={styles.title}>
+          <Typography variant="body1">{t("authoriseSpotify")}</Typography>
+        </Box>
+        </>
+      )}
+      {haveAccessToken && (
+        <>
+          <Box className={styles.links}>
+            <LinkButton
+              text={t("yourSpotify")}
+              route={routes.personalisedSpotify}
+              disabled={!haveAccessToken}
             />
           </Box>
-        </Box>
-      </Box>
+          <Box className={styles.pageParameters}>
+            <Box className={styles.title}>
+              <Typography variant="h1">{`${t('manvir')} ${tyear("2023")}`}</Typography>
+            </Box>
+            <Box className={styles.mainContainer}>
+              <Box className={styles.listContainer}>
+                <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
+              </Box>
+              <Box className={styles.listContainer}>
+                <TopSongsList
+                  songUrlList={topRockMetal2023}
+                  title={t("rockMetal")}
+                />
+              </Box>
+            </Box>
+          </Box>
+        </>
+      )}
     </>
   );
 };
