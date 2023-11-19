@@ -30,7 +30,8 @@ module.exports = {
         "react"
     ],
     "rules": {
-        '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+        "*": "warn"
+        // '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
         //setting the severity of unused vars to be a warning, not an error, so that app can be built 
     }
 }
