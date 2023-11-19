@@ -3,12 +3,12 @@ import { generateCodeChallenge } from "./codeChallenger";
 import { spotifyAPI } from "../../Constants/SpotifyAPI";
 
 export const authorisationRequest = () => {
-let codeVerifier = generateRandomString(128);
+const codeVerifier = generateRandomString(128);
 
 generateCodeChallenge(codeVerifier).then(codeChallenge => {
-  let state = generateRandomString(16);
+  const state = generateRandomString(16);
   localStorage.setItem('code_verifier', codeVerifier);
-  let args = new URLSearchParams({
+  const args = new URLSearchParams({
     response_type: 'code',
     client_id: spotifyAPI.clientId,
     scope: spotifyAPI.scope,

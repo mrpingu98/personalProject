@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface UsernameState {
     userName: string;
-};
+}
 
 export const initialState: UsernameState = {
     userName: ''

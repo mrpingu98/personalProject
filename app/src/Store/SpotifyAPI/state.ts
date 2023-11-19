@@ -16,7 +16,7 @@ export interface SpotifyDataState {
     playlistsFetched: boolean;
     playlistsLoading: boolean;
     userPlaylists: spotifyUserPlaylists | null;
-};
+}
 
 export const initialState: SpotifyDataState = {
     refreshLoading: false,
