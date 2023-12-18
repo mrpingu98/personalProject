@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import * as React from "react";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
@@ -31,7 +30,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
         }}
       >
         {songUrlList.map((x) => (
-          <ListItem>
+          <ListItem key={x}>
             <TopSongsContainer url={x} />
           </ListItem>
         ))}

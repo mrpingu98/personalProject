@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -53,7 +52,7 @@ const PersonalisedSpotify = compose<React.FC>(
       </Typography>
       <Box marginTop={2}>
         {userTopTracks?.map((x) => (
-          <Box marginTop={0.5}>
+          <Box marginTop={0.5} key={x.artist}>
             <Typography>
               {x.artist}: {x.song}
             </Typography>
@@ -63,7 +62,7 @@ const PersonalisedSpotify = compose<React.FC>(
       <Box marginTop={6}>
         <Typography variant="h4">{t("recentPlaylists")}:</Typography>
         {userPlaylists?.map((x) => (
-          <Box className={styles.row} marginTop={4}>
+          <Box className={styles.row} marginTop={4} key={x.name}>
             <Box marginTop={0.5}>
               <Typography>{x.name}:</Typography>
             </Box>

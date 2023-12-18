@@ -14,6 +14,8 @@ const Home: React.FC = () => {
 
   const [userNameEntered, setUserNameEntered] = React.useState<string>("");
 
+  console.log(Home.displayName)
+
   // const onClickUpdateUserName = React.useCallback(() => {
   //   updateUserName(userNameEntered);
   //   setUserNameEntered("");
