@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -49,6 +48,7 @@ const NavBar: React.FC = () => {
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
             <NavBarButton
+              key={page}
               onClick={() => handleNavbarNavigation(page)}
               text={page}
             />

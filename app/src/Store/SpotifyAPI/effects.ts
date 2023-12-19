@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { spotifyUserTopArtist } from "../../Types/Spotify";
 import { getSpotifyUserProfile } from "./getUserPersonalData";
 import { getUserPlaylists } from "./getUserPlayslists";
 import { getUserTopArtists } from "./getUserTopArtists";
@@ -46,7 +46,7 @@ function* fetchUserTopArtistsWorker() {
     const data = yield response;
     yield put(
       spotifyDataActions.fetchUserTopArtistsSuccess({
-        name: data.items.map((x: any) => x.name),
+        name: data.items.map((x: spotifyUserTopArtist) => x.name),
       })
     );
   } catch (error) {
@@ -60,7 +60,7 @@ function* fetchUserTopTracksWorker() {
     const response = yield getUserTopTracks();
     // @ts-ignore
     const data = yield response;
-    const formatData = data.items.map((x: any) => ({
+    const formatData = data.items.map((x: {name: string, artists: {name: string}[]}) => ({
       song: x.name,
       artist: x.artists[0].name,
     }));
@@ -76,7 +76,7 @@ function* fetchUserPlaylistsWorker() {
     const response = yield getUserPlaylists();
     // @ts-ignore
     const data = yield response;
-    const formatData = data.items.map((x: any) => ({
+    const formatData = data.items.map((x: {name: string, images:{url: string}[]}) => ({
       name: x.name,
       imageUrl: x.images[0] ? x.images[0].url : null,
     }));

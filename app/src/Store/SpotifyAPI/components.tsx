@@ -1,12 +1,10 @@
-/* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { spotifyDataActions } from "./state";
 import { AppState } from "../rootReducer";
 import React from "react";
 
-export const withRefreshAccessToken = () => (Component: React.ComponentType<any>) => {
-    return (props: any) => {
+export const withRefreshAccessToken = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
       const { refreshFetched, refreshLoading } = useSelector((state: AppState) => state.spotifyData);
 
@@ -19,10 +17,13 @@ export const withRefreshAccessToken = () => (Component: React.ComponentType<any>
       if (refreshLoading || !refreshFetched) return <div />;
       return <Component {...props} />;
     };
+    // Set the displayName for the HOC
+    WrappedComponent.displayName = `withRefreshAccessToken(${Component.displayName || Component.name})`;
+    return WrappedComponent;
   };
 
-export const withSpotifyUserPersonalData = () => (Component: React.ComponentType<any>) => {
-    return (props: any) => {
+export const withSpotifyUserPersonalData = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
       const { fetched, loading } = useSelector((state: AppState) => state.spotifyData);
 
@@ -35,10 +36,12 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
       if (loading || !fetched) return <div />;
       return <Component {...props} />;
     };
+    WrappedComponent.displayName = `withSpotifyUserPersonalData(${Component.displayName || Component.name})`;
+    return WrappedComponent;
   };
 
-  export const withSpotifyUserTopArtists = () => (Component: React.ComponentType<any>) => {
-    return (props: any) => {
+  export const withSpotifyUserTopArtists = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
       const { topArtistsFetched, topArtistsLoading } = useSelector((state: AppState) => state.spotifyData);
 
@@ -51,10 +54,12 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
       if (topArtistsLoading || !topArtistsFetched) return <div />;
       return <Component {...props} />;
     };
+    WrappedComponent.displayName = `withSpotifyUserTopArtists(${Component.displayName || Component.name})`;
+    return WrappedComponent;
   };
 
-  export const withSpotifyUserTopTracks = () => (Component: React.ComponentType<any>) => {
-    return (props: any) => {
+  export const withSpotifyUserTopTracks = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
       const { topTracksFetched, topTracksLoading } = useSelector((state: AppState) => state.spotifyData);
 
@@ -67,10 +72,12 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
       if (topTracksLoading || !topTracksFetched) return <div />;
       return <Component {...props} />;
     };
+    WrappedComponent.displayName = `withSpotifyUserTopTracks(${Component.displayName || Component.name})`;
+    return WrappedComponent;
   };
 
-  export const withSpotifyUserPlaylists = () => (Component: React.ComponentType<any>) => {
-    return (props: any) => {
+  export const withSpotifyUserPlaylists = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
       const { playlistsFetched, playlistsLoading } = useSelector((state: AppState) => state.spotifyData);
 
@@ -83,4 +90,6 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
       if (playlistsLoading || !playlistsFetched) return <div />;
       return <Component {...props} />;
     };
+    WrappedComponent.displayName = `withSpotifyUserPlaylists(${Component.displayName || Component.name})`;
+    return WrappedComponent;
   };
