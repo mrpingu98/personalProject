@@ -7,13 +7,14 @@ import { getUserTopTracks } from "./getUserTopTracks";
 import { refreshToken } from "./refreshToken";
 import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
+import { routes } from "../../Constants/Routes";
 
 function* fetchRefreshTokenWorker() {
   try {
     yield refreshToken();
     yield put(spotifyDataActions.fetchRefreshTokenSuccess());
   } catch (error) {
-    throw new Error("Error" + error);
+    console.log(error)
   }
 }
 
@@ -34,7 +35,7 @@ function* fetchUserProfileWorker() {
       })
     );
   } catch (error) {
-    throw new Error("Error" + error);
+    window.location.href = routes.error
   }
 }
 
@@ -50,7 +51,7 @@ function* fetchUserTopArtistsWorker() {
       })
     );
   } catch (error) {
-    throw new Error("Error" + error);
+    window.location.href = routes.error
   }
 }
 
@@ -66,7 +67,7 @@ function* fetchUserTopTracksWorker() {
     }));
     yield put(spotifyDataActions.fetchUserTopTracksSuccess(formatData));
   } catch (error) {
-    throw new Error("Error" + error);
+    window.location.href = routes.error
   }
 }
 
@@ -82,7 +83,7 @@ function* fetchUserPlaylistsWorker() {
     }));
     yield put(spotifyDataActions.fetchUserPlaylistsSuccess(formatData));
   } catch (error) {
-    throw new Error("Error" + error);
+    window.location.href = routes.error
   }
 }
 
