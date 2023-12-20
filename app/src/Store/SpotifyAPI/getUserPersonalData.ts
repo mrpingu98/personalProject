@@ -12,7 +12,7 @@ function* getSpotifyUserProfile() {
     const data = yield response.json();
     return data;
   } catch (error) {
-    throw new Error("Error " + error);
+    console.log(error)
   }
 }
 
