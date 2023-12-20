@@ -3,7 +3,8 @@ export const routes = {
     dnb: "/music/dnb",
     home: "/",
     personalisedSpotify: "/music/personalisedSpotify",
-    myProfile: '/myProfile'
+    myProfile: '/myProfile',
+    error: '/error'
 
 
 }

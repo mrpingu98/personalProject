@@ -5,7 +5,7 @@ import { home } from "./home";
 import {navbar} from './navbar'
 import { personalisedSpotify } from "./personalisedSpotify";
 import { myProfile } from "./myProfile";
-
+import { error } from "./error";
 
 export const enResources = {
   spotifyEmbedLinks: spotifyEmbedLinks,
@@ -14,5 +14,6 @@ export const enResources = {
   home: home,
   navbar: navbar,
   personalisedSpotify: personalisedSpotify,
-  myProfile: myProfile
+  myProfile: myProfile,
+  error: error
 };
