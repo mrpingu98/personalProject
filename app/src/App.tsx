@@ -13,6 +13,7 @@ import { store } from "./Store/configureStore";
 import { Provider } from 'react-redux'
 import { PersonalisedSpotifyRoute } from "./Routes/PersonalisedSpotify";
 import { MyProfileRoute } from "./Routes/MyProfileRoute";
+import { ErrorRoute } from "./Routes/ErrorRoute";
 
 const muiTheme = createTheme(theme)
 
@@ -24,6 +25,7 @@ function AppRoutes() {
         <MusicRoute />
         <PersonalisedSpotifyRoute />
         <MyProfileRoute />
+        <ErrorRoute />
     </>
   );
 }
