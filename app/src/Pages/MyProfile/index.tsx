@@ -25,12 +25,19 @@ export const MyProfile: React.FC = () => {
   return (
     <Box className={styles.listContainer}>
         <Box marginBottom={4}>
-        <Typography variant="h1">{t('myProfile')}</Typography>
+        <Typography variant="h1" data-test-id={"myprofile-title"}>{t('myProfile')}</Typography>
         </Box>
-      <Typography variant="h3">{t('spotifyAuthorisation')}</Typography>
+      <Typography variant="h3" data-test-id={"myprofile-spotify-title"}>{t('spotifyAuthorisation')}</Typography>
       <Box className={styles.container} marginTop={2}>
         <Typography variant="body1">
-            {haveAccessToken ?  t('haveAuthorised') :  t('spotifyDescription')}
+            {haveAccessToken ? 
+            <div data-test-id={"authorised-description"}>
+            {t('haveAuthorised')}
+            </div> :  
+            <div data-test-id={"unauthorised-description"}>
+            {t('spotifyDescription')}
+            </div>
+            }
         </Typography>
         <Box marginLeft={2}>
         <PrimaryButton

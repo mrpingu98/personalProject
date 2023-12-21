@@ -29,6 +29,7 @@ const Music: React.FC = () => {
           <Tooltip title='Authorise Spotify access in the "My Profile" area'>
             <span>
               <LinkButton
+                data-test-id={"personalised-spotify-button-disabled"}
                 text={t("yourSpotify")}
                 route={routes.personalisedSpotify}
                 disabled={!haveAccessToken}
@@ -37,7 +38,7 @@ const Music: React.FC = () => {
           </Tooltip>
         </Box>
           <Box marginTop={"5%"} className={styles.title}>
-          <Typography variant="body1">{t("authoriseSpotify")}</Typography>
+          <Typography variant="body1" data-test-id={"unauthorised-spotify-description"}>{t("authoriseSpotify")}</Typography>
         </Box>
         </>
       )}
@@ -52,13 +53,13 @@ const Music: React.FC = () => {
           </Box>
           <Box className={styles.pageParameters}>
             <Box className={styles.title}>
-              <Typography variant="h1">{`${t('manvir')} ${tyear("2023")}`}</Typography>
+              <Typography variant="h1" data-test-id={"music-title"}>{`${t('manvir')} ${tyear("2023")}`}</Typography>
             </Box>
             <Box className={styles.mainContainer}>
-              <Box className={styles.listContainer}>
+              <Box className={styles.listContainer} data-test-id={'dnb-title'}>
                 <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
               </Box>
-              <Box className={styles.listContainer}>
+              <Box className={styles.listContainer} data-test-id={"rock-title"}>
                 <TopSongsList
                   songUrlList={topRockMetal2023}
                   title={t("rockMetal")}
