@@ -17,27 +17,41 @@ export const MyProfile: React.FC = () => {
 
   React.useEffect(() => {
     fetchTokenRequest().then(() => {
-      const checkAccessToken = localStorage.getItem("access_token") ? true : false;
+      const checkAccessToken = localStorage.getItem("access_token")
+        ? true
+        : false;
       setHaveAccessToken(checkAccessToken);
     });
   }, []);
 
   return (
     <Box className={styles.listContainer}>
-        <Box marginBottom={4}>
-        <Typography variant="h1">{t('myProfile')}</Typography>
-        </Box>
-      <Typography variant="h3">{t('spotifyAuthorisation')}</Typography>
+      <Box marginBottom={4}>
+        <Typography variant="h1" data-test-id={"myprofile-title"}>
+          {t("myProfile")}
+        </Typography>
+      </Box>
+      <Typography variant="h3" data-test-id={"myprofile-spotify-title"}>
+        {t("spotifyAuthorisation")}
+      </Typography>
       <Box className={styles.container} marginTop={2}>
         <Typography variant="body1">
-            {haveAccessToken ?  t('haveAuthorised') :  t('spotifyDescription')}
+          {haveAccessToken ? (
+            <div data-test-id={"authorised-description"}>
+              {t("haveAuthorised")}
+            </div>
+          ) : (
+            <div data-test-id={"unauthorised-description"}>
+              {t("spotifyDescription")}
+            </div>
+          )}
         </Typography>
         <Box marginLeft={2}>
-        <PrimaryButton
-          text={t("authorise")}
-          onClick={fetchAuthorisation}
-          disabled={haveAccessToken}
-        />
+          <PrimaryButton
+            text={t("authorise")}
+            onClick={fetchAuthorisation}
+            disabled={haveAccessToken}
+          />
         </Box>
       </Box>
     </Box>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { Box, TextField, ThemeProvider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -24,9 +23,9 @@ const Home: React.FC = () => {
   return (
     <Box className={styles.container}>
       <Box className={styles.column}>
-        <Typography variant="h1">{t("welcome")}</Typography>
+        <Typography variant="h1" data-test-id={"home-title"}>{t("welcome")}</Typography>
         <Box marginTop={"5%"}>
-          <Typography variant="body1">{t("welcomeMessage")}</Typography>
+          <Typography variant="body1" data-test-id={"home-description"}>{t("welcomeMessage")}</Typography>
         </Box>
         {/* <Box className={styles.username}>
           <ThemeProvider theme={textFieldTheme}>

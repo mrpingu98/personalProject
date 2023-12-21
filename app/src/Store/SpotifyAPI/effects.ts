@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { spotifyUserTopArtist } from "../../Types/Spotify";
 import { getSpotifyUserProfile } from "./getUserPersonalData";
 import { getUserPlaylists } from "./getUserPlayslists";
