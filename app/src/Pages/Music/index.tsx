@@ -88,6 +88,9 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    '@media (max-width: 600px)': {
+      flexDirection: 'column', // Apply for screens up to 600px (xs screens)
+    },
   },
   listContainer: {
     padding: theme.spacing(4),

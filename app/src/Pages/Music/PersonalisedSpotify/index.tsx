@@ -86,6 +86,9 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
+    '@media (max-width: 600px)': {
+      flexDirection: 'column',
+    },
   },
   mainContainer: {
     alignItems: "flex-start",
