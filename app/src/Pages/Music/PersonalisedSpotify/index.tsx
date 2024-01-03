@@ -11,6 +11,7 @@ import {
 } from "../../../Store/SpotifyAPI/components";
 import { compose } from "redux";
 import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
+import { PrimaryButton } from "../../../Components/PrimaryButton";
 
 const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
@@ -23,6 +24,22 @@ const PersonalisedSpotify = compose<React.FC>(
   const { t } = useTranslation("personalisedSpotify");
 
   const { spotifyUserData, userTopArtists, userTopTracks, userPlaylists } = useSpotifyData();
+
+  const accessToken = localStorage.getItem("access_token");
+  const [data, setData] = React.useState<any>();
+
+  const fetchPlaylistTracks = async () => {
+    const response = await fetch(
+      "https://api.spotify.com/v1/playlists/5aFyYYjQLeLBrZIJqlsVt5",
+      {
+        method: "GET",
+        headers: { Authorization: "Bearer " + accessToken },
+      }
+    );
+    const returnedData = await response.json();
+    setData(returnedData);
+    return returnedData;
+  };
 
   return (
     <Box className={styles.mainContainer}>
@@ -76,6 +93,20 @@ const PersonalisedSpotify = compose<React.FC>(
           </Box>
         ))}
       </Box>
+      <Box>
+        <PrimaryButton onClick={fetchPlaylistTracks} text={'Playlist'}/>
+      </Box>
+      {data && (
+        <Box marginTop={2}>
+          {data.tracks.items.map((x: any) => (
+            <Box marginTop={0.5}>
+              <Typography>
+                {x.track.artists[0].name}: {x.track.name}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 });
