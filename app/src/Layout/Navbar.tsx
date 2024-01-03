@@ -17,7 +17,9 @@ const NavBar: React.FC = () => {
   const { userName } = useUserName();
   const { t } = useTranslation("navbar");
 
-  const pages = [t("Muzik"), t("Merch")];
+  const pages = [t("Muzik"), 
+    // t("Merch")
+];
 
   const handleNavbarNavigation = (page: string) => {
     if (page === t("Muzik")) {
@@ -37,15 +39,9 @@ const NavBar: React.FC = () => {
 
   return (
     <AppBar className={styles.navBar} sx={{ backgroundColor: "#858585" }}>
-      <Toolbar
-        disableGutters
-        sx={{
-          ml: 4,
-          mr: 4,
-        }}
-      >
+      <Toolbar disableGutters sx={{ml: 2, mr:2}}>
         <NavBarButton onClick={navigateHome} text={t("home")} />
-        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        <Box sx={{ flexGrow: 1, display: "flex"}}>
           {pages.map((page) => (
             <NavBarButton
               key={page}
@@ -75,11 +71,6 @@ const useStyles = makeStyles({
   userName: {
     display: "flex",
     justifyContent: "flex-end",
-  },
-  toolbar: {
-    padding: 2,
-    marginLeft: 2,
-    marginRight: 2,
-  },
+  }
 });
 export default NavBar;
