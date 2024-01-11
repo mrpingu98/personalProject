@@ -23,52 +23,45 @@ const Music: React.FC = () => {
 
   return (
     <>
-      {!haveAccessToken && (
-        <>
-        <Box className={styles.links}>
-          <Tooltip title='Authorise Spotify access in the "My Profile" area'>
-            <span>
-              <LinkButton
-                data-test-id={"personalised-spotify-button-disabled"}
-                text={t("yourSpotify")}
-                route={routes.personalisedSpotify}
-                disabled={!haveAccessToken}
-              />
-            </span>
-          </Tooltip>
+      {!haveAccessToken &&
+        <Box marginTop={"5%"} className={styles.title}>
+          <Typography variant="body2" data-test-id={"unauthorised-spotify-description"}>
+            <em>
+              {t("authoriseSpotify")}
+            </em>
+          </Typography>
         </Box>
-          <Box marginTop={"5%"} className={styles.title}>
-          <Typography variant="body1" data-test-id={"unauthorised-spotify-description"}>{t("authoriseSpotify")}</Typography>
+      }
+      <Box className={styles.links}>
+        <LinkButton
+          text={t("yourSpotify")}
+          route={routes.personalisedSpotify}
+          disabled={!haveAccessToken}
+        />
+        <Box marginLeft={2}>
+          <LinkButton
+            data-test-id={"Mixes-link-button"}
+            text={t("mixes")}
+            route={routes.mixes}
+          />
         </Box>
-        </>
-      )}
-      {haveAccessToken && (
-        <>
-          <Box className={styles.links}>
-            <LinkButton
-              text={t("yourSpotify")}
-              route={routes.personalisedSpotify}
-              disabled={!haveAccessToken}
+      </Box>
+      <Box className={styles.pageParameters}>
+        <Box className={styles.title}>
+          <Typography variant="h1" data-test-id={"music-title"}>{`${t('manvir')} ${tyear("2023")}`}</Typography>
+        </Box>
+        <Box className={styles.mainContainer}>
+          <Box className={styles.listContainer} data-test-id={'dnb-title'}>
+            <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
+          </Box>
+          <Box className={styles.listContainer} data-test-id={"rock-title"}>
+            <TopSongsList
+              songUrlList={topRockMetal2023}
+              title={t("rockMetal")}
             />
           </Box>
-          <Box className={styles.pageParameters}>
-            <Box className={styles.title}>
-              <Typography variant="h1" data-test-id={"music-title"}>{`${t('manvir')} ${tyear("2023")}`}</Typography>
-            </Box>
-            <Box className={styles.mainContainer}>
-              <Box className={styles.listContainer} data-test-id={'dnb-title'}>
-                <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
-              </Box>
-              <Box className={styles.listContainer} data-test-id={"rock-title"}>
-                <TopSongsList
-                  songUrlList={topRockMetal2023}
-                  title={t("rockMetal")}
-                />
-              </Box>
-            </Box>
-          </Box>
-        </>
-      )}
+        </Box>
+      </Box>
     </>
   );
 };
@@ -99,10 +92,11 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   links: {
-    alignItems: "flex-start",
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: 'center',
+    marginTop: theme.spacing(4)
   },
 });
 

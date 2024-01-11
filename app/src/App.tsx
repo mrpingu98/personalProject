@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { HomeRoute } from "./Routes/HomeRoutes";
 import { BrowserRouter } from "react-router-dom";
-import { DrumAndBassRoute } from "./Routes/DrumAndBassRoutes";
+import { MixesRoute } from "./Routes/MixesRoutes";
 import Layout from "./Layout";
 import { MusicRoute } from "./Routes/MusicRoute";
 import './Configuration/configurei18n';
@@ -21,7 +21,7 @@ function AppRoutes() {
   return (
     <>
         <HomeRoute />
-        <DrumAndBassRoute />
+        <MixesRoute />
         <MusicRoute />
         <PersonalisedSpotifyRoute />
         <MyProfileRoute />
