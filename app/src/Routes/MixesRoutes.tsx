@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {DrumAndBass} from "../Pages/DrumAndBass";
+import {Mixes} from "../Pages/Mixes";
 import { routes } from "../Constants/Routes";
 
-export const DrumAndBassRoute: React.FC = () => {
+export const MixesRoute: React.FC = () => {
   return (
     <Routes>
-      <Route path={routes.dnb} element={<DrumAndBass />} />
+      <Route path={routes.mixes} element={<Mixes />} />
     </Routes>
   );
 };

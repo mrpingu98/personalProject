@@ -1,6 +1,6 @@
 export const routes = {
     music: "/music",
-    dnb: "/music/dnb",
+    mixes: "/music/mixes",
     home: "/",
     personalisedSpotify: "/music/personalisedSpotify",
     myProfile: '/myProfile',

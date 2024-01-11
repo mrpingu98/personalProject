@@ -32,7 +32,7 @@ export const typographyOverrides: Partial<Record<Variant, TypographyStyleOptions
     fontFamily: 'Arial',
   },
   body2: {
-    fontSize: 18,
+    fontSize: 15,
     lineHeight: 1.2,
     color: "#656565",
     fontFamily: 'Arial',
