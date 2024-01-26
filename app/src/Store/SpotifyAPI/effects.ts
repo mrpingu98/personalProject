@@ -8,6 +8,7 @@ import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
 import { routes } from "../../Constants/Routes";
 import { getAllTimeUserTopTracks } from "./getAllTimeUserTopTracks";
+import { getAllTimeUserTopArtists } from "./getAllTimeUserTopArtists";
 
 function* fetchRefreshTokenWorker() {
   try {
@@ -47,6 +48,22 @@ function* fetchUserTopArtistsWorker() {
     const data = yield response;
     yield put(
       spotifyDataActions.fetchUserTopArtistsSuccess({
+        name: data.items.map((x: spotifyUserTopArtist) => x.name),
+      })
+    );
+  } catch (error) {
+    window.location.href = routes.error
+  }
+}
+
+function* fetchAllTimeUserTopArtistsWorker() {
+  try {
+    // @ts-ignore
+    const response = yield getAllTimeUserTopArtists();
+    // @ts-ignore
+    const data = yield response;
+    yield put(
+      spotifyDataActions.fetcAllTimeUserTopArtistsSuccess({
         name: data.items.map((x: spotifyUserTopArtist) => x.name),
       })
     );
@@ -126,6 +143,13 @@ export function* spotifyUserTopArtistsWatcher() {
 }
 
 export function* spotifyAllTimeUserTopArtistsWatcher() {
+  yield takeLatest(
+    spotifyDataActions.fetchAllTimeUserTopArtists.toString(),
+    fetchAllTimeUserTopArtistsWorker
+  );
+}
+
+export function* spotifyAllTimeUserTopTracksWatcher() {
   yield takeLatest(
     spotifyDataActions.fetchAllTimeUserTopTracks.toString(),
     fetchAllTimeUserTopTracksWorker

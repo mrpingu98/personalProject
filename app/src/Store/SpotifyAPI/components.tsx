@@ -58,6 +58,24 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
     return WrappedComponent;
   };
 
+  export const withSpotifyAllTimeUserTopArtists = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
+      const dispatch = useDispatch();
+      const { allTimeTopArtistsFetched, allTimeTopArtistsLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!allTimeTopArtistsFetched) {
+          dispatch(spotifyDataActions.fetchAllTimeUserTopArtists());
+        }
+      }, [dispatch, allTimeTopArtistsFetched]);
+
+      if (allTimeTopArtistsLoading || !allTimeTopArtistsFetched) return <div />;
+      return <Component {...props} />;
+    };
+    WrappedComponent.displayName = `withSpotifyUserTopArtists(${Component.displayName || Component.name})`;
+    return WrappedComponent;
+  };
+
   export const withSpotifyUserTopTracks = () => (Component: React.ComponentType) => {
     const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();

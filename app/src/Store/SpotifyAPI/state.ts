@@ -19,6 +19,9 @@ export interface SpotifyDataState {
     allTimeTopTracksFetched: boolean;
     allTimeTopTracksLoading: boolean;
     allTimeUserTopTracks: spotifyUserTopTracks | null;
+    allTimeTopArtistsLoading: boolean;
+    allTimeTopArtistsFetched: boolean;
+    allTimeUserTopArtists: spotifyUserTopArtist | null;
 }
 
 export const initialState: SpotifyDataState = {
@@ -38,7 +41,10 @@ export const initialState: SpotifyDataState = {
     userPlaylists: null,
     allTimeTopTracksFetched: false,
     allTimeTopTracksLoading: false,
-    allTimeUserTopTracks: null
+    allTimeUserTopTracks: null,
+    allTimeTopArtistsFetched: false,
+    allTimeTopArtistsLoading: false,
+    allTimeUserTopArtists: null
 };
 
 const spotifyDataSlice = createSlice({
@@ -91,6 +97,14 @@ const spotifyDataSlice = createSlice({
             state.allTimeTopTracksLoading = false
             state.allTimeTopTracksFetched = true;
             state.allTimeUserTopTracks = action.payload
+        },
+        fetchAllTimeUserTopArtists(state: SpotifyDataState) {
+            state.allTimeTopArtistsLoading= true
+        },
+        fetcAllTimeUserTopArtistsSuccess(state: SpotifyDataState, action:PayloadAction<spotifyUserTopArtist>) {
+            state.allTimeTopArtistsLoading = false
+            state.allTimeTopArtistsFetched = true
+            state.allTimeUserTopArtists = action.payload
         },
 
     }
