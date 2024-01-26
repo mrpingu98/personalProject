@@ -8,21 +8,35 @@ import {
   withSpotifyUserTopArtists,
   withSpotifyUserTopTracks,
   withSpotifyUserPlaylists,
+  withSpotifyAllTimeUserTopTracks,
+  withSpotifyAllTimeUserTopArtists,
 } from "../../../Store/SpotifyAPI/components";
 import { compose } from "redux";
 import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
+import { TopArtists } from "./TopArtists";
+import { TopTracks } from "./TopTracks";
+import { Playlists } from "./Playlists";
 
 const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
   withSpotifyUserPersonalData(),
   withSpotifyUserTopArtists(),
   withSpotifyUserTopTracks(),
-  withSpotifyUserPlaylists()
+  withSpotifyUserPlaylists(),
+  withSpotifyAllTimeUserTopTracks(),
+  withSpotifyAllTimeUserTopArtists()
 )(() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
 
-  const { spotifyUserData, userTopArtists, userTopTracks, userPlaylists } = useSpotifyData();
+  const {
+    spotifyUserData,
+    userTopArtists,
+    userTopTracks,
+    userPlaylists,
+    allTimeUserTopTracks,
+    allTimeUserTopArtists,
+  } = useSpotifyData();
 
   return (
     <Box className={styles.mainContainer}>
@@ -39,43 +53,17 @@ const PersonalisedSpotify = compose<React.FC>(
         </Box>
       </Box>
       <Typography variant="h3">{t("welcomeMessage")}</Typography>
-      <Typography variant="h4" marginTop={6}>
-        {t("topArtistsSixMonths")}:
+      <Typography variant="h1" marginTop={6}>
+        {t("allTime")}
       </Typography>
-      <Box marginTop={2} className={styles.row}>
-        <Typography variant="body1">
-          {userTopArtists?.name.join(", ")}
-        </Typography>
-      </Box>
-      <Typography variant="h4" marginTop={6}>
-        {t("topTracksSixMonths")}:
+      <TopArtists userTopArtists={allTimeUserTopArtists} />
+      <TopTracks userTopTracks={allTimeUserTopTracks} />
+      <Typography variant="h1" marginTop={6}>
+        {t("sixMonths")}
       </Typography>
-      <Box marginTop={2}>
-        {userTopTracks?.map((x) => (
-          <Box marginTop={0.5} key={x.artist}>
-            <Typography>
-              {x.artist}: {x.song}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
-      <Box marginTop={6}>
-        <Typography variant="h4">{t("recentPlaylists")}:</Typography>
-        {userPlaylists?.map((x) => (
-          <Box className={styles.row} marginTop={4} key={x.name}>
-            <Box marginTop={0.5}>
-              <Typography>{x.name}:</Typography>
-            </Box>
-            <Box marginLeft={5}>
-              <img
-                src={x.imageUrl}
-                alt="No picture available"
-                className={styles.playlistPic}
-              />
-            </Box>
-          </Box>
-        ))}
-      </Box>
+      <TopArtists userTopArtists={userTopArtists} />
+      <TopTracks userTopTracks={userTopTracks} />
+      <Playlists playlists={userPlaylists} />
     </Box>
   );
 });
@@ -86,8 +74,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    '@media (max-width: 600px)': {
-      flexDirection: 'column',
+    "@media (max-width: 600px)": {
+      flexDirection: "column",
     },
   },
   mainContainer: {
@@ -98,11 +86,6 @@ const useStyles = makeStyles({
   profilePic: {
     height: 150,
     width: 150,
-    borderRadius: "20%",
-  },
-  playlistPic: {
-    height: 200,
-    width: 200,
     borderRadius: "20%",
   },
 });
