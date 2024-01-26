@@ -26,5 +26,7 @@ export const mixes = {
     dark11Link: 'https://drive.google.com/file/d/1M5WrLF0ivS2j3U1n3c7BDNLhcS9WGldL/view?usp=sharing',
     dark11: 'dark11',
     dark13DnbLink: 'https://drive.google.com/file/d/1v_m6zUKETo1mdkmWGtJOWlA36dE6dgh6/view?usp=sharing',
-    dark13Dnb: 'dark 13 [1985 dnb]'
+    dark13Dnb: 'dark 13 [1985 dnb]',
+    dark13140Link: 'https://drive.google.com/file/d/120r6UfZwZXdkoiR--u1V7HPwgu5w3Qk-/view?usp=sharing',
+    dark13140: 'dark 13 [1985 140]'
 }
