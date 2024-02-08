@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,6 +11,8 @@ import {
 } from "../../../Store/SpotifyAPI/components";
 import { compose } from "redux";
 import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
+import { PrimaryButton } from "../../../Components/PrimaryButton";
+import { deleteRequest, get } from "../../../Store/apiStore";
 
 const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
@@ -23,6 +25,94 @@ const PersonalisedSpotify = compose<React.FC>(
   const { t } = useTranslation("personalisedSpotify");
 
   const { spotifyUserData, userTopArtists, userTopTracks, userPlaylists } = useSpotifyData();
+
+  const accessToken = localStorage.getItem("access_token");
+ 
+//needs to be cleaned up - add ui to show how to delete tracks etc, can remove some of the api calls etc etc
+//+ git pull from  main once MS41 has been merged, so that the updated playlists 6 months etc is shown
+  const [tracks, setTracks] = React.useState<string[]>([])
+  const [explicitTracks, setExplicitTracks] = React.useState<string[]>([])
+  const [explicitTracksUri, setExplicitTracksUri] = React.useState<{uri: string}[]>([])
+  const [snapshotId, setSnapshotId] = React.useState<string>()
+
+  const fetchTracks = async () => {
+    let url = 'https://api.spotify.com/v1/playlists/3w8XWn9alrnRKMp0TvNYjF'
+    let booleam = true
+    let array: string[] = []
+    while(url != null){
+      const response = await get(url, { Authorization: "Bearer " + accessToken } )
+
+      if(booleam === true){
+        const mapped = response.tracks.items.map((x: any) => `${x.track.artists[0].name} : ${x.track.name}`)
+        array = [...mapped]
+        url = response.tracks.next
+        booleam = false
+
+      } else{
+        const mapped = response.items.map((x: any) => `${x.track.artists[0].name} : ${x.track.name}`)
+        array = [...array, ...mapped]
+        url = response.next
+      }
+    }
+    setTracks(array)
+  }
+
+  const fetchExplicitTracks = async () => {
+    let url = 'https://api.spotify.com/v1/playlists/3w8XWn9alrnRKMp0TvNYjF'
+    let booleam = true
+    let array: string[] = []
+    while(url != null){
+      const response = await get(url, { Authorization: "Bearer " + accessToken } )
+
+      if(booleam === true){
+        const mapped = response.tracks.items.map((x: any) => x.track.explicit === true && `${x.track.artists[0].name} : ${x.track.name}`)
+        array = [...mapped]
+        url = response.tracks.next
+        booleam = false
+
+      } else{
+        const mapped = response.items.map((x: any) => x.track.explicit === true && `${x.track.artists[0].name} : ${x.track.name}`)
+        array = [...array, ...mapped]
+        url = response.next
+      }
+    }
+    setExplicitTracks(array)
+ } 
+
+
+
+ const fetchExplicitTracksUri = async () => {
+  let url = 'https://api.spotify.com/v1/playlists/3w8XWn9alrnRKMp0TvNYjF'
+  let booleam = true
+  let array: {uri: string}[] = []
+  while(url != null){
+    const response = await get(url, { Authorization: "Bearer " + accessToken } )
+
+    if(booleam === true){
+      const mapped = response.tracks.items.filter((x: any) => x.track.explicit === true).map((x: any) => ({uri:`${x.track.uri}`})) 
+      array = [...mapped]
+      url = response.tracks.next
+      booleam = false
+      setSnapshotId(response.snapshot_id)
+
+    } else{
+      const mapped = response.items.filter((x: any) => x.track.explicit === true).map((x: any) => ({uri: `${x.track.uri}`})) 
+      array = [...array, ...mapped]
+      url = response.next
+    }
+  }
+  setExplicitTracksUri(array)
+}
+
+const deleteExplicitTracks = async () => {
+  const data = {
+    tracks: explicitTracksUri,
+    snapshot_id: snapshotId
+  }
+  const response = await deleteRequest('https://api.spotify.com/v1/playlists/3w8XWn9alrnRKMp0TvNYjF/tracks', data)
+  return response
+}
+
 
   return (
     <Box className={styles.mainContainer}>
@@ -76,9 +166,38 @@ const PersonalisedSpotify = compose<React.FC>(
           </Box>
         ))}
       </Box>
+      <Box>
+        <PrimaryButton onClick={fetchTracks} text={"fetch tracks"} />
+        {tracks && (
+          <Box marginTop={2}>
+            {tracks.map((x) => (
+              <Box marginTop={0.5}>
+                <Typography>{x}</Typography>
+              </Box>
+            ))}
+          </Box>
+        )}
+      </Box>
+      <Box>
+        <PrimaryButton onClick={fetchExplicitTracks} text={"explicit"} />
+        {explicitTracks && (
+          <Box marginTop={2}>
+            {explicitTracks.map((x) => (
+              <Box marginTop={0.5}>
+                <Typography>{x}</Typography>
+              </Box>
+            ))}
+          </Box>
+        )}
+      </Box>
+      <Button onClick={fetchExplicitTracksUri}>fetchexplicituris</Button>
+      <Button onClick={() => console.log(explicitTracksUri)}>test</Button>
+      <Button onClick={deleteExplicitTracks}>delete</Button>
     </Box>
   );
 });
+
+
 
 const useStyles = makeStyles({
   row: {
@@ -86,9 +205,6 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    '@media (max-width: 600px)': {
-      flexDirection: 'column',
-    },
   },
   mainContainer: {
     alignItems: "flex-start",

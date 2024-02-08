@@ -1,7 +1,8 @@
+const accessToken = localStorage.getItem('access_token')
+
 export const yieldGet = (url: string, header?: object) => {
     if (header) {
         const headersArray = Object.entries(header);
-        console.log(headersArray);
         return fetch(url, {
             method: 'GET',
             headers: headersArray
@@ -12,7 +13,43 @@ export const yieldGet = (url: string, header?: object) => {
             method: "GET"
         })
     }
+}
 
+export const get = async (url: string, header?: object) => {
+    if (header) {
+        const headersArray = Object.entries(header);
+        const response =  
+        
+        await fetch(url, {
+            method: 'GET',
+            headers: headersArray
+        })
+        const result = await response.json();
+        return result;
+    }
+    else {
+        const response = await fetch(url, {
+            method: "GET"
+        })
+        const result = await response.json();
+        return result;
+    }
+}
+
+
+export const deleteRequest = async (url: string, data: any) => {
+        const response =  
+        await fetch(url, {
+            method: 'DELETE',
+            headers:[ ['Authorization', `Bearer ${accessToken}`],
+            ['Content-Type', 'application/json']],
+            body: JSON.stringify(data)
+        })
+        if(response.ok){
+            return console.log('Delete successful')
+        } else {
+            return console.log('Delete unsuccessful ')
+        }
 }
 
 // below doesn't currently work for the refresh token POST request...something to look at another time....
