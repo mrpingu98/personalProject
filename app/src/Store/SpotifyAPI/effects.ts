@@ -7,6 +7,8 @@ import { refreshToken } from "./refreshToken";
 import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
 import { routes } from "../../Constants/Routes";
+import { getAllTimeUserTopTracks } from "./getAllTimeUserTopTracks";
+import { getAllTimeUserTopArtists } from "./getAllTimeUserTopArtists";
 
 function* fetchRefreshTokenWorker() {
   try {
@@ -54,6 +56,22 @@ function* fetchUserTopArtistsWorker() {
   }
 }
 
+function* fetchAllTimeUserTopArtistsWorker() {
+  try {
+    // @ts-ignore
+    const response = yield getAllTimeUserTopArtists();
+    // @ts-ignore
+    const data = yield response;
+    yield put(
+      spotifyDataActions.fetcAllTimeUserTopArtistsSuccess({
+        name: data.items.map((x: spotifyUserTopArtist) => x.name),
+      })
+    );
+  } catch (error) {
+    window.location.href = routes.error
+  }
+}
+
 function* fetchUserTopTracksWorker() {
   try {
     // @ts-ignore
@@ -65,6 +83,23 @@ function* fetchUserTopTracksWorker() {
       artist: x.artists[0].name,
     }));
     yield put(spotifyDataActions.fetchUserTopTracksSuccess(formatData));
+  } catch (error) {
+    window.location.href = routes.error
+  }
+}
+
+function* fetchAllTimeUserTopTracksWorker() {
+  try {
+    // @ts-ignore
+    const response = yield getAllTimeUserTopTracks();
+    console.log('2')
+    // @ts-ignore
+    const data = yield response;
+    const formatData = data.items.map((x: {name: string, artists: {name: string}[]}) => ({
+      song: x.name,
+      artist: x.artists[0].name,
+    }));
+    yield put(spotifyDataActions.fetchAllTimeUserTopTracksSuccess(formatData));
   } catch (error) {
     window.location.href = routes.error
   }
@@ -104,6 +139,20 @@ export function* spotifyUserTopArtistsWatcher() {
   yield takeLatest(
     spotifyDataActions.fetchUserTopArtists.toString(),
     fetchUserTopArtistsWorker
+  );
+}
+
+export function* spotifyAllTimeUserTopArtistsWatcher() {
+  yield takeLatest(
+    spotifyDataActions.fetchAllTimeUserTopArtists.toString(),
+    fetchAllTimeUserTopArtistsWorker
+  );
+}
+
+export function* spotifyAllTimeUserTopTracksWatcher() {
+  yield takeLatest(
+    spotifyDataActions.fetchAllTimeUserTopTracks.toString(),
+    fetchAllTimeUserTopTracksWorker
   );
 }
 

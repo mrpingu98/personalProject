@@ -5,7 +5,9 @@ initialAuthorisation: "Initial Authorisation",
 hello: "Hello",
 welcomeMessage: "Welcome to your personalised spotify page! See below for some details about your profile",
 followers: "Followers: ",
-topArtistsSixMonths: "Top Artists (last six months)",
-topTracksSixMonths: "Top Tracks (last six months)",
-recentPlaylists: "Most recently created/followed playlists"
+topArtists: "Top Artists",
+topTracks: "Top Tracks",
+recentPlaylists: "Most recently created/followed playlists",
+allTime: "All Time",
+sixMonths: "Past six months"
 }

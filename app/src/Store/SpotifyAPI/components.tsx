@@ -58,6 +58,24 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
     return WrappedComponent;
   };
 
+  export const withSpotifyAllTimeUserTopArtists = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
+      const dispatch = useDispatch();
+      const { allTimeTopArtistsFetched, allTimeTopArtistsLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!allTimeTopArtistsFetched) {
+          dispatch(spotifyDataActions.fetchAllTimeUserTopArtists());
+        }
+      }, [dispatch, allTimeTopArtistsFetched]);
+
+      if (allTimeTopArtistsLoading || !allTimeTopArtistsFetched) return <div />;
+      return <Component {...props} />;
+    };
+    WrappedComponent.displayName = `withSpotifyUserTopArtists(${Component.displayName || Component.name})`;
+    return WrappedComponent;
+  };
+
   export const withSpotifyUserTopTracks = () => (Component: React.ComponentType) => {
     const WrappedComponent: React.FC = (props) => {
       const dispatch = useDispatch();
@@ -70,6 +88,24 @@ export const withSpotifyUserPersonalData = () => (Component: React.ComponentType
       }, [dispatch, topTracksFetched]);
 
       if (topTracksLoading || !topTracksFetched) return <div />;
+      return <Component {...props} />;
+    };
+    WrappedComponent.displayName = `withSpotifyUserTopTracks(${Component.displayName || Component.name})`;
+    return WrappedComponent;
+  };
+
+  export const withSpotifyAllTimeUserTopTracks = () => (Component: React.ComponentType) => {
+    const WrappedComponent: React.FC = (props) => {
+      const dispatch = useDispatch();
+      const { allTimeTopTracksFetched, allTimeTopTracksLoading } = useSelector((state: AppState) => state.spotifyData);
+
+      React.useEffect(() => {
+        if (!allTimeTopTracksFetched) {
+          dispatch(spotifyDataActions.fetchAllTimeUserTopTracks());
+        }
+      }, [dispatch, allTimeTopTracksFetched]);
+
+      if (allTimeTopTracksLoading || !allTimeTopTracksFetched) return <div />;
       return <Component {...props} />;
     };
     WrappedComponent.displayName = `withSpotifyUserTopTracks(${Component.displayName || Component.name})`;
