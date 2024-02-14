@@ -28,7 +28,6 @@ const PersonalisedSpotify = compose<React.FC>(
 )(() => {
   const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
-
   const {
     spotifyUserData,
     userTopArtists,
