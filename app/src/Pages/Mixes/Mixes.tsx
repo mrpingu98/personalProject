@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
-import { MixesList2023, MixesList2022, MixesList2024 } from "../../Constants/mixesList";
+import { MixesList2022, MixesList2023, MixesList2024 } from "./mixesByYear";
 import { MixesList } from "./MixesList";
 
 const Mixes = () => {

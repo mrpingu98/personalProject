@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { mixes } from "./Types/Mixes";
+import { mixes } from "../../Constants/Types/Mixes";
 
 export function MixesList2022(): mixes {
   const { t } = useTranslation("mixes");
