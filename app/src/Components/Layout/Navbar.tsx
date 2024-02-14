@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { useUserName } from "../../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
 import { NavBarButton } from "./NavBarButton";
 import { routes } from "../../Constants/Routes/Routes";
@@ -14,7 +13,6 @@ import { routes } from "../../Constants/Routes/Routes";
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const styles = useStyles();
-  const { userName } = useUserName();
   const { t } = useTranslation("navbar");
 
   const pages = [t("Muzik"), 
@@ -56,7 +54,6 @@ const NavBar: React.FC = () => {
             text={t("myProfile")}
             icon={<AccountCircleIcon />}
           />
-          <Typography>{userName}</Typography>
         </Box>
       </Toolbar>
     </AppBar>
