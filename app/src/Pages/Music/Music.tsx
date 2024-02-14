@@ -6,7 +6,7 @@ import { TopDnb2023, TopRockMetal2023 } from "../../Constants/topSongsLists";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
-import { routes } from "../../Constants/Routes";
+import { routes } from "../../Constants/Routes/Routes";
 
 const Music: React.FC = () => {
   const styles = useStyles();

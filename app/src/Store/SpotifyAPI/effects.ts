@@ -6,7 +6,7 @@ import { getUserTopTracks } from "./getUserTopTracks";
 import { refreshToken } from "./refreshToken";
 import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
-import { routes } from "../../Constants/Routes";
+import { routes } from "../../Constants/Routes/Routes";
 import { getAllTimeUserTopTracks } from "./getAllTimeUserTopTracks";
 import { getAllTimeUserTopArtists } from "./getAllTimeUserTopArtists";
 
