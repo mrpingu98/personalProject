@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { HomeRoute } from "./Constants/Routes/HomeRoutes";
 import { BrowserRouter } from "react-router-dom";
 import { MixesRoute } from "./Constants/Routes/MixesRoutes";
