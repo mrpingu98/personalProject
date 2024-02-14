@@ -2,11 +2,11 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/material";
 
-interface TopSongsContainerProps {
+interface TopSongsListItemProps {
   url: string;
 }
 
-const TopSongsContainer: React.FC<TopSongsContainerProps> = ({ url }) => {
+const TopSongsListItem: React.FC<TopSongsListItemProps> = ({ url }) => {
   const styles = useStyles();
 
   return (
@@ -30,4 +30,4 @@ const useStyles = makeStyles({
   },
 });
 
-export { TopSongsContainer };
+export { TopSongsListItem };
