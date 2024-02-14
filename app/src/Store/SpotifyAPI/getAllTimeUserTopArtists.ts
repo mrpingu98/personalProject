@@ -1,4 +1,4 @@
-import { apiEndpoints } from "../../Constants/Endpoints";
+import { apiEndpoints } from "../Endpoints";
 import { yieldGet } from "../apiStore";
 
 function* getAllTimeUserTopArtists() {

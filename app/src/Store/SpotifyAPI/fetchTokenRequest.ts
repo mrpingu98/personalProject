@@ -1,4 +1,4 @@
-import { spotifyAPI } from "../../Constants/SpotifyAPI";
+import { spotifyAPI } from "./SpotifyAPI";
 
 export const fetchTokenRequest = () => {
   const searchParams = new URLSearchParams(window.location.search);
