@@ -1,4 +1,4 @@
-import { spotifyUserTopArtist } from "../../Types/Spotify";
+import { spotifyUserTopArtist } from "../../Constants/Types/Spotify";
 import { getSpotifyUserProfile } from "./getUserPersonalData";
 import { getUserPlaylists } from "./getUserPlayslists";
 import { getUserTopArtists } from "./getUserTopArtists";

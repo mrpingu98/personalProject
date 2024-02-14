@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
-import { spotifyUserPlaylists, spotifyUserTopArtist } from "../../../Types/Spotify";
+import { spotifyUserPlaylists, spotifyUserTopArtist } from "../../../Constants/Types/Spotify";
 import { useTranslation } from "react-i18next";
 
 interface PlaylistsProps {

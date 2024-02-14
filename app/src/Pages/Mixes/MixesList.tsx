@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { mixes } from "../../Types/Mixes";
+import { mixes } from "../../Constants/Types/Mixes";
 
 interface MixesListProps {
     mixList: mixes,
