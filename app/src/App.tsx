@@ -5,6 +5,8 @@ import { MixesRoute } from "./Constants/Routes/MixesRoutes";
 import Layout from "./Components/Layout";
 import { MusicRoute } from "./Constants/Routes/MusicRoute";
 import './Configuration/configurei18n';
+import './index.css'
+
 //to allow the useTranslation to work, seem to just have to import the configuration here - not wrap it around anything
 import { createTheme, ThemeProvider } from "@mui/material";
 import { theme } from "./Constants/Theme";
