@@ -3,8 +3,8 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PrimaryButton } from "../../Components/PrimaryButton";
-import { authorisationRequest } from "../../Store/SpotifyAPI/authorisationRequest";
-import { fetchTokenRequest } from "../../Store/SpotifyAPI/fetchTokenRequest";
+import { authorisationRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/authorisationRequest";
+import { fetchTokenRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/fetchTokenRequest";
 
 export const MyProfile: React.FC = () => {
   const styles = useStyles();

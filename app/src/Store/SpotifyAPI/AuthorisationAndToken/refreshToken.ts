@@ -1,4 +1,4 @@
-import { apiEndpoints } from "../Endpoints";
+import { apiEndpoints } from "../../Endpoints";
 
 function* refreshToken() {
   const refreshToken = localStorage.getItem("refresh_token");

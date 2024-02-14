@@ -1,9 +1,9 @@
-import { apiEndpoints } from "../Endpoints";
-import { yieldGet } from "../apiStore";
+import { apiEndpoints } from "../../Endpoints";
+import { yieldGet } from "../../apiStore";
 
-function* getUserTopArtists() {
+function* getAllTimeUserTopArtists() {
   const accessToken = localStorage.getItem("access_token");
-  const userTopArtistsUrl = apiEndpoints.spotifyUserTopArtists;
+  const userTopArtistsUrl = apiEndpoints.spotifyAllTimeUserTopArtists;
   try {
     // @ts-ignore
     const response = yield yieldGet(userTopArtistsUrl, { Authorization: "Bearer " + accessToken,})
@@ -15,4 +15,4 @@ function* getUserTopArtists() {
   }
 }
 
-export { getUserTopArtists };
+export { getAllTimeUserTopArtists };

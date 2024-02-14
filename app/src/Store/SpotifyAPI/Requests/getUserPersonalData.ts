@@ -1,5 +1,5 @@
-import { apiEndpoints } from "../Endpoints";
-import { yieldGet } from "../apiStore";
+import { apiEndpoints } from "../../Endpoints";
+import { yieldGet } from "../../apiStore";
 
 function* getSpotifyUserProfile() {
   const accessToken = localStorage.getItem("access_token");

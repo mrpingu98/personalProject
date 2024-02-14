@@ -1,5 +1,5 @@
-import { apiEndpoints } from "../Endpoints";
-import { yieldGet } from "../apiStore";
+import { apiEndpoints } from "../../Endpoints";
+import { yieldGet } from "../../apiStore";
 
 function* getUserPlaylists() {
   const accessToken = localStorage.getItem("access_token");
