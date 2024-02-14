@@ -4,7 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { useUserName } from "../../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
 import { PrimaryButton } from "../../Components/PrimaryButton";
-import { textFieldTheme } from "../../Theme/TextFieldTheme";
+import { textFieldTheme } from "../../Constants/Theme/TextFieldTheme";
 
 const Home: React.FC = () => {
   const styles = useStyles();

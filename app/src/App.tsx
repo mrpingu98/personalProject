@@ -8,7 +8,7 @@ import { MusicRoute } from "./Constants/Routes/MusicRoute";
 import './Configuration/configurei18n';
 //to allow the useTranslation to work, seem to just have to import the configuration here - not wrap it around anything
 import { createTheme, ThemeProvider } from "@mui/material";
-import { theme } from "./Theme";
+import { theme } from "./Constants/Theme";
 import { store } from "./Store/configureStore";
 import { Provider } from 'react-redux'
 import { PersonalisedSpotifyRoute } from "./Constants/Routes/PersonalisedSpotify";
