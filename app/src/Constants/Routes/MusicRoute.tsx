@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Music } from "../Pages/Music";
-import { routes } from "../Constants/Routes";
+import { Music } from "../../Pages/Music";
+import { routes } from "../Routes";
 
 
 export const MusicRoute: React.FC = () => {

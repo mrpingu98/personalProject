@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {Mixes} from "../Pages/Mixes";
-import { routes } from "../Constants/Routes";
+import {Mixes} from "../../Pages/Mixes";
+import { routes } from "../Routes";
 
 export const MixesRoute: React.FC = () => {
   return (

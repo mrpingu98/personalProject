@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { useUserName } from "../Store/Username/hooks";
+import { useUserName } from "../../Store/Username/hooks";
 import { useTranslation } from "react-i18next";
 import { NavBarButton } from "./NavBarButton";
-import { routes } from "../Constants/Routes";
+import { routes } from "../../Constants/Routes";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();

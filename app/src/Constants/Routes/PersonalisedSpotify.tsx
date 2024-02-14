@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { PersonalisedSpotify } from "../Pages/Music/PersonalisedSpotify";
-import { routes } from "../Constants/Routes";
+import { PersonalisedSpotify } from "../../Pages/Music/PersonalisedSpotify";
+import { routes } from "../Routes";
 
 export const PersonalisedSpotifyRoute: React.FC = () => {
   return (

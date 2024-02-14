@@ -1,7 +1,7 @@
-import { Home } from "../Pages/Home";
+import { Home } from "../../Pages/Home";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { routes } from "../Constants/Routes";
+import { routes } from "../Routes";
 
 export const HomeRoute: React.FC = () => {
   return (
