@@ -10,9 +10,9 @@ import {
   withSpotifyUserPlaylists,
   withSpotifyAllTimeUserTopTracks,
   withSpotifyAllTimeUserTopArtists,
-} from "../../../Store/SpotifyAPI/components";
+} from "../../Store/SpotifyAPI/components";
 import { compose } from "redux";
-import { useSpotifyData } from "../../../Store/SpotifyAPI/hooks";
+import { useSpotifyData } from "../../Store/SpotifyAPI/hooks";
 import { TopArtists } from "./TopArtists";
 import { TopTracks } from "./TopTracks";
 import { Playlists } from "./Playlists";
