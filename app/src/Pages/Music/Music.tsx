@@ -1,19 +1,18 @@
 import React from "react";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
-import { TopDnb2023, TopRockMetal2023 } from "./topSongsLists";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
 import { routes } from "../../Constants/Routes/Routes";
+import useTopSongsList from "../../Hooks/useTopSongsList";
 
 const Music: React.FC = () => {
   const styles = useStyles();
-  const topDnb2023 = TopDnb2023();
-  const topRockMetal2023 = TopRockMetal2023();
   const { t } = useTranslation("music");
   const { t: tyear } = useTranslation("numbersAndDates");
+  const {dnbList2023, rockList2023} = useTopSongsList()
   const [haveAccessToken, setHaveAccessToken] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -52,11 +51,11 @@ const Music: React.FC = () => {
         </Box>
         <Box className={styles.mainContainer}>
           <Box className={styles.listContainer} data-test-id={'dnb-title'}>
-            <TopSongsList songUrlList={topDnb2023} title={t("dnb")} />
+            <TopSongsList songUrlList={dnbList2023} title={t("dnb")} />
           </Box>
           <Box className={styles.listContainer} data-test-id={"rock-title"}>
             <TopSongsList
-              songUrlList={topRockMetal2023}
+              songUrlList={rockList2023}
               title={t("rockMetal")}
             />
           </Box>
