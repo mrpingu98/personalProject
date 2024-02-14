@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
-import { MixesList2022, MixesList2023, MixesList2024 } from "./mixesByYear";
+import useMixes from "../../Hooks/useMixes";
 import { MixesList } from "./MixesList";
 
 const Mixes = () => {
@@ -9,9 +9,7 @@ const Mixes = () => {
   const { t } = useTranslation("mixes");
   const { t: tdates } = useTranslation("numbersAndDates");
 
-  const mixesList2023 = MixesList2023();
-  const mixesList2022 = MixesList2022();
-  const mixesList2024 = MixesList2024();
+  const {mixes2022, mixes2023, mixes2024} = useMixes()
 
   return (
     <Box className={styles.mainContainer}>
@@ -21,9 +19,9 @@ const Mixes = () => {
         </Typography>
       </Box>
       <Typography variant="h3">{t("mixesDescription")}</Typography>
-      <MixesList mixList={mixesList2024} year={tdates('2024')} />
-      <MixesList mixList={mixesList2023} year={tdates('2023')} />
-      <MixesList mixList={mixesList2022} year={tdates('2022')} />
+      <MixesList mixList={mixes2024} year={tdates('2024')} />
+      <MixesList mixList={mixes2023} year={tdates('2023')} />
+      <MixesList mixList={mixes2022} year={tdates('2022')} />
     </Box>
   );
 }
