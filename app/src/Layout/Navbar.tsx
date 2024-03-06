@@ -17,17 +17,7 @@ const NavBar: React.FC = () => {
   const { userName } = useUserName();
   const { t } = useTranslation("navbar");
 
-  const pages = [t("Muzik"), 
-    // t("Merch")
-];
-
-  const handleNavbarNavigation = (page: string) => {
-    if (page === t("Muzik")) {
-      navigate(routes.music);
-    } else {
-      console.log(`Page URL not found for: ${page}`);
-    }
-  };
+  const pages = [{title: t("Muzik"), route: routes.music}, {title: t("Merch"), route: routes.merchandise}];
 
   const navigateMyProfile = React.useCallback(() => {
     navigate(routes.myProfile);
@@ -44,9 +34,9 @@ const NavBar: React.FC = () => {
         <Box sx={{ flexGrow: 1, display: "flex"}}>
           {pages.map((page) => (
             <NavBarButton
-              key={page}
-              onClick={() => handleNavbarNavigation(page)}
-              text={page}
+              key={page.title}
+              onClick={() => navigate(page.route)}
+              text={page.title}
             />
           ))}
         </Box>
