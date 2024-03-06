@@ -1,61 +1,66 @@
 import React from "react";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import createTheme from "@mui/material/styles/createTheme";
-import { TopDnb2023, TopRockMetal2023 } from "../../Constants/topSongsLists";
-import { useTranslation } from "react-i18next";
+import axios from "axios";
+
 
 const Merchandise: React.FC = () => {
   const styles = useStyles();
-  const topDnb2023 = TopDnb2023();
-  const topRockMetal2023 = TopRockMetal2023();
-  const { t } = useTranslation("music");
-  const { t: tyear } = useTranslation("numbersAndDates");
-  const [haveAccessToken, setHaveAccessToken] = React.useState<boolean>(false);
+  const [products, setProducts] = React.useState<any>(null);
+
 
   React.useEffect(() => {
-    const checkAccessToken = localStorage.getItem("access_token") ? true : false;
-    setHaveAccessToken(checkAccessToken);
+    axios.get('https://localhost:7119/product').then(response => {
+      setProducts(response.data);
+      console.log('complete')
+    })
+      .catch(error => {
+        console.error('Error fetching data');
+      })
   }, []);
+  //make a custom hook for get and post requests 
 
   return (
-   <>
-   <Typography>test</Typography>
-   </>
+    <>
+      {products ? (
+        products.map((x: any) => (
+          <>
+            <Box className={styles.mainContainer}>
+              <Box className={styles.column}>
+                <Typography>{x.name}</Typography>
+                <Typography>{x.description}</Typography>
+                <Typography>{x.price}</Typography>
+              </Box>
+              <Box marginRight='15%'>
+                <Typography>test2</Typography>
+              </Box>
+            </Box>
+          </>
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
   );
 };
 
 const theme = createTheme();
 const useStyles = makeStyles({
-  pageParameters: {
-    width: "60%",
-    marginLeft: "20%",
-  },
-  title: {
-    justifyContent: "center",
-    display: "flex",
-  },
   mainContainer: {
-    alignItems: "center",
     display: "flex",
-    flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: '10%',
     '@media (max-width: 600px)': {
-      flexDirection: 'column', // Apply for screens up to 600px (xs screens)
+      flexDirection: 'column', // Apply for screens up to 600px (xs screens) - need to check this
     },
   },
-  listContainer: {
-    padding: theme.spacing(4),
-    alignItems: "center",
+  column: {
+    alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
-  },
-  links: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: 'center',
-    marginTop: theme.spacing(4)
+    marginLeft: "15%"
   },
 });
 
