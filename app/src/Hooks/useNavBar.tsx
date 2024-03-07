@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { routes } from "../Constants/Routes/Routes";
+import { routes } from "../Constants/Routes/RoutesEndpoints";
 
 const useNavBar = () => {
     const navigate = useNavigate();

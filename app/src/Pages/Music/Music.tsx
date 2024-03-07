@@ -5,7 +5,7 @@ import createTheme from "@mui/material/styles/createTheme";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
-import { routes } from "../../Constants/Routes/Routes";
+import { routes } from "../../Constants/Routes/RoutesEndpoints";
 import useTopSongsList from "../../Hooks/useTopSongsList";
 
 const Music: React.FC = () => {
