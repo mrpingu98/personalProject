@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { mixes } from "../../Types/Mixes";
+import { mixes } from "../../Constants/Types/Mixes";
 
 interface MixesListProps {
     mixList: mixes,
@@ -15,9 +15,9 @@ const MixesList: React.FC<MixesListProps> = ({ mixList, year }) => {
             {Object.keys(mixList).map((month) => (
                 <Box>
                     <Typography variant="body1" marginTop={3}>{month}</Typography>
-                        {mixList[month].map(x => (
+                        {mixList[month].map(mix => (
                         <Box marginTop={2}>
-                            <a href={x.link} target="_blank">{x.name}</a>
+                            <a href={mix.link} target="_blank">{mix.name}</a>
                         </Box>))}
                 </Box>
             ))}
