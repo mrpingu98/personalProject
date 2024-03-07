@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   return (
     <MainContainer>
         <Typography variant="h1" data-test-id={"home-title"}>{t("welcome")}</Typography>
-        <Box marginTop={"5%"}>
+        <Box marginTop={"2%"}>
           <Typography variant="body1" data-test-id={"home-description"}>{t("welcomeMessage")}</Typography>
         </Box>
     </MainContainer>
