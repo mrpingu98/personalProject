@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import {
   withRefreshAccessToken,
@@ -16,6 +15,7 @@ import { useSpotifyData } from "../../Store/SpotifyAPI/hooks";
 import { TopArtists } from "./TopArtists";
 import { TopTracks } from "./TopTracks";
 import { Playlists } from "./Playlists";
+import { styled } from '@mui/system';
 
 const PersonalisedSpotify = compose<React.FC>(
   withRefreshAccessToken(),
@@ -26,7 +26,7 @@ const PersonalisedSpotify = compose<React.FC>(
   withSpotifyAllTimeUserTopTracks(),
   withSpotifyAllTimeUserTopArtists()
 )(() => {
-  const styles = useStyles();
+
   const { t } = useTranslation("personalisedSpotify");
   const {
     spotifyUserData,
@@ -38,8 +38,8 @@ const PersonalisedSpotify = compose<React.FC>(
   } = useSpotifyData();
 
   return (
-    <Box className={styles.mainContainer}>
-      <Box className={styles.row} marginBottom={4}>
+    <MainContainer>
+      <Row>
         <Typography variant="h1">
           {`${t("hello")} ${spotifyUserData?.name}`}
         </Typography>
@@ -47,10 +47,10 @@ const PersonalisedSpotify = compose<React.FC>(
           <img
             src={spotifyUserData?.image}
             alt="Profile"
-            className={styles.profilePic}
+            style = {{ height: 150, width: 150, borderRadius: "20%"}}
           />
         </Box>
-      </Box>
+      </Row>
       <Typography variant="h3">{t("welcomeMessage")}</Typography>
       <Typography variant="h1" marginTop={6}>
         {t("allTime")}
@@ -63,30 +63,25 @@ const PersonalisedSpotify = compose<React.FC>(
       <TopArtists userTopArtists={userTopArtists} />
       <TopTracks userTopTracks={userTopTracks} />
       <Playlists playlists={userPlaylists} />
-    </Box>
+    </MainContainer>
   );
 });
 
-const useStyles = makeStyles({
-  row: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    "@media (max-width: 600px)": {
-      flexDirection: "column",
-    },
+const Row = styled('div')({
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  marginBottom: 4,
+  justifyContent: "flex-start",
+  '@media (max-width: 600px)': {
+    flexDirection: 'column',
   },
-  mainContainer: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "column",
-  },
-  profilePic: {
-    height: 150,
-    width: 150,
-    borderRadius: "20%",
-  },
+});
+
+const MainContainer = styled('div')({
+  alignItems: "flex-start",
+  display: "flex",
+  flexDirection: "column",
 });
 
 export { PersonalisedSpotify };
