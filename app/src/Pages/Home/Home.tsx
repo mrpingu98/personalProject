@@ -2,33 +2,25 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
+import { styled } from '@mui/system';
 
 const Home: React.FC = () => {
-  const styles = useStyles();
   const { t } = useTranslation("home");
-
+localStorage.setItem("access_token", "")
   return (
-    <Box className={styles.container}>
-      <Box className={styles.column}>
+    <MainContainer>
         <Typography variant="h1" data-test-id={"home-title"}>{t("welcome")}</Typography>
         <Box marginTop={"5%"}>
           <Typography variant="body1" data-test-id={"home-description"}>{t("welcomeMessage")}</Typography>
         </Box>
-      </Box>
-    </Box>
+    </MainContainer>
   );
 };
 
-const useStyles = makeStyles({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  column: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+const MainContainer = styled('div')({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
 });
 
 export { Home };
