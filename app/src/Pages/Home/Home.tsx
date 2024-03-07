@@ -1,12 +1,11 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import { styled } from '@mui/system';
 
 const Home: React.FC = () => {
   const { t } = useTranslation("home");
-localStorage.setItem("access_token", "")
+  
   return (
     <MainContainer>
         <Typography variant="h1" data-test-id={"home-title"}>{t("welcome")}</Typography>
