@@ -10,7 +10,10 @@ const useNavBar = () => {
     const handleNavbarNavigation = (page: string) => {
       if (page === t("Muzik")) {
         navigate(routes.music);
-      } else {
+      } 
+      if (page === t("Merch")) {
+        navigate(routes.merchandise);
+      }else {
         console.log(`Page URL not found for: ${page}`);
       }
     };
