@@ -1,34 +1,25 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
+import { styled } from '@mui/system';
 
 const Error: React.FC = () => {
-  const styles = useStyles();
   const { t } = useTranslation("error");
 
   return (
-    <Box className={styles.container}>
-      <Box className={styles.column}>
+      <Container>
         <Typography variant="h1">{t("title")}</Typography>
-        <Box marginTop={"5%"}>
+        <Box marginTop={6}>
           <Typography variant="body1">{t("description")}</Typography>
         </Box>
-      </Box>
-    </Box>
+      </Container>
   );
 };
 
-const useStyles = makeStyles({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  column: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+const Container = styled('div')({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
 });
 
 export { Error };
