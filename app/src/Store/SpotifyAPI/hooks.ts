@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { AppState } from "../rootReducer";
-import { spotifyUserData, spotifyUserPlaylists, spotifyUserTopArtist, spotifyUserTopTracks } from "../../Types/Spotify";
+import { spotifyUserData, spotifyUserPlaylists, spotifyUserTopArtist, spotifyUserTopTracks } from "../../Constants/Types/Spotify";
 
 interface SpotifyDataHook {
   spotifyUserData: spotifyUserData | null;

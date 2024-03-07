@@ -1,7 +1,7 @@
 import * as React from "react";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
-import { TopSongsContainer } from "./TopSongsContainer";
+import { TopSongsListItem } from "./TopSongsListItem";
 import { Typography } from "@mui/material";
 
 interface TopSongsListProps {
@@ -31,7 +31,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
       >
         {songUrlList.map((x) => (
           <ListItem key={x}>
-            <TopSongsContainer url={x} />
+            <TopSongsListItem url={x} />
           </ListItem>
         ))}
       </List>

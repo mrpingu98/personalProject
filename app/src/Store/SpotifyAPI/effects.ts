@@ -1,14 +1,14 @@
-import { spotifyUserTopArtist } from "../../Types/Spotify";
-import { getSpotifyUserProfile } from "./getUserPersonalData";
-import { getUserPlaylists } from "./getUserPlayslists";
-import { getUserTopArtists } from "./getUserTopArtists";
-import { getUserTopTracks } from "./getUserTopTracks";
-import { refreshToken } from "./refreshToken";
+import { spotifyUserTopArtist } from "../../Constants/Types/Spotify";
+import { getSpotifyUserProfile } from "./Requests/getUserPersonalData";
+import { getUserPlaylists } from "./Requests/getUserPlayslists";
+import { getUserTopArtists } from "./Requests/getUserTopArtists";
+import { getUserTopTracks } from "./Requests/getUserTopTracks";
+import { refreshToken } from "./AuthorisationAndToken/refreshToken";
 import { spotifyDataActions } from "./state";
 import { takeLatest, put } from "redux-saga/effects";
-import { routes } from "../../Constants/Routes";
-import { getAllTimeUserTopTracks } from "./getAllTimeUserTopTracks";
-import { getAllTimeUserTopArtists } from "./getAllTimeUserTopArtists";
+import { routes } from "../../Constants/Routes/Routes";
+import { getAllTimeUserTopTracks } from "./Requests/getAllTimeUserTopTracks";
+import { getAllTimeUserTopArtists } from "./Requests/getAllTimeUserTopArtists";
 
 function* fetchRefreshTokenWorker() {
   try {
