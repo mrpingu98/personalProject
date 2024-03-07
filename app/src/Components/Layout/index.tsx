@@ -1,6 +1,5 @@
 import * as React from "react";
 import NavBar from "./Navbar";
-import { makeStyles } from "@mui/styles";
 import { ReactNode } from "react";
 import createTheme from "@mui/material/styles/createTheme";
 
@@ -8,34 +7,28 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+const theme = createTheme();
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const styles = useStyles();
   return (
     <div>
       <NavBar />
-      <main className={styles.content}>
-        <div className={styles.children}>{children}</div>
+      <main style={{
+        flexGrow: 1,
+        minHeight: "100vh",
+        position: "relative",
+        backgroundColor: "#f3efeb",
+        marginTop: 65,
+        padding: theme.spacing(6)
+      }}>
+        <div style={{marginBottom: theme.spacing(5),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2)}}>{children}</div>
       </main>
     </div>
   );
 };
 
-const theme = createTheme();
-const useStyles = makeStyles({
-  content: {
-    flexGrow: 1,
-    minHeight: "100vh",
-    position: "relative",
-    backgroundColor: "#f3efeb",
-    marginTop: 65,
-    padding: theme.spacing(6)
-  },
-  children: {
-    marginBottom: theme.spacing(5),
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)
-  },
-});
 export default Layout;
 
 

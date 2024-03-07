@@ -3,19 +3,17 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import { NavBarButton } from "./NavBarButton";
 import useNavBar from "../../Hooks/useNavBar";
 
 const NavBar: React.FC = () => {
-  const styles = useStyles();
   const { t } = useTranslation("navbar");
   const pages = [t("Muzik"), t("Merch")];
   const {handleNavbarNavigation, navigateHome, navigateMyProfile} = useNavBar()
 
   return (
-    <AppBar className={styles.navBar} sx={{ backgroundColor: "#858585" }}>
+    <AppBar sx={{ backgroundColor: "#858585", height: 65, position: 'fixed' }}>
       <Toolbar disableGutters sx={{ml: 2, mr:2}}>
         <NavBarButton onClick={navigateHome} text={t("home")} />
         <Box sx={{ flexGrow: 1, display: "flex"}}>
@@ -27,7 +25,7 @@ const NavBar: React.FC = () => {
             />
           ))}
         </Box>
-        <Box className={styles.userName}>
+        <Box sx={{  display: "flex", justifyContent: "flex-end"}}>
           <NavBarButton
             onClick={navigateMyProfile}
             text={t("myProfile")}
@@ -39,14 +37,4 @@ const NavBar: React.FC = () => {
   );
 };
 
-const useStyles = makeStyles({
-  navBar: {
-    height: 65,
-    position: "fixed",
-  },
-  userName: {
-    display: "flex",
-    justifyContent: "flex-end",
-  }
-});
 export default NavBar;
