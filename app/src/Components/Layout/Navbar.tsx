@@ -11,7 +11,7 @@ import useNavBar from "../../Hooks/useNavBar";
 const NavBar: React.FC = () => {
   const styles = useStyles();
   const { t } = useTranslation("navbar");
-  const pages = [t("Muzik")];
+  const pages = [t("Muzik"), t("Merch")];
   const {handleNavbarNavigation, navigateHome, navigateMyProfile} = useNavBar()
 
   return (

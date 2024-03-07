@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { routes } from "../Constants/Routes/Routes";
+import { routes } from "../Constants/Routes/RoutesEndpoints";
 
 const useNavBar = () => {
     const navigate = useNavigate();
@@ -10,7 +10,10 @@ const useNavBar = () => {
     const handleNavbarNavigation = (page: string) => {
       if (page === t("Muzik")) {
         navigate(routes.music);
-      } else {
+      } 
+      if (page === t("Merch")) {
+        navigate(routes.merchandise);
+      }else {
         console.log(`Page URL not found for: ${page}`);
       }
     };

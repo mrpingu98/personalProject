@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { PersonalisedSpotify } from "../../Pages/PersonalisedSpotify/PersonalisedSpotify";
-import { routes } from "./Routes";
+import { routes } from "./RoutesEndpoints";
 
 export const PersonalisedSpotifyRoute: React.FC = () => {
   return (
