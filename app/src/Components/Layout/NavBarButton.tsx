@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { ReactNode } from "react";
-import { makeStyles } from "@mui/styles";
+
 interface NavBarButtonProps {
   onClick: () => void;
   text: string;
@@ -8,17 +8,17 @@ interface NavBarButtonProps {
 }
 
 const NavBarButton: React.FC<NavBarButtonProps> = ({ onClick, text, icon }) => {
-  const styles = useStyles();
   return (
     <>
       {icon ? (
         <Button
-          className={styles.button}
           onClick={onClick}
           sx={{
             my: 2,
             color: "white",
             bgcolor: "#858585",
+            display: 'flex',
+            alignItems:'center',
             ":hover": {
               bgcolor: "#656565",
               color: "white",
@@ -29,15 +29,16 @@ const NavBarButton: React.FC<NavBarButtonProps> = ({ onClick, text, icon }) => {
         </Button>
       ) : (
         <Button
-          className={styles.button}
           onClick={onClick}
           sx={{
             my: 2,
             color: "white",
+            display: 'flex',
+            alignItems:'center',
             bgcolor: "#858585",
             ":hover": {
               bgcolor: "#656565",
-              color: "white",
+              color: "white"
             },
           }}
         >
@@ -47,12 +48,5 @@ const NavBarButton: React.FC<NavBarButtonProps> = ({ onClick, text, icon }) => {
     </>
   );
 };
-
-const useStyles = makeStyles({
-  button: {
-    display: "flex",
-    alignItems: "center",
-  },
-});
 
 export { NavBarButton };

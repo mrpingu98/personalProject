@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
 import { Box, Typography } from "@mui/material";
 import { spotifyUserTopTracks } from "../../Constants/Types/Spotify";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,6 @@ interface TopTracksProps {
 }
 
 const TopTracks: React.FC<TopTracksProps> = ({ userTopTracks }) => {
-  const styles = useStyles();
   const { t } = useTranslation("personalisedSpotify");
 
   return (
@@ -29,17 +27,5 @@ const TopTracks: React.FC<TopTracksProps> = ({ userTopTracks }) => {
     </>
   );
 };
-
-const useStyles = makeStyles({
-  row: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    "@media (max-width: 600px)": {
-      flexDirection: "column",
-    },
-  },
-});
 
 export { TopTracks };

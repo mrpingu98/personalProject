@@ -1,13 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { authorisationRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/authorisationRequest";
 import { fetchTokenRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/fetchTokenRequest";
+import { styled } from '@mui/system';
 
 export const MyProfile: React.FC = () => {
-  const styles = useStyles();
   const { t } = useTranslation("myProfile");
   const [haveAccessToken, setHaveAccessToken] = React.useState<boolean>(false);
 
@@ -25,7 +24,7 @@ export const MyProfile: React.FC = () => {
   }, []);
 
   return (
-    <Box className={styles.listContainer}>
+    <ListContainer>
       <Box marginBottom={4}>
         <Typography variant="h1" data-test-id={"myprofile-title"}>
           {t("myProfile")}
@@ -34,7 +33,7 @@ export const MyProfile: React.FC = () => {
       <Typography variant="h3" data-test-id={"myprofile-spotify-title"}>
         {t("spotifyAuthorisation")}
       </Typography>
-      <Box className={styles.container} marginTop={2}>
+      <Container>
         <Typography variant="body1">
           {haveAccessToken ? (
             <div data-test-id={"authorised-description"}>
@@ -53,21 +52,21 @@ export const MyProfile: React.FC = () => {
             disabled={haveAccessToken}
           />
         </Box>
-      </Box>
-    </Box>
+      </Container>
+    </ListContainer>
   );
 };
 
-const useStyles = makeStyles({
-  container: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-  },
-  listContainer: {
-    alignItems: "flex-start",
+const Container = styled('div')({
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-start",
+  marginTop: 2,
+});
+
+const ListContainer = styled('div')({
+  alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
-  },
 });

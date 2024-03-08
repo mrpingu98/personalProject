@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/material";
 
 interface TopSongsListItemProps {
@@ -7,12 +6,11 @@ interface TopSongsListItemProps {
 }
 
 const TopSongsListItem: React.FC<TopSongsListItemProps> = ({ url }) => {
-  const styles = useStyles();
 
   return (
     <Box width="40%">
       <iframe
-        className={styles.spotifyElement}
+        style = {{height: 152, border: 'none', borderRadius: '15px'}}
         src={url}
         title="Spotify Track"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -21,13 +19,5 @@ const TopSongsListItem: React.FC<TopSongsListItemProps> = ({ url }) => {
     </Box>
   );
 };
-
-const useStyles = makeStyles({
-  spotifyElement: {
-    height: 152,
-    borderRadius: '15px',
-    border: 'none'
-  },
-});
 
 export { TopSongsListItem };
