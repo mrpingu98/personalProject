@@ -1,44 +1,39 @@
-import React from "react";
+import React, { useTransition } from "react";
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
 import { styled } from '@mui/system';
+import { Error } from "../Error/Error";
+import { apiEndpoints } from "../../Store/Endpoints";
+import { useQueryGet } from "../../Hooks/useQueryGet"
+import { LoadingCircle } from "../../Components/LoadingCircle";
+import { useTranslation } from "react-i18next";
 
 
 const Merchandise: React.FC = () => {
-  const [products, setProducts] = React.useState<any>(null);
 
+  const {t} = useTranslation("merchandise");
 
-  React.useEffect(() => {
-    axios.get('https://localhost:7119/product').then(response => {
-      setProducts(response.data);
-      console.log('complete')
-    })
-      .catch(error => {
-        console.error('Error fetching data');
-      })
-  }, []);
-  //make a custom hook for get and post requests 
+  const { data: products, error, isPending } = useQueryGet(apiEndpoints.getAllProducts, 'getProducts');
+  if (isPending) return <LoadingCircle />
+  if (error) return <Error />
 
   return (
     <>
-      {products ? (
-        products.map((x: any) => (
-          <>
-            <MainContainer>
-              <Column>
-                <Typography>{x.name}</Typography>
-                <Typography>{x.description}</Typography>
-                <Typography>{x.price}</Typography>
-              </Column>
-              <Box marginRight='15%'>
-                <Typography>test2</Typography>
-              </Box>
-            </MainContainer>
-          </>
-        ))
-      ) : (
-        <div>Loading...</div>
-      )}
+      <Typography variant='h1'>{t("title")}</Typography>
+      <Box sx={{ marginTop: '2%' }}>
+        <Typography variant='body1'>{t("description")}</Typography>
+      </Box>
+      {products.map((product: any) => (
+        <MainContainer key={product.productId}>
+          <Column>
+            <Typography>{product.name}</Typography>
+            <Typography>{product.description}</Typography>
+            <Typography>{product.price}</Typography>
+          </Column>
+          <Box marginRight='15%'>
+            <Typography>PICTURE</Typography>
+          </Box>
+        </MainContainer>
+      ))}
     </>
   );
 };
@@ -47,6 +42,7 @@ const MainContainer = styled('div')({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  marginTop: '5%',
   marginBottom: '10%',
   '@media (max-width: 600px)': {
     flexDirection: 'column', // Apply for screens up to 600px (xs screens) - need to check this
@@ -54,10 +50,10 @@ const MainContainer = styled('div')({
 });
 
 const Column = styled('div')({
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    marginLeft: "15%"
+  alignItems: "flex-start",
+  display: "flex",
+  flexDirection: "column",
+  marginLeft: "15%"
 });
 
 export { Merchandise };
