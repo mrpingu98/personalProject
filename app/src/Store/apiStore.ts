@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const yieldGet = (url: string, header?: object) => {
     if (header) {
         const headersArray = Object.entries(header);
@@ -12,8 +14,28 @@ export const yieldGet = (url: string, header?: object) => {
             method: "GET"
         })
     }
-
 }
+
+export const get = async (url: string) => {
+    try{
+        const response = await axios.get(url);
+        return response.data;
+    }
+    catch (error){
+        console.error(error)
+    }
+  }
+
+export const post = async (url: string, payload: object) => {
+    try{
+      const response = await axios.post(url, payload);
+      return response.data;
+    }
+    catch(error){
+      console.error(error)
+    }
+  } 
+
 
 // below doesn't currently work for the refresh token POST request...something to look at another time....
 
