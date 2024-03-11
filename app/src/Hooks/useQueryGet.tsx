@@ -8,7 +8,7 @@ interface UseQueryGet {
   }
 
 export const useQueryGet = (url: string, queryKey: string, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryGet => {
-    const getProducts = () => get(url)
-    const { data, error, isPending } = useQuery({queryKey: [{queryKey}], queryFn: getProducts, refetchOnMount: false, refetchOnWindowFocus: false});
+    const getRequest = () => get(url)
+    const { data, error, isPending } = useQuery({queryKey: [{queryKey}], queryFn: getRequest, refetchOnMount: refetchOnMount, refetchOnWindowFocus: refetchOnWindowFocus});
     return {data: data, error: error, isPending: isPending}
 }
