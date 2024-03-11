@@ -1,26 +1,29 @@
 import { Button, TextField, Typography } from "@mui/material"
 import { useQueryPost } from "../../Hooks/useQueryPost";
+import { Product } from "../../Constants/Types/Product";
 import React from "react";
 
-
-export const MerchandiseAdmin :React.FC = () => {
-    const [productName, setProductName] = React.useState<string>('');
+const MerchandiseAdmin: React.FC = () => {
+    const [name, setName] = React.useState<string>('');
     const [description, setDescription] = React.useState<string>('');
     const [price, setPrice] = React.useState<string>('');
     const [imageUrl, setImageUrl] = React.useState<string>('');
 
+    const addProduct: Product = {
+        name: name,
+        description: description,
+        price: parseFloat(price),
+        imageUrl: imageUrl
+    }
 
-    const { mutation } = useQueryPost('https://localhost:7119/product', {
-        name: 'QueryProduct',
-        description: 'third product added using query mutation',
-        price: 12
-      });
+
+    const { mutation } = useQueryPost('https://localhost:7119/product', addProduct);
 
     return (
         <>
         <Typography variant='h1'>Add Product</Typography>
         <div>Name</div>
-        <TextField onChange={(e) => setProductName(e.target.value)}/>
+        <TextField onChange={(e) => setName(e.target.value)}/>
         <div>Description</div>
         <TextField onChange={(e) => setDescription(e.target.value)}/>
         <div>Price</div>
@@ -46,3 +49,5 @@ export const MerchandiseAdmin :React.FC = () => {
         </>
     )
 }
+
+export {MerchandiseAdmin}
