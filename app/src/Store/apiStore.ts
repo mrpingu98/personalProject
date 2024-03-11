@@ -26,6 +26,16 @@ export const get = async (url: string) => {
     }
   }
 
+export const post = async (url: string, payload: object) => {
+    try{
+      const response = await axios.post(url, payload);
+      return response.data;
+    }
+    catch(error){
+      console.error(error)
+    }
+  } 
+
 
 // below doesn't currently work for the refresh token POST request...something to look at another time....
 
