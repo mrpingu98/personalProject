@@ -1,18 +1,24 @@
-import React, { useTransition } from "react";
-import { Box, Typography } from "@mui/material";
+import React from "react";
+import { Box, Button, Typography } from "@mui/material";
 import { styled } from '@mui/system';
 import { Error } from "../Error/Error";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { useQueryGet } from "../../Hooks/useQueryGet"
 import { LoadingCircle } from "../../Components/LoadingCircle";
 import { useTranslation } from "react-i18next";
+import { useQueryPost } from "../../Hooks/useQueryPost";
 
 
 const Merchandise: React.FC = () => {
-
   const {t} = useTranslation("merchandise");
 
-  const { data: products, error, isPending } = useQueryGet(apiEndpoints.getAllProducts, 'getProducts');
+ const{mutation} = useQueryPost('https://localhost:7119/product', {
+    name: 'QueryProduct',
+    description: 'third product added using query mutation',
+    price: 12
+  });
+
+  const { data: products, error, isPending } = useQueryGet(apiEndpoints.getAllProducts, 'getProducts', false, false);
   if (isPending) return <LoadingCircle />
   if (error) return <Error />
 
@@ -34,6 +40,21 @@ const Merchandise: React.FC = () => {
           </Box>
         </MainContainer>
       ))}
+      <div>
+      {mutation.isPending ? (
+        'Adding todo...'
+      ) : (
+        <>
+          {mutation.isError ? (
+            <div>An error occurred: {mutation.error.message}</div>
+          ) : null}
+
+          {mutation.isSuccess ? <div>Todo added!</div> : null}
+
+          <Button onClick={() => mutation.mutate()}>dohwocwdc</Button>
+        </>
+      )}
+    </div>
     </>
   );
 };
