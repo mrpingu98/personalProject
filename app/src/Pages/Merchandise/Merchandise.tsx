@@ -7,12 +7,14 @@ import { useQueryGet } from "../../Hooks/useQueryGet"
 import { LoadingCircle } from "../../Components/LoadingCircle";
 import { useTranslation } from "react-i18next";
 import { useQueryPost } from "../../Hooks/useQueryPost";
+import { LinkButton } from "../../Components/LinkButton";
+import { routes } from "../../Constants/Routes/RoutesEndpoints";
 
 
 const Merchandise: React.FC = () => {
-  const {t} = useTranslation("merchandise");
+  const { t } = useTranslation("merchandise");
 
- const{mutation} = useQueryPost('https://localhost:7119/product', {
+  const { mutation } = useQueryPost('https://localhost:7119/product', {
     name: 'QueryProduct',
     description: 'third product added using query mutation',
     price: 12
@@ -24,12 +26,18 @@ const Merchandise: React.FC = () => {
 
   return (
     <>
-      <Typography variant='h1'>{t("title")}</Typography>
+      <Box sx={{ display: "flex", justifyContent: 'space-between' }}>
+        <Typography variant='h1'>{t("title")}</Typography>
+        <LinkButton
+          text="Admin"
+          route={routes.merchandiseAdmin}
+        />
+      </Box>
       <Box sx={{ marginTop: '2%' }}>
         <Typography variant='body1'>{t("description")}</Typography>
       </Box>
       {products.map((product: any) => (
-        <MainContainer key={product.productId}>
+        <MainContainer key={product.id}>
           <Column>
             <Typography>{product.name}</Typography>
             <Typography>{product.description}</Typography>
@@ -41,20 +49,20 @@ const Merchandise: React.FC = () => {
         </MainContainer>
       ))}
       <div>
-      {mutation.isPending ? (
-        'Adding todo...'
-      ) : (
-        <>
-          {mutation.isError ? (
-            <div>An error occurred: {mutation.error.message}</div>
-          ) : null}
+        {mutation.isPending ? (
+          'Adding todo...'
+        ) : (
+          <>
+            {mutation.isError ? (
+              <div>An error occurred: {mutation.error.message}</div>
+            ) : null}
 
-          {mutation.isSuccess ? <div>Todo added!</div> : null}
+            {mutation.isSuccess ? <div>Todo added!</div> : null}
 
-          <Button onClick={() => mutation.mutate()}>dohwocwdc</Button>
-        </>
-      )}
-    </div>
+            <Button onClick={() => mutation.mutate()}>dohwocwdc</Button>
+          </>
+        )}
+      </div>
     </>
   );
 };

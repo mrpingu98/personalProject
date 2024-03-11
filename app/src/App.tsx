@@ -16,6 +16,7 @@ import { PersonalisedSpotifyRoute } from "./Constants/Routes/PersonalisedSpotify
 import { MyProfileRoute } from "./Constants/Routes/MyProfileRoute";
 import { ErrorRoute } from "./Constants/Routes/ErrorRoute";
 import { MerchandiseRoute } from "./Constants/Routes/MerchandiseRoute";
+import { MerchandiseAdmin } from "./Pages/MerchandiseAdmin/MerchandiseAdmin";
 
 const muiTheme = createTheme(theme)
 
@@ -29,6 +30,7 @@ function AppRoutes() {
         <MyProfileRoute />
         <ErrorRoute />
         <MerchandiseRoute />
+        <MerchandiseAdmin />
     </>
   );
 }
