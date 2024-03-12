@@ -2,8 +2,10 @@ import { Button, TextField, Typography } from "@mui/material"
 import { useQueryDelete, useQueryPost, useQueryPut } from "../../Hooks/useMutations";
 import { AddProductPayload, DeleteProductPayload, EditProductPayload } from "../../Constants/Types/Product";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const MerchandiseAdmin: React.FC = () => {
+    const {t} = useTranslation('merchandiseAdmin')
     const [deleteProductPayload, setDeleteProductPayload] = React.useState<DeleteProductPayload>({name: ''});
     const [addProductPayload, setAddProductPayload] = React.useState<AddProductPayload>({
       name: '',
@@ -27,16 +29,16 @@ const MerchandiseAdmin: React.FC = () => {
 
     return (
         <>
-        <Typography variant='h1'>Add Product</Typography>
-        <div>Name</div>
+        <Typography variant='h1'>{t('addProduct')}</Typography>
+        <div>{t('name')}</div>
         <TextField onChange={(e) => setAddProductPayload({...addProductPayload, name: e.target.value})}/>
-        <div>Description</div>
+        <div>{t('description')}</div>
         <TextField onChange={(e) => setAddProductPayload({...addProductPayload, description: e.target.value})}/>
-        <div>Price</div>
+        <div>{t('price')}</div>
         <TextField onChange={(e) => setAddProductPayload({...addProductPayload, price: parseFloat(e.target.value)})}/>
-        <div>ImageUrl</div>
+        <div>{t('imageUrl')}</div>
         <TextField onChange={(e) => setAddProductPayload({...addProductPayload, imageUrl: e.target.value})}/>
-        <Button onClick={() => mutationAddProduct.mutate()}>Add Product</Button>
+        <Button onClick={() => mutationAddProduct.mutate()}>{t('addProduct')}</Button>
         <div>
         {mutationAddProduct.isPending ? (
           'Adding todo...'
@@ -51,18 +53,18 @@ const MerchandiseAdmin: React.FC = () => {
         )}
       </div>
 
-      <Typography variant='h1' marginTop='5%'>Edit Product</Typography>
-        <div>Name</div>
+      <Typography variant='h1' marginTop='5%'>{t('editProduct')}</Typography>
+        <div>{t('name')}</div>
         <TextField onChange={(e) => setEditProductPayload({...editProductPayload, name: e.target.value})}/>
-        <div>New Name</div>
+        <div>{t('newName')}</div>
         <TextField onChange={(e) => setEditProductPayload({...editProductPayload, newName: e.target.value})}/>
-        <div>Description</div>
+        <div>{t('description')}</div>
         <TextField onChange={(e) => setEditProductPayload({...editProductPayload, description: e.target.value})}/>
-        <div>Price</div>
+        <div>{t('price')}</div>
         <TextField onChange={(e) => setEditProductPayload({...editProductPayload, price: parseFloat(e.target.value)})}/>
-        <div>ImageUrl</div>
+        <div>{t('imageUrl')}</div>
         <TextField onChange={(e) => setEditProductPayload({...editProductPayload, imageUrl: e.target.value})}/>
-        <Button onClick={() => mutationEditProduct.mutate()}>Edit Product</Button>
+        <Button onClick={() => mutationEditProduct.mutate()}>{t('editProduct')}</Button>
         <div>
         {mutationEditProduct.isPending ? (
           'Adding todo...'
@@ -77,10 +79,10 @@ const MerchandiseAdmin: React.FC = () => {
         )}
       </div>
 
-      <Typography variant='h1' marginTop='5%'>Delete Product</Typography>
+      <Typography variant='h1' marginTop='5%'>{t('deleteProduct')}</Typography>
         <div>Name</div>
         <TextField onChange={(e) => setDeleteProductPayload({... deleteProductPayload, name: e.target.value})}/>
-        <Button onClick={() => mutationDeleteProduct.mutate()}>Delete Product</Button>
+        <Button onClick={() => mutationDeleteProduct.mutate()}>{t('deleteProduct')}</Button>
         <div>
         {mutationDeleteProduct.isPending ? (
           'Adding todo...'
