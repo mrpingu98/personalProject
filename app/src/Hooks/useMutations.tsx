@@ -1,33 +1,34 @@
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import axios, { AxiosResponse } from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 
-interface UseQueryPost {
-    mutation: UseMutationResult<AxiosResponse<any, any>, Error, void, unknown>
-  }
 
-export const useQueryPost = (url: string, payload: any, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryPost => {
+export const useMutationPost = (url: string, payload: any, key?: string) => {
+    const queryClient = useQueryClient()
     
-    const mutation = useMutation({mutationFn: () => {
-        return axios.post(url, payload)
-    }})
-
-    return {mutation: mutation}
+    const mutation = useMutation({
+            mutationFn: () => {return axios.post(url, payload)},
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'})}
+        })
+    return {mutation}
 }
 
-export const useQueryPut = (url: string, payload: any, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryPost => {
-    
-    const mutation = useMutation({mutationFn: () => {
-        return axios.put(url, payload)
-    }})
-
-    return {mutation: mutation}
+export const useMutationPut = (url: string, payload: any, key?: string) => {
+    const queryClient = useQueryClient()
+    const mutation = useMutation({
+        mutationFn: () => {return axios.put(url, payload)},
+        onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'})}
+    })
+    return {mutation}
 }
 
-export const useQueryDelete = (url: string, payload: any, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryPost => {
-    
-    const mutation = useMutation({mutationFn: () => {
-        return axios.delete(url, payload)
-    }})
-
-    return {mutation: mutation}
+export const useMutationDelete = (url: string, payload: any, key?: string) => {
+    const queryClient = useQueryClient()
+    const mutation = useMutation({
+        mutationFn: () => {return axios.delete(url, payload)},
+        onSuccess: () => {queryClient.invalidateQueries({ queryKey: [key], refetchType: 'all'})}
+    })
+    return {mutation}
 }
+
+//By default invalidateQueries() only forces refetch for active queries, and for some reason the loader doesn't count as being "active", 
+//so I had to add the prop refetchType: 'all' to invalidateQueries()
