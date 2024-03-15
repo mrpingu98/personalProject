@@ -1,8 +1,10 @@
-import { Button, TextField, Typography } from "@mui/material"
-import { useQueryDelete, useQueryPost, useQueryPut } from "../../Hooks/useMutations";
-import { AddProductPayload, DeleteProductPayload, EditProductPayload } from "../../Constants/Types/Product";
 import React from "react";
+import { Button, TextField, Typography } from "@mui/material"
+import { useMutationDelete, useMutationPost, useMutationPut } from "../../Hooks/useMutations";
+import { AddProductPayload, DeleteProductPayload, EditProductPayload } from "../../Constants/Types/Product";
 import { useTranslation } from "react-i18next";
+import { apiEndpoints } from "../../Store/Endpoints";
+
 
 const MerchandiseAdmin: React.FC = () => {
     const {t} = useTranslation('merchandiseAdmin')
@@ -21,11 +23,11 @@ const MerchandiseAdmin: React.FC = () => {
       imageUrl: ''
     })
 
-    const {mutation: mutationAddProduct} = useQueryPost('https://localhost:7119/product', addProductPayload);
+    const {mutation: mutationAddProduct} = useMutationPost(apiEndpoints.products, addProductPayload, 'getProducts');
 
-    const {mutation: mutationEditProduct} = useQueryPut('https://localhost:7119/product', editProductPayload)
+    const {mutation: mutationEditProduct} = useMutationPut(apiEndpoints.products, editProductPayload, 'getProducts')
 
-    const {mutation: mutationDeleteProduct} = useQueryDelete('https://localhost:7119/product', deleteProductPayload)
+    const {mutation: mutationDeleteProduct} = useMutationDelete(apiEndpoints.products, deleteProductPayload, 'getProducts')
 
     return (
         <>
@@ -80,7 +82,7 @@ const MerchandiseAdmin: React.FC = () => {
       </div>
 
       <Typography variant='h1' marginTop='5%'>{t('deleteProduct')}</Typography>
-        <div>Name</div>
+        <div>{t('name')}</div>
         <TextField onChange={(e) => setDeleteProductPayload({... deleteProductPayload, name: e.target.value})}/>
         <Button onClick={() => mutationDeleteProduct.mutate()}>{t('deleteProduct')}</Button>
         <div>
