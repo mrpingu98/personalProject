@@ -24,7 +24,7 @@ export const useMutationPut = (url: string, payload: any, key?: string) => {
 export const useMutationDelete = (url: string, payload: any, key?: string) => {
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: () => {return axios.delete(url, payload)},
+        mutationFn: () => {return axios.delete(url, {data: payload})},
         onSuccess: () => {queryClient.invalidateQueries({ queryKey: [key], refetchType: 'all'})}
     })
     return {mutation}
