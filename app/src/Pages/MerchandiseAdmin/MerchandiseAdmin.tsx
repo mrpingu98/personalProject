@@ -57,7 +57,7 @@ const MerchandiseAdmin: React.FC = () => {
               {mutationAddProduct.isSuccess &&
                 <SnackBar
                   snackbarActive={addProductSnackbar}
-                  setSnackbarActive={setAddProductSnackbar)
+                  setSnackbarActive={setAddProductSnackbar}
                   message={t('productAdded')}
 
                 />}
