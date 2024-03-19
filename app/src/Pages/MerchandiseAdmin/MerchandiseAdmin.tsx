@@ -10,6 +10,7 @@ import { SnackBar } from "../../Components/SnackBar";
 
 const MerchandiseAdmin: React.FC = () => {
   const { t } = useTranslation('merchandiseAdmin')
+  const {t: queryKey} = useTranslation('queryKeys')
   const [deleteProductPayload, setDeleteProductPayload] = React.useState<DeleteProductPayload>({ name: '' });
   const [addProductPayload, setAddProductPayload] = React.useState<AddProductPayload>({
     name: '',
@@ -25,12 +26,13 @@ const MerchandiseAdmin: React.FC = () => {
     price: parseFloat('0'),
     imageUrl: ''
   })
+  
+  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationPost(apiEndpoints.products, addProductPayload, queryKey('getProducts'));
 
-  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationPost(apiEndpoints.products, addProductPayload, 'getProducts');
+  const { mutation: mutationEditProduct, snackbar: editProductSnackbar, setSnackbar: setEditProductSnackbar } = useMutationPut(apiEndpoints.products, editProductPayload, queryKey('getProducts'))
 
-  const { mutation: mutationEditProduct, snackbar: editProductSnackbar, setSnackbar: setEditProductSnackbar } = useMutationPut(apiEndpoints.products, editProductPayload, 'getProducts')
+  const { mutation: mutationDeleteProduct, snackbar: deleteProductSnackbar, setSnackbar: setDeleteProductSnackbar } = useMutationDelete(apiEndpoints.products, deleteProductPayload, queryKey('getProducts'))
 
-  const { mutation: mutationDeleteProduct, snackbar: deleteProductSnackbar, setSnackbar: setDeleteProductSnackbar } = useMutationDelete(apiEndpoints.products, deleteProductPayload, 'getProducts')
 
   return (
     <>
@@ -55,8 +57,9 @@ const MerchandiseAdmin: React.FC = () => {
               {mutationAddProduct.isSuccess &&
                 <SnackBar
                   snackbarActive={addProductSnackbar}
-                  setSnackbarActive={setAddProductSnackbar}
-                  message='Product Added'
+                  setSnackbarActive={setAddProductSnackbar)
+                  message={t('productAdded')}
+
                 />}
             </>
 
@@ -87,7 +90,8 @@ const MerchandiseAdmin: React.FC = () => {
                 <SnackBar
                   snackbarActive={editProductSnackbar}
                   setSnackbarActive={setEditProductSnackbar}
-                  message='Product Updates'
+                  message={t('productUpdated')}
+
                 />}
             </>
 
@@ -110,7 +114,8 @@ const MerchandiseAdmin: React.FC = () => {
                 <SnackBar
                   snackbarActive={deleteProductSnackbar}
                   setSnackbarActive={setDeleteProductSnackbar}
-                  message='Product Deleted'
+                  message={t('productDeleted')}
+
                 />}
             </>
 

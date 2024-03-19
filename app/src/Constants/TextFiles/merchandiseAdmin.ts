@@ -6,5 +6,9 @@ export const merchandiseAdmin = {
     newName: 'New Name',
     addProduct: 'Add Product',
     editProduct: 'Edit Product',
-    deleteProduct: 'Delete Product'
+    deleteProduct: 'Delete Product',
+    productAdded: 'Product added',
+    productUpdated: 'Product Updated',
+    productDeleted: 'Product Deleted'
+
 }

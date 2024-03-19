@@ -9,6 +9,8 @@ import { error } from "./error";
 import { mixes } from "./mixes";
 import { merchandise } from "./merchandise";
 import { merchandiseAdmin } from "./merchandiseAdmin";
+import { queryKeys } from "./queryKeys";
+
 
 export const enResources = {
   spotifyEmbedLinks: spotifyEmbedLinks,
@@ -21,5 +23,7 @@ export const enResources = {
   error: error,
   mixes: mixes,
   merchandise: merchandise,
-  merchandiseAdmin: merchandiseAdmin
+  merchandiseAdmin: merchandiseAdmin,
+  queryKeys: queryKeys
+
 };
