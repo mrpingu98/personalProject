@@ -7,8 +7,7 @@ interface UseQueryGet {
     isPending: boolean;
   }
 
-export const useQueryGet = (url: string, queryKey: string, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryGet => {
-    const getRequest = () => get(url)
-    const { data, error, isPending } = useQuery({queryKey: [{queryKey}], queryFn: getRequest, refetchOnMount: refetchOnMount, refetchOnWindowFocus: refetchOnWindowFocus});
-    return {data: data, error: error, isPending: isPending}
+export const useQueryGet = (url: string, key: string, refetchOnMount?: boolean, refetchOnWindowFocus?: boolean): UseQueryGet => {
+    const getRequest = async () => await get(url)
+    return useQuery({queryKey: [key], queryFn: getRequest, enabled: true, refetchOnMount: refetchOnMount, refetchOnWindowFocus: refetchOnWindowFocus});
 }

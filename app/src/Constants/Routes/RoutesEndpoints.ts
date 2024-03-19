@@ -5,7 +5,6 @@ export const routes = {
     personalisedSpotify: "/music/personalisedSpotify",
     myProfile: '/myProfile',
     error: '/error',
-    merchandise: '/merchandise'
-
-
+    merchandise: '/merchandise',
+    merchandiseAdmin: '/merchandise/admin'
 }
