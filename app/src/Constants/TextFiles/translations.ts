@@ -11,6 +11,7 @@ import { merchandise } from "./merchandise";
 import { merchandiseAdmin } from "./merchandiseAdmin";
 import { queryKeys } from "./queryKeys";
 
+
 export const enResources = {
   spotifyEmbedLinks: spotifyEmbedLinks,
   music: music,
@@ -24,4 +25,5 @@ export const enResources = {
   merchandise: merchandise,
   merchandiseAdmin: merchandiseAdmin,
   queryKeys: queryKeys
+
 };

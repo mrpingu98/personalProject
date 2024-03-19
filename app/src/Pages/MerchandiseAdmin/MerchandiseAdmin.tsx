@@ -26,12 +26,13 @@ const MerchandiseAdmin: React.FC = () => {
     price: parseFloat('0'),
     imageUrl: ''
   })
-
+  
   const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationPost(apiEndpoints.products, addProductPayload, queryKey('getProducts'));
 
   const { mutation: mutationEditProduct, snackbar: editProductSnackbar, setSnackbar: setEditProductSnackbar } = useMutationPut(apiEndpoints.products, editProductPayload, queryKey('getProducts'))
 
   const { mutation: mutationDeleteProduct, snackbar: deleteProductSnackbar, setSnackbar: setDeleteProductSnackbar } = useMutationDelete(apiEndpoints.products, deleteProductPayload, queryKey('getProducts'))
+
 
   return (
     <>
@@ -56,8 +57,9 @@ const MerchandiseAdmin: React.FC = () => {
               {mutationAddProduct.isSuccess &&
                 <SnackBar
                   snackbarActive={addProductSnackbar}
-                  setSnackbarActive={setAddProductSnackbar}
+                  setSnackbarActive={setAddProductSnackbar)
                   message={t('productAdded')}
+
                 />}
             </>
 
@@ -89,6 +91,7 @@ const MerchandiseAdmin: React.FC = () => {
                   snackbarActive={editProductSnackbar}
                   setSnackbarActive={setEditProductSnackbar}
                   message={t('productUpdated')}
+
                 />}
             </>
 
@@ -112,6 +115,7 @@ const MerchandiseAdmin: React.FC = () => {
                   snackbarActive={deleteProductSnackbar}
                   setSnackbarActive={setDeleteProductSnackbar}
                   message={t('productDeleted')}
+
                 />}
             </>
 

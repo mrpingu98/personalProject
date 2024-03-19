@@ -10,4 +10,5 @@ export const merchandiseAdmin = {
     productAdded: 'Product added',
     productUpdated: 'Product Updated',
     productDeleted: 'Product Deleted'
+
 }
