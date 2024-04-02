@@ -6,9 +6,6 @@ if (process.env.NODE_ENV === 'development'){
     apiUrl = process.env.REACT_APP_API_URL_PROD
 }
 
-console.log(process.env.NODE_ENV)
-console.log(apiUrl)
-
 export const apiEndpoints = {
     spotifyUserTopTracks: `https://api.spotify.com/v1/me/top/tracks?limit=${10}`,
     spotifyAllTimeUserTopTracks: `https://api.spotify.com/v1/me/top/tracks?limit=${10}&time_range=long_term`,
