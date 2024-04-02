@@ -14,5 +14,5 @@ export const apiEndpoints = {
     spotifyUserTopArtists: `https://api.spotify.com/v1/me/top/artists?limit=${10}`,
     spotifyAllTimeUserTopArtists: `https://api.spotify.com/v1/me/top/artists?limit=${10}&time_range=long_term`,
     spotifyUserPlaylists: `https://api.spotify.com/v1/me/playlists?limit=${10}`,
-    products: `${apiUrl}/product/GetAllProducts`,
+    products: `${apiUrl}/product`,
 }
