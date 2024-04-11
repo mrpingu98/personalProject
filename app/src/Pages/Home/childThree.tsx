@@ -8,12 +8,13 @@ interface ChildThreeProps {
   }
   
 const ChildThree: React.FC<ChildThreeProps> = ({ message }) => {
-    const value = useContext(HomeContext)
+    const {contextValue, setContextValue} = useContext(HomeContext)
     console.log('child three rendered')
     return (
         <>
         <Typography>Child three + {message}</Typography>
-        <Typography>{value}</Typography>
+        <Typography>{contextValue}</Typography>
+        <Button onClick={() => setContextValue(contextValue + 's')} >setcontextValue</Button>
         </>
     );
 }

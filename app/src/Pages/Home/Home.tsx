@@ -70,7 +70,7 @@ const Home: React.FC = () => {
   //   console.log("callback function");
   // }, [callbackFunction]);
 
-  const contextValue = "message passed using useContext";
+  const [contextValue, setContextValue] = React.useState("message passed using useContext"); //context passed to childthree component
 
   const countReducer = (count: number, action: { type: string }) => {
     switch (action.type) {
@@ -131,7 +131,7 @@ const Home: React.FC = () => {
   //add useref example for colourising an image 
 
   return (
-    <HomeContext.Provider value={contextValue}>
+    <HomeContext.Provider value={{contextValue, setContextValue}}>
       <MainContainer>
         <Typography variant="h1" data-test-id={"home-title"}>
           {t("welcome")}
@@ -149,8 +149,8 @@ const Home: React.FC = () => {
           counter three
         </Button>
 
-        {/* <ChildOne message="message passed down using props" />
-        <NormalFunctionChild normalFunction={normalFunction} />
+        <ChildOne message="message passed down using props" />
+        {/* <NormalFunctionChild normalFunction={normalFunction} />
         <CallbackFunctionChild callbackFunction={callbackFunction} /> */}
         <Button onClick={() => refCounter.current++}>Add 1 to ref</Button>
         <Button onClick={() => console.log(refCounter.current)}>
