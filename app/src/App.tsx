@@ -2,7 +2,7 @@ import React from "react";
 import { HomeRoute } from "./Constants/Routes/HomeRoutes";
 import { BrowserRouter } from "react-router-dom";
 import { MixesRoute } from "./Constants/Routes/MixesRoutes";
-import Layout from "./Components/Layout";
+import Layout from "./Components/Layout/Layout";
 import { MusicRoute } from "./Constants/Routes/MusicRoute";
 import './Configuration/configurei18n';
 import './index.css'
