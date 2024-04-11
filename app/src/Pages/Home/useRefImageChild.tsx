@@ -43,7 +43,8 @@ const UseRefImageChild: React.FC<UseRefImageChildProps> = React.memo(
         setInView(isImageVisibleInViewport()) //on load of page, check if image is in viewport 
         window.addEventListener("scroll", scrollHandler) //add an event listener on the load of the page (that then exists for whole time it's not re-rendered?) - when user scrolls, call this function 
         return () => {
-            window.removeEventListener("scroll", scrollHandler) //when it re-renders, remove this event listener 
+            window.removeEventListener("scroll", scrollHandler)
+            //return in a useEffect is cleanup code - will run when component umounts, or before useEffect runs again - so here, are removing the event listener
         }
         
     },[])
