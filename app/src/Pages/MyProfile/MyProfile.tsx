@@ -1,10 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { authorisationRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/authorisationRequest";
 import { fetchTokenRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/fetchTokenRequest";
 import { styled } from '@mui/system';
+import { DarkThemeContext } from "../../Constants/Contexts";
 
 export const MyProfile: React.FC = () => {
   const { t } = useTranslation("myProfile");
@@ -23,6 +24,8 @@ export const MyProfile: React.FC = () => {
     });
   }, []);
 
+  const {darkTheme, toggle}= React.useContext(DarkThemeContext)
+
   return (
     <ListContainer>
       <Box marginBottom={4}>
@@ -33,25 +36,48 @@ export const MyProfile: React.FC = () => {
       <Typography variant="h3" data-test-id={"myprofile-spotify-title"}>
         {t("spotifyAuthorisation")}
       </Typography>
+      <Box marginBottom={4}>
+        <Container>
+          <Typography variant="body1">
+            {haveAccessToken ? (
+              <div data-test-id={"authorised-description"}>
+                {t("haveAuthorised")}
+              </div>
+            ) : (
+              <div data-test-id={"unauthorised-description"}>
+                {t("spotifyDescription")}
+              </div>
+            )}
+          </Typography>
+          <Box marginLeft={2}>
+            <PrimaryButton
+              text={t("authorise")}
+              onClick={fetchAuthorisation}
+              disabled={haveAccessToken}
+            />
+          </Box>
+        </Container>
+      </Box>
+      <Typography variant="h3" data-test-id={"myprofile-spotify-title"}>
+        {t('theme')}
+      </Typography>
       <Container>
-        <Typography variant="body1">
-          {haveAccessToken ? (
-            <div data-test-id={"authorised-description"}>
-              {t("haveAuthorised")}
-            </div>
-          ) : (
-            <div data-test-id={"unauthorised-description"}>
-              {t("spotifyDescription")}
-            </div>
-          )}
-        </Typography>
-        <Box marginLeft={2}>
-          <PrimaryButton
-            text={t("authorise")}
-            onClick={fetchAuthorisation}
-            disabled={haveAccessToken}
-          />
-        </Box>
+        {darkTheme && (
+          <>
+            <Typography>{t('setTheme')}</Typography>
+            <Box marginLeft={4}>
+              <PrimaryButton text={t('lightTheme')} onClick={toggle} />
+            </Box>
+          </>
+        )}
+        {!darkTheme && (
+          <>
+            <Typography>{t('setTheme')}</Typography>
+            <Box marginLeft={4}>
+              <PrimaryButton text={t('darkTheme')} onClick={toggle} />
+            </Box>
+          </>
+        )}
       </Container>
     </ListContainer>
   );
@@ -62,7 +88,7 @@ const Container = styled('div')({
   display: "flex",
   flexDirection: "row",
   justifyContent: "flex-start",
-  marginTop: 2,
+  marginTop: 2
 });
 
 const ListContainer = styled('div')({
