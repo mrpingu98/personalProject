@@ -3,16 +3,15 @@ import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 import { TopSongsListItem } from "./TopSongsListItem";
 import { Typography } from "@mui/material";
+import { DarkThemeContext } from "../../Constants/Contexts";
 
 interface TopSongsListProps {
   songUrlList: string[];
   title: string;
 }
 
-export const TopSongsList: React.FC<TopSongsListProps> = ({
-  songUrlList,
-  title,
-}) => {
+export const TopSongsList: React.FC<TopSongsListProps> = ({songUrlList, title,}) => {
+  const {darkTheme} = React.useContext(DarkThemeContext)
   return (
     <>
       <Typography variant="h2" marginBottom={2}>
@@ -22,7 +21,7 @@ export const TopSongsList: React.FC<TopSongsListProps> = ({
         sx={{
           width: "100%",
           maxWidth: 360,
-          bgcolor: "#f3efeb",
+          bgcolor: darkTheme ? "#656565" : "#f3efeb" ,
           position: "relative",
           overflow: "auto",
           maxHeight: 675,

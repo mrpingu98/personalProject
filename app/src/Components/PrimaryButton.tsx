@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { DarkThemeContext } from "../Constants/Contexts";
 
 interface PrimaryButtonProps {
   onClick?: () => void;
@@ -8,17 +9,18 @@ interface PrimaryButtonProps {
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({ onClick, text, disabled }) => {
+  const {darkTheme} = React.useContext(DarkThemeContext)
   return (
     <Button
       onClick={onClick}
       disabled={disabled}
       sx={{
-        color: "white",
+        color: darkTheme ?  "#f3efeb" : "#656565",
         display: "block",
-        bgcolor: "#858585",
+        bgcolor: darkTheme ? "#656565" : "#f3efeb" ,
         ":hover": {
-          bgcolor: "#858585",
-          color: "white",
+          bgcolor: darkTheme ? "#f3efeb" : "#656565" ,
+          color: darkTheme ?  "#656565" : "#f3efeb",
         },
       }}
     >
