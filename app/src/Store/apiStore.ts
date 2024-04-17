@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { spotifyRefreshTokenResponse } from "../Constants/Types/Spotify";
 
 export const yieldGet = (url: string, header?: object) => {
     if (header) {
@@ -16,11 +17,11 @@ export const yieldGet = (url: string, header?: object) => {
     }
 }
 
-export const get = async (url: string) => {
+export const get = async (url: string, header?: object) => {
     try{
-        const response = await axios.get(url);
-        return response.data;
-    }
+        const response = await axios.get(url, {headers: header});
+          return response.data;
+        }
     catch (error){
         console.error(error)
     }
@@ -56,36 +57,21 @@ export const post = async (url: string, payload: any) => {
     }
   } 
 
+  export const spotifyPost = async (url: string, payload: any) => {
+    try{
+      const response: AxiosResponse<spotifyRefreshTokenResponse> = await axios.post(url, payload, {headers:{ "Content-Type": "application/x-www-form-urlencoded"}});
+      return response.data;
+    }
+    catch(error){
+      console.error(error)
+    }
+  } 
 
-// below doesn't currently work for the refresh token POST request...something to look at another time....
+  //AxiosResponse by default is <any, any>, <data, headers>
+  //Where this is referenced in my mutation, i need to set local storage to items from the data returned 
+  //So have to change the data type that is returnd from 'any' to the specific data you expect to receive
+  //Otherwise error occurs saying it can't access data.[variable], as it doesn't exist on type AxiosResponse<any, any>
+  //With type change, it is now: AxiosResponse<RefreshTokenResponse, eny>
 
-// export const yieldPost = (url: string, header?: object, body?: object) => {
-//     const requestOptions: RequestInit = {
-//         method: 'POST',
-//     }
-//     if (header) {
-//         console.log('1')
-//         const headersArray = Object.entries(header);
-//         requestOptions.headers = headersArray;
-//     }
-//     if (body) {
-//         console.log('2')
-//         if (body instanceof URLSearchParams) {
-//             // If the body is an instance of URLSearchParams, convert it to a string
-//             requestOptions.body = body.toString();
-//         }
-//         else {
-//             console.log('3')
-//             requestOptions.body = JSON.stringify(body)
-//         }
-//     }
-//     return fetch(url, requestOptions)
-// }
-
-//there is something about formatting the body to a string 
-//depends on the content type the server is expecting 
-//if passing in URLSearchParams you use .toString 
-//if passing in a standard object (e.g. a payload for the backend), then use JSON.stringify on it
-//NOTE: payload/body are the same thing
 
 
