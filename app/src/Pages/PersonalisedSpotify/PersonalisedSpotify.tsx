@@ -1,53 +1,40 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import {
-  withRefreshAccessToken,
-  withSpotifyUserPersonalData,
-  withSpotifyUserTopArtists,
-  withSpotifyUserTopTracks,
-  withSpotifyUserPlaylists,
-  withSpotifyAllTimeUserTopTracks,
-  withSpotifyAllTimeUserTopArtists,
-} from "../../Store/SpotifyAPI/components";
-import { compose } from "redux";
-import { useSpotifyData } from "../../Store/SpotifyAPI/hooks";
 import { TopArtists } from "./TopArtists";
 import { TopTracks } from "./TopTracks";
 import { Playlists } from "./Playlists";
 import { styled } from '@mui/system';
+import { LoadingCircle } from "../../Components/LoadingCircle";
+import { useQuerySpotifyUserPlaylists, useQuerySpotifyUserProfile, useQuerySpotifyUserTopArtists, useQuerySpotifyUserTopTracks } from "../../Hooks/useQueryGet";
+import { apiEndpoints } from "../../Store/Endpoints";
+import { Error } from "../Error/Error";
 
-const PersonalisedSpotify = compose<React.FC>(
-  withRefreshAccessToken(),
-  withSpotifyUserPersonalData(),
-  withSpotifyUserTopArtists(),
-  withSpotifyUserTopTracks(),
-  withSpotifyUserPlaylists(),
-  withSpotifyAllTimeUserTopTracks(),
-  withSpotifyAllTimeUserTopArtists()
-)(() => {
+const PersonalisedSpotify: React.FC = () => {
 
   const { t } = useTranslation("personalisedSpotify");
-  const {
-    spotifyUserData,
-    userTopArtists,
-    userTopTracks,
-    userPlaylists,
-    allTimeUserTopTracks,
-    allTimeUserTopArtists,
-  } = useSpotifyData();
+  const {t:tkey} = useTranslation("queryKeys")
+
+  const {data: userProfile, error: userProfileError, isPending: userProfilePending} = useQuerySpotifyUserProfile({url: apiEndpoints.spotifyUserProfile, key: tkey('spotifyUserProfile'), enabled: true})
+  const {data: userPlaylists, error: userPlaylistsError, isPending: userPlaylistsPending} = useQuerySpotifyUserPlaylists({url: apiEndpoints.spotifyUserPlaylists, key: tkey('spotifyUserPlaylists'), enabled: !!userProfile })
+  const {data: userTopArtists, error: userTopArtistsError, isPending: userTopArtistsPending} = useQuerySpotifyUserTopArtists({url: apiEndpoints.spotifyUserTopArtists, key: tkey('spotifyUserTopArtists'), enabled: !!userPlaylists})
+  const {data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists})
+  const {data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending} = useQuerySpotifyUserTopArtists({url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
+  const {data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists})
+  if (userProfilePending || userPlaylistsPending || userTopArtistsPending || userTopTracksPending || userAllTimeTopArtistsPending || userAllTimeTopTracksPending) return <LoadingCircle />
+  if (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
 
   return (
     <MainContainer>
       <Row>
         <Typography variant="h1">
-          {`${t("hello")} ${spotifyUserData?.name}`}
+          {`${t("hello")} ${userProfile?.name}`}
         </Typography>
         <Box marginLeft={4}>
           <img
-            src={spotifyUserData?.image}
+            src={userProfile?.image}
             alt="Profile"
-            style = {{ height: 150, width: 150, borderRadius: "20%"}}
+            style={{ height: 150, width: 150, borderRadius: "20%" }}
           />
         </Box>
       </Row>
@@ -55,8 +42,8 @@ const PersonalisedSpotify = compose<React.FC>(
       <Typography variant="h1" marginTop={6}>
         {t("allTime")}
       </Typography>
-      <TopArtists userTopArtists={allTimeUserTopArtists} />
-      <TopTracks userTopTracks={allTimeUserTopTracks} />
+      <TopArtists userTopArtists={userAllTimeTopArtists} />
+      <TopTracks userTopTracks={userAllTimeTopTracks} />
       <Typography variant="h1" marginTop={6}>
         {t("sixMonths")}
       </Typography>
@@ -65,7 +52,7 @@ const PersonalisedSpotify = compose<React.FC>(
       <Playlists playlists={userPlaylists} />
     </MainContainer>
   );
-});
+};
 
 const Row = styled('div')({
   alignItems: "center",
