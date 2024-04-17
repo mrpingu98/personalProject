@@ -1,42 +1,50 @@
 import * as React from "react";
 import NavBar from "./Navbar";
 import { ReactNode } from "react";
-import createTheme from "@mui/material/styles/createTheme";
+import { DarkThemeContext } from "../../Constants/Contexts";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useTypographyOverrides } from "../../Hooks/useTypographyOverrides";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const theme = createTheme();
-
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { darkTheme } = React.useContext(DarkThemeContext);
+  const { overrides } = useTypographyOverrides();
+
+  const theme = createTheme(overrides);
+
   return (
     <div>
-      <NavBar />
-      <main style={{
-        flexGrow: 1,
-        minHeight: "100vh",
-        position: "relative",
-        backgroundColor: "#f3efeb",
-        marginTop: 65,
-        padding: theme.spacing(6)
-      }}>
-        <div style={{marginBottom: theme.spacing(5),
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2)}}>{children}</div>
-      </main>
+      <ThemeProvider theme={theme}>
+        <NavBar />
+        <main
+          style={{
+            flexGrow: 1,
+            minHeight: "100vh",
+            position: "relative",
+            backgroundColor: darkTheme ? "#656565" : "#f3efeb",
+            marginTop: 65,
+            padding: theme.spacing(6),
+          }}
+        >
+          <div
+            style={{
+              marginBottom: theme.spacing(5),
+              marginLeft: theme.spacing(2),
+              marginRight: theme.spacing(2),
+            }}
+          >
+            {children}
+          </div>
+        </main>
+      </ThemeProvider>
     </div>
   );
 };
 
 export default Layout;
-
-
-
-
-
-
-
 
 //chldren is an inbuilt prop - basically saying that wherever the Layout component is used, any 'children' of it (what is wrapped within its layer), will be passed as the prop children
 
