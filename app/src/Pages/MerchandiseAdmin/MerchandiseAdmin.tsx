@@ -37,13 +37,13 @@ const MerchandiseAdmin: React.FC = () => {
   return (
     <>
       <Typography variant='h1'>{t('addProduct')}</Typography>
-      <div>{t('name')}</div>
+      <Typography variant='body1'>{t('name')}</Typography>
       <TextField onChange={(e) => setAddProductPayload({ ...addProductPayload, name: e.target.value })} />
-      <div>{t('description')}</div>
+      <Typography variant='body1'>{t('description')}</Typography>
       <TextField onChange={(e) => setAddProductPayload({ ...addProductPayload, description: e.target.value })} />
-      <div>{t('price')}</div>
+      <Typography variant='body1'>{t('price')}</Typography>
       <TextField onChange={(e) => setAddProductPayload({ ...addProductPayload, price: parseFloat(e.target.value) })} />
-      <div>{t('imageUrl')}</div>
+      <Typography variant='body1'>{t('imageUrl')}</Typography>
       <TextField onChange={(e) => setAddProductPayload({ ...addProductPayload, imageUrl: e.target.value })} />
       <Button onClick={() => mutationAddProduct.mutate()}>{t('addProduct')}</Button>
       <div>
@@ -67,15 +67,15 @@ const MerchandiseAdmin: React.FC = () => {
       </div>
 
       <Typography variant='h1' marginTop='5%'>{t('editProduct')}</Typography>
-      <div>{t('name')}</div>
+      <Typography variant='body1'>{t('name')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, name: e.target.value })} />
-      <div>{t('newName')}</div>
+      <Typography variant='body1'>{t('newName')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, newName: e.target.value })} />
-      <div>{t('description')}</div>
+      <Typography variant='body1'>{t('description')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, description: e.target.value })} />
-      <div>{t('price')}</div>
+      <Typography variant='body1'>{t('price')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, price: parseFloat(e.target.value) })} />
-      <div>{t('imageUrl')}</div>
+      <Typography variant='body1'>{t('imageUrl')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, imageUrl: e.target.value })} />
       <Button onClick={() => mutationEditProduct.mutate()}>{t('editProduct')}</Button>
       <div>
@@ -99,7 +99,7 @@ const MerchandiseAdmin: React.FC = () => {
       </div>
 
       <Typography variant='h1' marginTop='5%'>{t('deleteProduct')}</Typography>
-      <div>{t('name')}</div>
+      <Typography variant='body1'>{t('name')}</Typography>
       <TextField onChange={(e) => setDeleteProductPayload({ ...deleteProductPayload, name: e.target.value })} />
       <Button onClick={() => mutationDeleteProduct.mutate()}>{t('deleteProduct')}</Button>
       <div>
