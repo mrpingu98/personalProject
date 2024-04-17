@@ -9,6 +9,8 @@ import { LoadingCircle } from "../../Components/LoadingCircle";
 import { useQuerySpotifyUserPlaylists, useQuerySpotifyUserProfile, useQuerySpotifyUserTopArtists, useQuerySpotifyUserTopTracks } from "../../Hooks/useQueryGet";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Error } from "../Error/Error";
+import { ErrorTokenExpired } from "./ErrorTokenExpired";
+import { ErrorInvalidToken } from "./ErrorInvalidToken";
 
 const PersonalisedSpotify: React.FC = () => {
 
@@ -21,8 +23,22 @@ const PersonalisedSpotify: React.FC = () => {
   const {data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists})
   const {data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending} = useQuerySpotifyUserTopArtists({url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
   const {data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists})
-  if (userProfilePending || userPlaylistsPending || userTopArtistsPending || userTopTracksPending || userAllTimeTopArtistsPending || userAllTimeTopTracksPending) return <LoadingCircle />
-  if (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
+  if (userProfilePending) return <LoadingCircle />
+  if (userProfileError?.message == 'Access token expired'){
+    return <ErrorTokenExpired />
+  }
+  if(userProfileError?.message == 'Invalid access token'){
+    return <ErrorInvalidToken />
+  }
+  if (userPlaylistsPending || userTopArtistsPending || userTopTracksPending || userAllTimeTopArtistsPending || userAllTimeTopTracksPending) return <LoadingCircle />
+  if
+  (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
+
+  //order of logic is important 
+  //have to put the rest of the pending checks after the error handling
+  //as the page loads, all the requests are pending - so if the above is put before the error checking, the page will continually show a loading circle, as all the requests 
+  //will be on pending, returning the loading circle 
+
 
   return (
     <MainContainer>
