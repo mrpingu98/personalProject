@@ -3,7 +3,7 @@ import { yieldGet } from "../../apiStore";
 
 function* getAllTimeUserTopArtists() {
   const accessToken = localStorage.getItem("access_token");
-  const userTopArtistsUrl = apiEndpoints.spotifyAllTimeUserTopArtists;
+  const userTopArtistsUrl = apiEndpoints.spotifyUserAllTimeTopArtists;
   try {
     // @ts-ignore
     const response = yield yieldGet(userTopArtistsUrl, { Authorization: "Bearer " + accessToken,})

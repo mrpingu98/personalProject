@@ -12,8 +12,9 @@ import { routes } from "../../Constants/Routes/RoutesEndpoints";
 
 const Merchandise: React.FC = () => {
   const { t } = useTranslation("merchandise");
-
-  const { data: products, error, isPending } = useQueryGet(apiEndpoints.products, 'getProducts', false, false);
+  const {t: tkey} = useTranslation("queryKeys")
+  
+  const { data: products, error, isPending } = useQueryGet({url: apiEndpoints.products, key: tkey('getProducts')});
   if (isPending) return <LoadingCircle />
   if (error) return <Error />
 
