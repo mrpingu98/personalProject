@@ -15,6 +15,9 @@ interface Props {
   header?: object
 }
 
+const accessToken = localStorage.getItem("access_token")
+const header = { Authorization: "Bearer " + accessToken }
+
 export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
   const getRequest = async () => await get(url, header)
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
@@ -24,7 +27,7 @@ export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQue
 
 //decided to format the data within the useQuery requests as these are spcific for the spotify request, and won't be used anywhere else
 
-export const useQuerySpotifyUserProfile = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
+export const useQuerySpotifyUserProfile = ({ url, key, enabled = true }: Props): UseQueryGet => {
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserData = {
@@ -40,7 +43,7 @@ export const useQuerySpotifyUserProfile = ({ url, key, enabled = true, header }:
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 
-export const useQuerySpotifyUserPlaylists = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
+export const useQuerySpotifyUserPlaylists = ({ url, key, enabled = true }: Props): UseQueryGet => {
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserPlaylists = data.items.map((playlist: any) => ({
@@ -52,7 +55,7 @@ export const useQuerySpotifyUserPlaylists = ({ url, key, enabled = true, header 
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 
-export const useQuerySpotifyUserTopArtists = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
+export const useQuerySpotifyUserTopArtists = ({ url, key, enabled = true }: Props): UseQueryGet => {
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserTopArtist = {
@@ -64,7 +67,7 @@ export const useQuerySpotifyUserTopArtists = ({ url, key, enabled = true, header
 }
 
 
-export const useQuerySpotifyUserTopTracks = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
+export const useQuerySpotifyUserTopTracks = ({ url, key, enabled = true }: Props): UseQueryGet => {
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserTopTracks = data.items.map((track: any) => ({
