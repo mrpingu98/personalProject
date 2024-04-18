@@ -15,24 +15,21 @@ import { ErrorInvalidToken } from "./ErrorInvalidToken";
 const PersonalisedSpotify: React.FC = () => {
 
   const { t } = useTranslation("personalisedSpotify");
-  const {t:tkey} = useTranslation("queryKeys")
+  const { t: tkey } = useTranslation("queryKeys")
 
-  const {data: userProfile, error: userProfileError, isPending: userProfilePending} = useQuerySpotifyUserProfile({url: apiEndpoints.spotifyUserProfile, key: tkey('spotifyUserProfile'), enabled: true})
-  const {data: userPlaylists, error: userPlaylistsError, isPending: userPlaylistsPending} = useQuerySpotifyUserPlaylists({url: apiEndpoints.spotifyUserPlaylists, key: tkey('spotifyUserPlaylists'), enabled: !!userProfile })
-  const {data: userTopArtists, error: userTopArtistsError, isPending: userTopArtistsPending} = useQuerySpotifyUserTopArtists({url: apiEndpoints.spotifyUserTopArtists, key: tkey('spotifyUserTopArtists'), enabled: !!userPlaylists})
-  const {data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists})
-  const {data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending} = useQuerySpotifyUserTopArtists({url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
-  const {data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending} = useQuerySpotifyUserTopTracks({url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists})
+  const { data: userProfile, error: userProfileError, isPending: userProfilePending } = useQuerySpotifyUserProfile({ url: apiEndpoints.spotifyUserProfile, key: tkey('spotifyUserProfile'), enabled: true })
+  const { data: userPlaylists, error: userPlaylistsError, isPending: userPlaylistsPending } = useQuerySpotifyUserPlaylists({ url: apiEndpoints.spotifyUserPlaylists, key: tkey('spotifyUserPlaylists'), enabled: !!userProfile })
+  const { data: userTopArtists, error: userTopArtistsError, isPending: userTopArtistsPending } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserTopArtists, key: tkey('spotifyUserTopArtists'), enabled: !!userPlaylists })
+  const { data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists })
+  const { data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
+  const { data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists })
+
   if (userProfilePending) return <LoadingCircle />
-  if (userProfileError?.message == 'Access token expired'){
-    return <ErrorTokenExpired />
-  }
-  if(userProfileError?.message == 'Invalid access token'){
-    return <ErrorInvalidToken />
-  }
+  if (userProfileError?.message == 'Access token expired') {return <ErrorTokenExpired />}
+  if (userProfileError?.message == 'Invalid access token') {return <ErrorInvalidToken />}
+  if (userProfileError?.message == 'There was an error connecting to the server') {return <Error />}
   if (userPlaylistsPending || userTopArtistsPending || userTopTracksPending || userAllTimeTopArtistsPending || userAllTimeTopTracksPending) return <LoadingCircle />
-  if
-  (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
+  if (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
 
   //order of logic is important 
   //have to put the rest of the pending checks after the error handling
