@@ -17,25 +17,20 @@ const PersonalisedSpotify: React.FC = () => {
   const { t } = useTranslation("personalisedSpotify");
   const { t: tkey } = useTranslation("queryKeys")
 
-  const { data: userProfile, error: userProfileError, isPending: userProfilePending } = useQuerySpotifyUserProfile({ url: apiEndpoints.spotifyUserProfile, key: tkey('spotifyUserProfile'), enabled: true })
-  const { data: userPlaylists, error: userPlaylistsError, isPending: userPlaylistsPending } = useQuerySpotifyUserPlaylists({ url: apiEndpoints.spotifyUserPlaylists, key: tkey('spotifyUserPlaylists'), enabled: !!userProfile })
-  const { data: userTopArtists, error: userTopArtistsError, isPending: userTopArtistsPending } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserTopArtists, key: tkey('spotifyUserTopArtists'), enabled: !!userPlaylists })
-  const { data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists })
-  const { data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
-  const { data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists })
+  const { data: userProfile, error: userProfileError, isPending: userProfilePending, isInitialLoading: userProfileLoading   } = useQuerySpotifyUserProfile({ url: apiEndpoints.spotifyUserProfile, key: tkey('spotifyUserProfile'), enabled: true })
+  const { data: userPlaylists, error: userPlaylistsError, isPending: userPlaylistsPending, isInitialLoading: userPLaylistsLoading } = useQuerySpotifyUserPlaylists({ url: apiEndpoints.spotifyUserPlaylists, key: tkey('spotifyUserPlaylists'), enabled: !!userProfile })
+  const { data: userTopArtists, error: userTopArtistsError, isPending: userTopArtistsPending, isInitialLoading: userTopArtistsLoading  } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserTopArtists, key: tkey('spotifyUserTopArtists'), enabled: !!userPlaylists })
+  const { data: userTopTracks, error: userTopTracksError, isPending: userTopTracksPending, isInitialLoading: userTopTracksLoading  } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserTopTracks, key: tkey('spotifyUserTopTracks'), enabled: !!userTopArtists })
+  const { data: userAllTimeTopArtists, error: userAllTimeTopArtistsError, isPending: userAllTimeTopArtistsPending, isInitialLoading: userAllTimeTopArtistsLoading  } = useQuerySpotifyUserTopArtists({ url: apiEndpoints.spotifyUserAllTimeTopArtists, key: tkey('spotifyUserAllTimeTopArtists'), enabled: !!userTopTracks })
+  const { data: userAllTimeTopTracks, error: userAllTimeTopTracksError, isPending: userAllTimeTopTracksPending, isInitialLoading: userAllTimeTopTracksLoading  } = useQuerySpotifyUserTopTracks({ url: apiEndpoints.spotifyUserAllTimeTopTracks, key: tkey('spotifyUserAllTimeTopTracks'), enabled: !!userAllTimeTopArtists })
 
-  if (userProfilePending) return <LoadingCircle />
   if (userProfileError?.message == 'Access token expired') {return <ErrorTokenExpired />}
   if (userProfileError?.message == 'Invalid access token') {return <ErrorInvalidToken />}
   if (userProfileError?.message == 'There was an error connecting to the server') {return <Error />}
-  if (userPlaylistsPending || userTopArtistsPending || userTopTracksPending || userAllTimeTopArtistsPending || userAllTimeTopTracksPending) return <LoadingCircle />
-  if (userProfileError || userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
+  if(userProfileLoading || userPLaylistsLoading || userTopArtistsLoading || userTopTracksLoading || userAllTimeTopArtistsLoading || userAllTimeTopTracksLoading) return <LoadingCircle />
+  if (userPlaylistsError || userTopArtistsError || userTopTracksError || userAllTimeTopArtistsError || userAllTimeTopTracksError) return <Error />
 
-  //order of logic is important 
-  //have to put the rest of the pending checks after the error handling
-  //as the page loads, all the requests are pending - so if the above is put before the error checking, the page will continually show a loading circle, as all the requests 
-  //will be on pending, returning the loading circle 
-
+  //isPending vs isInitialLoading for loading circle to appear - see documentation 
 
   return (
     <MainContainer>

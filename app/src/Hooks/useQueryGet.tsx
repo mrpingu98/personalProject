@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { get } from "../Store/apiStore";
 import { spotifyUserData, spotifyUserPlaylists, spotifyUserTopArtist, spotifyUserTopTracks } from "../Constants/Types/Spotify";
-import { AnyAction } from "redux";
 
 interface UseQueryGet {
   data: any;
   error: Error | null;
   isPending: boolean;
+  isInitialLoading: boolean;
 }
 
 interface Props {
@@ -16,8 +16,6 @@ interface Props {
   header?: object
 }
 
-const accessToken = localStorage.getItem("access_token")
-const header = { Authorization: "Bearer " + accessToken }
 
 export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
   const getRequest = async () => await get(url, header)
@@ -27,7 +25,9 @@ export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQue
 
 //decided to format the data within the useQuery requests as these are spcific for the spotify request, and won't be used anywhere else
 
-export const useQuerySpotifyUserProfile = ({ url, key, enabled = true }: Props): UseQueryGet => {
+export const useQuerySpotifyUserProfile = ({ url, key, enabled}: Props): UseQueryGet => {
+  const accessToken = localStorage.getItem("access_token")
+  const header = { Authorization: "Bearer " + accessToken }
   const getRequest = async () => {
     try {
       const data = await get(url, header)
@@ -42,7 +42,6 @@ export const useQuerySpotifyUserProfile = ({ url, key, enabled = true }: Props):
       return formattedData
     }
     catch (error: any) {
-      console.log(error)
       if (error.response.data.error.message == 'The access token expired') {
         throw new Error('Access token expired')
       }
@@ -58,19 +57,23 @@ export const useQuerySpotifyUserProfile = ({ url, key, enabled = true }: Props):
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 
-export const useQuerySpotifyUserPlaylists = ({ url, key, enabled = true }: Props): UseQueryGet => {
+export const useQuerySpotifyUserPlaylists = ({ url, key, enabled }: Props): UseQueryGet => {
+  const accessToken = localStorage.getItem("access_token")
+  const header = { Authorization: "Bearer " + accessToken }
   const getRequest = async () => {
-    const data = await get(url, header)
-    const formattedData: spotifyUserPlaylists = data.items.map((playlist: any) => ({
-      name: playlist.name,
-      imageUrl: playlist.images ? playlist.images[0].url : null,
-    }));
-    return formattedData
+      const data = await get(url, header)
+      const formattedData: spotifyUserPlaylists = data.items.map((playlist: any) => ({
+        name: playlist.name,
+        imageUrl: playlist.images ? playlist.images[0].url : null,
+      }));
+      return formattedData
   }
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 
-export const useQuerySpotifyUserTopArtists = ({ url, key, enabled = true }: Props): UseQueryGet => {
+export const useQuerySpotifyUserTopArtists = ({ url, key, enabled }: Props): UseQueryGet => {
+  const accessToken = localStorage.getItem("access_token")
+  const header = { Authorization: "Bearer " + accessToken }
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserTopArtist = {
@@ -82,7 +85,9 @@ export const useQuerySpotifyUserTopArtists = ({ url, key, enabled = true }: Prop
 }
 
 
-export const useQuerySpotifyUserTopTracks = ({ url, key, enabled = true }: Props): UseQueryGet => {
+export const useQuerySpotifyUserTopTracks = ({ url, key, enabled}: Props): UseQueryGet => {
+  const accessToken = localStorage.getItem("access_token")
+  const header = { Authorization: "Bearer " + accessToken }
   const getRequest = async () => {
     const data = await get(url, header)
     const formattedData: spotifyUserTopTracks = data.items.map((track: any) => ({
