@@ -42,6 +42,7 @@ export const useMutationDelete = (url: string, payload: any, key?: string) => {
 
 
 export const useMutationSpotifyPost = (url: string, key?: string) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient() 
     const refreshToken = localStorage.getItem("refresh_token");
     const payload = {
@@ -56,8 +57,9 @@ export const useMutationSpotifyPost = (url: string, key?: string) => {
             onSuccess: (data) => {
                 queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), 
                 data?.access_token && localStorage.setItem("access_token", data.access_token),
-                data?.refresh_token && localStorage.setItem("refresh_token", data.refresh_token)
+                data?.refresh_token && localStorage.setItem("refresh_token", data.refresh_token),
+                setSnackbar(true)
             },
         })
-    return {mutation}
+    return {mutation, snackbar, setSnackbar}
 }
