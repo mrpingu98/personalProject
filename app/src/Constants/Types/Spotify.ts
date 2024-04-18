@@ -20,3 +20,11 @@ export type spotifyUserPlaylists = [{
   name: string,
   imageUrl: string
 }]
+
+export type spotifyRefreshTokenResponse = {
+  access_token: string | undefined,
+  token_type: string,
+  expires_in: number,
+  refresh_token: string | undefined,
+  scope: string
+}

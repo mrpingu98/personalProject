@@ -53,7 +53,6 @@ export const MyProfile: React.FC = () => {
             <PrimaryButton
               text={t("authorise")}
               onClick={fetchAuthorisation}
-              disabled={haveAccessToken}
             />
           </Box>
         </Container>
