@@ -17,13 +17,12 @@ interface Props {
 }
 
 const accessToken = localStorage.getItem("access_token")
-const header = { Authorization: "Bearer " + '12345' }
+const header = { Authorization: "Bearer " + accessToken }
 
 export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
   const getRequest = async () => await get(url, header)
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
-
 
 
 //decided to format the data within the useQuery requests as these are spcific for the spotify request, and won't be used anywhere else
