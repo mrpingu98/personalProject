@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React from "react";
 import { spotifyPost } from "../Store/apiStore";
 import { put } from "../Store/apiStore";
+import { CustomError } from "../Constants/Types/Product";
 
 
 export const useMutationPost = (url: string, payload: any, key?: string) => {
@@ -20,7 +21,7 @@ export const useMutationPut = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
 
-    const mutation = useMutation({
+    const mutation = useMutation<void, CustomError, void, unknown>({
         mutationFn: async () => {await put(url, payload)},
         onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)},
         // onError: () => {console.log(mutation.error)}
