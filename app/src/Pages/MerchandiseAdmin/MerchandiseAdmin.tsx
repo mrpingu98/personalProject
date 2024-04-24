@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { LoadingCircle } from "../../Components/LoadingCircle";
 import { SnackBar } from "../../Components/SnackBar";
+import { StringChain } from "cypress/types/lodash";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -84,7 +85,7 @@ const MerchandiseAdmin: React.FC = () => {
           (
             <>
               {mutationEditProduct.isError && (
-                <div>An error occurred: {mutationEditProduct.error.message}</div>
+                <div>An error occurred: {mutationEditProduct.error.message} {(mutationEditProduct.error.customMessage)}</div>
               )}
               {mutationEditProduct.isSuccess &&
                 <SnackBar

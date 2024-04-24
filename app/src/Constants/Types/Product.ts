@@ -16,3 +16,7 @@ export type EditProductPayload = {
 export type DeleteProductPayload = {
     name: string
 }
+export type CustomError = {
+    message: string,
+    customMessage?: string
+  }

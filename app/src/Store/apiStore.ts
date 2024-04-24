@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { spotifyRefreshTokenResponse } from "../Constants/Types/Spotify";
+import { CustomError } from "../Constants/Types/Product";
 
 export const yieldGet = (url: string, header?: object) => {
     if (header) {
@@ -52,8 +53,9 @@ export const post = async (url: string, payload: any) => {
       const response = await axios.put(url, payload);
       return response.data;
     }
-    catch(error){
-      console.error(error)
+    catch(error: any){
+      const customError: CustomError = {message: error.message, customMessage: error.response?.data}
+      throw customError
     }
   } 
 
