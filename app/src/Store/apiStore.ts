@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { spotifyRefreshTokenResponse } from "../Constants/Types/Spotify";
+import { CustomError } from "../Constants/Types/ErrorHandling";
 
 export const yieldGet = (url: string, header?: object) => {
     if (header) {
@@ -17,6 +18,8 @@ export const yieldGet = (url: string, header?: object) => {
     }
 }
 
+
+
 export const get = async (url: string, header?: object) => {
     try{
         const response = await axios.get(url, {headers: header});
@@ -32,8 +35,10 @@ export const post = async (url: string, payload: any) => {
       const response = await axios.post(url, payload);
       return response.data;
     }
-    catch(error){
+    catch(error: any){
       console.error(error)
+      const customError: CustomError = {defaultErrorMessage: error.message, status: error.response.status, statusText:error.response.statusText, customErrorMessage: error.response?.data}
+      throw customError
     }
   } 
 
@@ -42,8 +47,10 @@ export const post = async (url: string, payload: any) => {
       const response = await axios.delete(url, payload);
       return response.data;
     }
-    catch(error){
+    catch(error: any){
       console.error(error)
+      const customError: CustomError = {defaultErrorMessage: error.message, status: error.response.status, statusText:error.response.statusText, customErrorMessage: error.response?.data}
+      throw customError
     }
   } 
 
@@ -52,8 +59,10 @@ export const post = async (url: string, payload: any) => {
       const response = await axios.put(url, payload);
       return response.data;
     }
-    catch(error){
-      console.error(error)
+    catch(error: any){
+      console.log(error)
+      const customError: CustomError = {defaultErrorMessage: error.message, status: error.response.status, statusText:error.response.statusText, customErrorMessage: error.response?.data}
+      throw customError
     }
   } 
 
