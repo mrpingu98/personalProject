@@ -1,17 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import React from "react";
 import { spotifyPost } from "../Store/apiStore";
-import { put } from "../Store/apiStore";
-import { CustomError } from "../Constants/Types/Product";
+import { put, post, deletes } from "../Store/apiStore";
+import { CustomError } from "../Constants/Types/ErrorHandling";
 
 
 export const useMutationPost = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
-    
-    const mutation = useMutation({
-            mutationFn: () => {return axios.post(url, payload)},
+    //changed type of Error the useMutation expects so I can do custom error handling
+    //normal Error type doesn't have same properties as an AxiosError response 
+    //so I made a custom error type, and in the post request, pulled the information needed from the AxiosError response, and set them to the new type to be passed through 
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await post(url, payload),
             onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
         })
     return {mutation, snackbar, setSnackbar}
@@ -21,10 +23,9 @@ export const useMutationPut = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
 
-    const mutation = useMutation<void, CustomError, void, unknown>({
-        mutationFn: async () => {await put(url, payload)},
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+        mutationFn: async () => await put(url, payload),
         onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)},
-        // onError: () => {console.log(mutation.error)}
     })
     return {mutation, snackbar, setSnackbar}
 }
@@ -33,8 +34,8 @@ export const useMutationDelete = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
 
-    const mutation = useMutation({
-        mutationFn: () => {return axios.delete(url, {data: payload})},
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+        mutationFn: async () => await deletes(url, {data: payload}),
         onSuccess: () => {queryClient.invalidateQueries({ queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
     })
     return {mutation, snackbar, setSnackbar}
@@ -53,7 +54,7 @@ export const useMutationSpotifyPost = (url: string, key?: string) => {
       refresh_token: refreshToken == null ? "" : refreshToken,
       client_id: "44deba64e2b04230a4e7c818ca419918",
     }
-    
+    //change response type from within here, rather than in the api request itself...like ive done for the error type 
     const mutation = useMutation({
             mutationFn: () => {
                 return spotifyPost(url, payload)},
