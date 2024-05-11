@@ -30,9 +30,9 @@ export const get = async (url: string, header?: object) => {
     }
   }
 
-export const post = async (url: string, payload: any) => {
+export const post = async (url: string, payload: any, header?: object) => {
     try{
-      const response = await axios.post(url, payload);
+      const response = await axios.post(url, payload, {headers: header});
       return response.data;
     }
     catch(error: any){
