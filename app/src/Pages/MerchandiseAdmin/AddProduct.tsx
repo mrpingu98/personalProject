@@ -2,7 +2,7 @@ import { Typography, TextField, Button } from '@mui/material';
 import React from 'react';
 import { LoadingCircle } from '../../Components/LoadingCircle';
 import { SnackBar } from '../../Components/SnackBar';
-import { useMutationPost } from '../../Hooks/useMutations';
+import { useMutationAuthorisedPost } from '../../Hooks/useMutations';
 import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
 import { AddProductPayload } from '../../Constants/Types/Product';
@@ -18,9 +18,8 @@ const AddProduct: React.FC = () => {
     imageUrl: ''
   })
 
-  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationPost(apiEndpoints.products, addProductPayload, queryKey('getProducts'))
+  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationAuthorisedPost({url: apiEndpoints.products, payload: addProductPayload, key: queryKey('getProducts')})
 
-  console.log(addProductPayload)
 
   return (
     <>
