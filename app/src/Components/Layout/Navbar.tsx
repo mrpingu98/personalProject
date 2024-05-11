@@ -9,7 +9,7 @@ import useNavBar from "../../Hooks/useNavBar";
 
 const NavBar: React.FC = () => {
   const { t } = useTranslation("navbar");
-  const pages = [t("Muzik"), t("Merch")];
+  const pages = [t("muzik"), t("merch"), t("technical")];
   const {handleNavbarNavigation, navigateHome, navigateMyProfile} = useNavBar()
 
   return (

@@ -6,5 +6,6 @@ export const routes = {
     myProfile: '/myProfile',
     error: '/error',
     merchandise: '/merchandise',
-    merchandiseAdmin: '/merchandise/admin'
+    merchandiseAdmin: '/merchandise/admin',
+    technical: '/technical'
 }
