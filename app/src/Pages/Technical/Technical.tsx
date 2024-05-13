@@ -15,6 +15,7 @@ const Technical: React.FC = () => {
             <Typography variant='body1' marginTop={4}>{t('mainDescriptionOne')}</Typography>
             <Typography variant='body1' marginTop={4}>{t('mainDescriptionTwo')}</Typography>
             <Typography variant='body1' marginTop={4}>{t('mainDescriptionThree')}</Typography>
+            <Typography variant='body1' marginTop={4}>{t('mainDescriptionFour')}</Typography>
         </Description>
         <Title>
             <Typography variant="h3" marginTop={8}>{t('setupTitle')}</Typography>
@@ -39,6 +40,85 @@ const Technical: React.FC = () => {
                 </li>
             </ul>
         </Description>
+        <Title>
+            <Typography variant="h3" marginTop={8}>{t('frontEndTitle')}</Typography>
+        </Title>
+        <Description>
+            <ul>
+                <li>
+                    <Typography variant="body1">{t('frontEndDescriptionOne')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionTwo')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionThree')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionFour')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionFive')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionSix')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('frontEndDescriptionSeven')}</Typography>
+                </li>
+            </ul>
+        </Description>
+        <Title>
+            <Typography variant="h3" marginTop={8}>{t('backEndTitle')}</Typography>
+        </Title>
+        <Description>
+            <ul>
+                <li>
+                    <Typography variant="body1">{t('backEndDescriptionOne')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionTwo')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionThree')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionFour')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionFive')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionSix')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionSeven')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionEight')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionNine')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('backEndDescriptionTen')}</Typography>
+                </li>
+            </ul>
+        </Description>
+        <Title>
+            <Typography variant="h3" marginTop={8}>{t('azureTitle')}</Typography>
+        </Title>
+        <Description>
+            <ul>
+                <li>
+                    <Typography variant="body1">{t('azureDescriptionOne')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('azureDescriptionTwo')}</Typography>
+                </li>
+            </ul>
+        </Description>
+        
 
         </>
     )
