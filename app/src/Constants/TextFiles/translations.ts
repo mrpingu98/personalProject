@@ -10,6 +10,7 @@ import { mixes } from "./mixes";
 import { merchandise } from "./merchandise";
 import { merchandiseAdmin } from "./merchandiseAdmin";
 import { queryKeys } from "./queryKeys";
+import { technical } from "./technical";
 
 
 export const enResources = {
@@ -24,6 +25,6 @@ export const enResources = {
   mixes: mixes,
   merchandise: merchandise,
   merchandiseAdmin: merchandiseAdmin,
-  queryKeys: queryKeys
-
+  queryKeys: queryKeys,
+  technical: technical,
 };

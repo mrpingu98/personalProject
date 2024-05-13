@@ -15,6 +15,7 @@ import { MerchandiseAdminRoute } from "./Constants/Routes/MerchandiseAdminRoute"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DarkThemeContextProvider from "./Components/DarkThemeContextProvider";
+import { TechnicalRoute } from "./Constants/Routes/TechnicalRoute";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ function AppRoutes() {
       <ErrorRoute />
       <MerchandiseRoute />
       <MerchandiseAdminRoute />
+      <TechnicalRoute />
     </>
   );
 }

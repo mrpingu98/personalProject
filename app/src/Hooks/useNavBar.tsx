@@ -8,12 +8,16 @@ const useNavBar = () => {
     const { t } = useTranslation("navbar");
   
     const handleNavbarNavigation = (page: string) => {
-      if (page === t("Muzik")) {
+      if (page === t("muzik")) {
         navigate(routes.music);
       } 
-      if (page === t("Merch")) {
+      if (page === t("merch")) {
         navigate(routes.merchandise);
-      }else {
+      }
+      if (page === t("technical")) {
+        navigate(routes.technical);
+      }
+      else {
         console.log(`Page URL not found for: ${page}`);
       }
     };
