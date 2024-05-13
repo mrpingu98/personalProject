@@ -14,7 +14,7 @@ export const technical = {
     frontEndTitle: 'Front-End',
     frontEndDescriptionOne: 'Javascript, Typescript, MUI (Material UI)',
     frontEndDescriptionTwo: 'Redux',
-    frontEndDescriptionThree: 'React hooks - useState, useState, useCallback, useMemo, usRef, useContext, useTransition, useDeferredValue',
+    frontEndDescriptionThree: 'React hooks - useState, useEffect, useCallback, useMemo, usRef, useContext, useTransition, useDeferredValue',
     frontEndDescriptionFour:'Custom hooks',
     frontEndDescriptionFive: 'React Query - useQuery and useMutations to handle API requests and cache data + error handling with try/catch statements',
     frontEndDescriptionSix: 'Basic unit testing using Cypress ',
