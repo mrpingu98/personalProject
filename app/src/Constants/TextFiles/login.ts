@@ -1,7 +1,7 @@
 
 export const login = {
     login: 'Login',
-    email: 'Emai',
+    email: 'Email',
     password: 'Password',
     success: 'Loged in successfully',
     close: 'Close'

@@ -1,4 +1,4 @@
-import { Typography, TextField, Button } from '@mui/material';
+import { Typography, TextField, Button, Box } from '@mui/material';
 import React from 'react';
 import { LoadingCircle } from '../../Components/LoadingCircle';
 import { SnackBar } from '../../Components/SnackBar';
@@ -7,6 +7,7 @@ import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
 import { EditProductPayload } from '../../Constants/Types/Product';
 import { ErrorHandling } from '../../Components/MutationErrorHandling';
+import { PrimaryButton } from '../../Components/PrimaryButton';
 
 const EditProduct: React.FC = () => {
     const { t } = useTranslation('merchandiseAdmin')
@@ -21,7 +22,10 @@ const EditProduct: React.FC = () => {
   })
   
   const { mutation: mutationEditProduct, snackbar: editProductSnackbar, setSnackbar: setEditProductSnackbar } = useMutationPut(apiEndpoints.products, editProductPayload, queryKey('getProducts'))
-
+  
+  const onClick = () => {
+    mutationEditProduct.mutate()
+  }
 
     return(
        <>
@@ -36,7 +40,9 @@ const EditProduct: React.FC = () => {
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, price: e.target.value == '' ? 0 : parseFloat(e.target.value)  })} />
       <Typography variant='body1'>{t('imageUrl')}</Typography>
       <TextField onChange={(e) => setEditProductPayload({ ...editProductPayload, imageUrl: e.target.value })} />
-      <Button onClick={() => mutationEditProduct.mutate()}>{t('editProduct')}</Button>
+      <Box marginTop={2}>
+      <PrimaryButton onClick={onClick}  text={t('editProduct')}/>
+      </Box>
       <div>
         {mutationEditProduct.isPending&& <LoadingCircle />}
         {mutationEditProduct.isError && <ErrorHandling mutation={mutationEditProduct} />}
