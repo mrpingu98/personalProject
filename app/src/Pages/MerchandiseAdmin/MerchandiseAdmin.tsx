@@ -3,7 +3,7 @@ import { EditProduct } from "./EditProduct";
 import { AddProduct } from "./AddProduct";
 import { DeleteProduct } from "./DeleteProduct";
 import { PrimaryButton } from "../../Components/PrimaryButton";
-import { LoginDialog } from "../Home/LoginDialog";
+import { LoginDialog } from "../../Components/LoginDialog";
 import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Box } from "@mui/material";
