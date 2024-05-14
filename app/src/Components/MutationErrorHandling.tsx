@@ -13,6 +13,7 @@ const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
     const [networkError, setNetworkError] = React.useState<boolean>(false)
     const [customError, setCustomError] = React.useState<string>('')
     const [generalError, setGeneralError] = React.useState<boolean>(false)
+    const [unauthorisedError, setUnauthorisedError] = React.useState<boolean>(false)
 
     React.useEffect(() => {
         if (mutation.isError) {
@@ -20,17 +21,26 @@ const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
                 setNetworkError(true)
                 setCustomError('')
                 setGeneralError(false)
+                setUnauthorisedError(false)
+            }
+            else if (mutation.error.status == 401) {
+                setUnauthorisedError(true)
+                setNetworkError(false)
+                setCustomError('')
+                setGeneralError(false)
             }
             else if (typeof mutation.error.customErrorMessage === 'string' && mutation.error.customErrorMessage != "") {
                 setCustomError(mutation.error.customErrorMessage)
                 setNetworkError(false)
                 setGeneralError(false)
+                setUnauthorisedError(false)
                 //if multiple errors occur, the data becomes an object, with errors[] inside it 
             }
             else {
                 setGeneralError(true)
                 setCustomError('')
                 setNetworkError(false)
+                setUnauthorisedError(false)
             }
         }
     }, [mutation])
@@ -45,6 +55,9 @@ const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
             }
             {generalError &&
                 <Typography color={'red'} marginTop={4}>An error occurred. Please try again later</Typography>
+            }
+            {unauthorisedError && 
+                <Typography color={'red'} marginTop={4}>You are not authorised for this process.</Typography>
             }
         </>
     )
