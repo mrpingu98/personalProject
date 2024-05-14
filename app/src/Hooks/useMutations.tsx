@@ -62,6 +62,18 @@ export const useMutationAuthorisedPost = ({url, payload, key} : Props) => {
     return {mutation, snackbar, setSnackbar}
 }
 
+export const useMutationAuthorisedPut = ({url, payload, key} : Props) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await put(url, payload, header),
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
 export const useMutationPut = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
@@ -73,12 +85,24 @@ export const useMutationPut = (url: string, payload: any, key?: string) => {
     return {mutation, snackbar, setSnackbar}
 }
 
+export const useMutationAuthorisedDelete = ({url, payload, key} : Props) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await deletes(url, payload, header),
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
 export const useMutationDelete = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
 
     const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
-        mutationFn: async () => await deletes(url, {data: payload}),
+        mutationFn: async () => await deletes(url, payload),
         onSuccess: () => {queryClient.invalidateQueries({ queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
     })
     return {mutation, snackbar, setSnackbar}
