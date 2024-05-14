@@ -3,13 +3,14 @@ import { AxiosResponse } from 'axios';
 import React from 'react';
 import { CustomError } from '../Constants/Types/ErrorHandling';
 import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface ErrorProps {
     mutation: UseMutationResult<AxiosResponse<any, any>, CustomError, void, unknown>
 }
 
 const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
-    console.log(mutation)
+    const {t} = useTranslation('error')
     const [networkError, setNetworkError] = React.useState<boolean>(false)
     const [customError, setCustomError] = React.useState<string>('')
     const [generalError, setGeneralError] = React.useState<boolean>(false)
@@ -48,16 +49,16 @@ const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
     return (
         <>
             {networkError &&
-                <Typography color={'red'} marginTop={4}>An error occurred during the request. Please try again later.</Typography>
+                <Typography color={'red'} marginTop={4}>{t('networkError')}</Typography>
             }
             {customError &&
                 <Typography color={'red'} marginTop={4}>{customError}</Typography>
             }
             {generalError &&
-                <Typography color={'red'} marginTop={4}>An error occurred. Please try again later</Typography>
+                <Typography color={'red'} marginTop={4}>{t('generalError')}</Typography>
             }
             {unauthorisedError && 
-                <Typography color={'red'} marginTop={4}>You are not authorised for this process.</Typography>
+                <Typography color={'red'} marginTop={4}>{t('unauthorisedError')}</Typography>
             }
         </>
     )
