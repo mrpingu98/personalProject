@@ -27,6 +27,6 @@ export const enResources = {
   merchandise: merchandise,
   merchandiseAdmin: merchandiseAdmin,
   queryKeys: queryKeys,
-  login: login
+  login: login,
   technical: technical,
 };
