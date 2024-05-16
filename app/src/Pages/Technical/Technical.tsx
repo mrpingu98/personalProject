@@ -41,6 +41,28 @@ const Technical: React.FC = () => {
             </ul>
         </Description>
         <Title>
+            <Typography variant="h3" marginTop={8}>{t('pagesTitle')}</Typography>
+        </Title>
+        <Description>
+            <ul>
+                <li>
+                    <Typography variant="body1">{t('muzikPage')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('yourSpotify')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('myProfile')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('merch')}</Typography>
+                </li>
+                <li>
+                    <Typography variant="body1" marginTop={2}>{t('admin')}</Typography>
+                </li>
+            </ul>
+        </Description>
+        <Title>
             <Typography variant="h3" marginTop={8}>{t('frontEndTitle')}</Typography>
         </Title>
         <Description>
