@@ -37,13 +37,13 @@ const Music: React.FC = () => {
           route={routes.personalisedSpotify}
           disabled={!haveAccessToken}
         />
-        <Box marginLeft={2}>
+        {/* <Box marginLeft={2}>
           <LinkButton
             data-test-id={"Mixes-link-button"}
             text={t("mixes")}
             route={routes.mixes}
           />
-        </Box>
+        </Box> */}
       </Links>
       <PageParameters>
         <Title>

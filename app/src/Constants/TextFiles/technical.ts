@@ -29,7 +29,7 @@ export const technical = {
     backEndDescriptionSeven:  'Entity Framework Core',
     backEndDescriptionEight:  'Using swagger to test endpoints',
     backEndDescriptionNine:  'Custom error messages',
-    backEndDescriptionTen:  'Basic Login functionality using Microsoft.EntityFrameworkCore.Identity / Authorised endpoints / oAuth2 flow', 
+    backEndDescriptionTen:  'Basic Login functionality using Microsoft.EntityFrameworkCore.Identity / Authorised endpoints / oAuth2 flow. At the moment I have made one User Account - you can only add/edit/delete products if you log into this account.', 
     azureTitle: 'Azure',
     azureDescriptionOne: 'Deploying a Web App - never done this before / had any idea of how to do this, so had to research and understand how it all worked. Connected to my github repo to create an Azure CI/CD Pipeline. Configured yaml file for certain deployment settings (e.g. not automatically deploying whenever a push is made into main branch)',
     azureDescriptionTwo: "Deploying a Web API + SQL Server. Understand how to connect/view the SQL Db I had created (whitelisting IP Address, using Azure Data Studio). Initially app wasn’t running so had to use Application Logs to debug (was issues with my db such as not connecting correctly or expecting the wrong data types)"

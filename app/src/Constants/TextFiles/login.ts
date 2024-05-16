@@ -3,6 +3,6 @@ export const login = {
     login: 'Login',
     email: 'Email',
     password: 'Password',
-    success: 'Loged in successfully',
+    success: 'Logged in successfully',
     close: 'Close'
 }
