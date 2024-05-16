@@ -5,4 +5,7 @@ export const error  = {
     tokenExpiredDescription: 'There was an error fetching your Spotify data. Click the below button to refresh the connection to Spotify!',
     refresh: 'Refresh',
     refreshed: 'Spotify connection refreshed',
+    networkError: 'An error occurred during the request. Please try again later.',
+    generalError: 'An error occurred. Please try again later',
+    unauthorisedError: 'You are not authorised for this process.'
 }

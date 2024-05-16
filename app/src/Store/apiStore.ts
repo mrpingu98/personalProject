@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosHeaders, AxiosResponse } from "axios";
 import { spotifyRefreshTokenResponse } from "../Constants/Types/Spotify";
 import { CustomError } from "../Constants/Types/ErrorHandling";
 
@@ -30,9 +30,9 @@ export const get = async (url: string, header?: object) => {
     }
   }
 
-export const post = async (url: string, payload: any) => {
+export const post = async (url: string, payload: any, header?: object) => {
     try{
-      const response = await axios.post(url, payload);
+      const response = await axios.post(url, payload, {headers: header});
       return response.data;
     }
     catch(error: any){
@@ -42,9 +42,9 @@ export const post = async (url: string, payload: any) => {
     }
   } 
 
-  export const deletes = async (url: string, payload: any) => {
+  export const deletes = async (url: string, payload: any, header?: object) => {
     try{
-      const response = await axios.delete(url, payload);
+      const response = await axios.delete(url, {data: payload, headers: header});
       return response.data;
     }
     catch(error: any){
@@ -54,9 +54,9 @@ export const post = async (url: string, payload: any) => {
     }
   } 
 
-  export const put = async (url: string, payload: any) => {
+  export const put = async (url: string, payload: any, header?: object) => {
     try{
-      const response = await axios.put(url, payload);
+      const response = await axios.put(url, payload, {headers: header});
       return response.data;
     }
     catch(error: any){

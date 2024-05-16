@@ -6,14 +6,69 @@ import { put, post, deletes } from "../Store/apiStore";
 import { CustomError } from "../Constants/Types/ErrorHandling";
 
 
-export const useMutationPost = (url: string, payload: any, key?: string) => {
+interface Props {
+    url: string,
+    payload: any,
+    key?: string,
+    header?: object
+  }
+  
+
+export const useMutationPost = ({url, payload, key, header} : Props) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
     //changed type of Error the useMutation expects so I can do custom error handling
     //normal Error type doesn't have same properties as an AxiosError response 
     //so I made a custom error type, and in the post request, pulled the information needed from the AxiosError response, and set them to the new type to be passed through 
     const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
-            mutationFn: async () => await post(url, payload),
+            mutationFn: async () => await post(url, payload, header),
+            onSuccess: (data) => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
+export const useMutationPostLogout = ({url, payload, key, header} : Props) => {
+    const queryClient = useQueryClient()
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await post(url, payload, header),
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), localStorage.setItem('loginAccessToken', '')}
+        })
+    return {mutation}
+}
+
+//when logging out set the local storage back to '' for the acces stokens 
+
+export const useMutationPostLogin = ({url, payload, key, header} : Props) => {
+    const queryClient = useQueryClient()
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const mutation = useMutation<any, CustomError, void, unknown>({
+            mutationFn: async () => await post(url, payload, header),
+            onSuccess: (data) => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), 
+            localStorage.setItem("loginAccessToken", data.accessToken)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
+
+export const useMutationAuthorisedPost = ({url, payload, key} : Props) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await post(url, payload, header),
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
+export const useMutationAuthorisedPut = ({url, payload, key} : Props) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await put(url, payload, header),
             onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
         })
     return {mutation, snackbar, setSnackbar}
@@ -30,12 +85,24 @@ export const useMutationPut = (url: string, payload: any, key?: string) => {
     return {mutation, snackbar, setSnackbar}
 }
 
+export const useMutationAuthorisedDelete = ({url, payload, key} : Props) => {
+    const [snackbar, setSnackbar] = React.useState<boolean>(false);
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
+            mutationFn: async () => await deletes(url, payload, header),
+            onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
+        })
+    return {mutation, snackbar, setSnackbar}
+}
+
 export const useMutationDelete = (url: string, payload: any, key?: string) => {
     const [snackbar, setSnackbar] = React.useState<boolean>(false);
     const queryClient = useQueryClient()
 
     const mutation = useMutation<AxiosResponse, CustomError, void, unknown>({
-        mutationFn: async () => await deletes(url, {data: payload}),
+        mutationFn: async () => await deletes(url, payload),
         onSuccess: () => {queryClient.invalidateQueries({ queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
     })
     return {mutation, snackbar, setSnackbar}

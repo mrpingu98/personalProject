@@ -10,6 +10,7 @@ import { mixes } from "./mixes";
 import { merchandise } from "./merchandise";
 import { merchandiseAdmin } from "./merchandiseAdmin";
 import { queryKeys } from "./queryKeys";
+import { login } from "./login";
 import { technical } from "./technical";
 
 
@@ -26,5 +27,6 @@ export const enResources = {
   merchandise: merchandise,
   merchandiseAdmin: merchandiseAdmin,
   queryKeys: queryKeys,
+  login: login
   technical: technical,
 };

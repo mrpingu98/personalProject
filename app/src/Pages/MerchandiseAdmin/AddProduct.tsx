@@ -1,12 +1,13 @@
-import { Typography, TextField, Button } from '@mui/material';
+import { Typography, TextField, Button, Box } from '@mui/material';
 import React from 'react';
 import { LoadingCircle } from '../../Components/LoadingCircle';
 import { SnackBar } from '../../Components/SnackBar';
-import { useMutationPost } from '../../Hooks/useMutations';
+import { useMutationAuthorisedPost } from '../../Hooks/useMutations';
 import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
 import { AddProductPayload } from '../../Constants/Types/Product';
 import { ErrorHandling } from '../../Components/MutationErrorHandling';
+import { PrimaryButton } from '../../Components/PrimaryButton';
 
 const AddProduct: React.FC = () => {
   const { t } = useTranslation('merchandiseAdmin')
@@ -18,9 +19,11 @@ const AddProduct: React.FC = () => {
     imageUrl: ''
   })
 
-  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationPost(apiEndpoints.products, addProductPayload, queryKey('getProducts'))
+  const { mutation: mutationAddProduct, snackbar: addProductSnackbar, setSnackbar: setAddProductSnackbar } = useMutationAuthorisedPost({url: apiEndpoints.products, payload: addProductPayload, key: queryKey('getProducts')})
 
-  console.log(addProductPayload)
+  const onClick = () => {
+    mutationAddProduct.mutate()
+  }
 
   return (
     <>
@@ -36,7 +39,9 @@ const AddProduct: React.FC = () => {
       } />
       <Typography variant='body1'>{t('imageUrl')}</Typography>
       <TextField onChange={(e) => setAddProductPayload({ ...addProductPayload, imageUrl: e.target.value })} />
-      <Button onClick={() => mutationAddProduct.mutate()}>{t('addProduct')}</Button>
+      <Box marginTop={2}>
+      <PrimaryButton onClick={onClick}  text={t('addProduct')}/>
+      </Box>
       <div>
         {mutationAddProduct.isPending && <LoadingCircle />}
         {mutationAddProduct.isError &&

@@ -9,12 +9,12 @@ const Home: React.FC = () => {
   const { t } = useTranslation("home");
   const { mutation } = useMutationSpotifyPost(apiEndpoints.spotifyTokenRequest)
 
-  React.useEffect(() => {
-    const checkToken = localStorage.getItem("access_token") ? true : false
-    if (checkToken) {
-      mutation.mutate()
-    }
-  }, [])
+React.useEffect(() => {
+  const checkToken = localStorage.getItem("access_token") ? true : false
+  if (checkToken) {
+    mutation.mutate()
+  }
+},[])
 
   return (
     <MainContainer>
