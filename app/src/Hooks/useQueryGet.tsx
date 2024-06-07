@@ -18,17 +18,14 @@ interface Props {
 
 
 export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
-  const getRequest = async () => 
-    {
+  const getRequest = async () => {
       try{
         const data = await get(url, header)
         return data
       }
       catch(error: any){
-        // console.log(error)
-      }
-    }
-
+        console.log(error)
+      }}
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 

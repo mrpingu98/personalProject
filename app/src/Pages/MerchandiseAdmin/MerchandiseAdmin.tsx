@@ -7,6 +7,7 @@ import { LoginDialog } from "../../Components/LoginDialog";
 import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Box } from "@mui/material";
+import { DataTable } from "./Table";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -19,7 +20,6 @@ const MerchandiseAdmin: React.FC = () => {
   const onClickLogout = () => {
     mutationLogout.mutate()
   }
-
 
   return (
     <>
@@ -36,6 +36,7 @@ const MerchandiseAdmin: React.FC = () => {
         open={openLogin}
         setOpen={setOpenLogin}
       />
+      <DataTable />
     </>
   )
 }

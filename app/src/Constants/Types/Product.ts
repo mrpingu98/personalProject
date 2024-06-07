@@ -16,3 +16,18 @@ export type EditProductPayload = {
 export type DeleteProductPayload = {
     name: string
 }
+
+export type ProductResponse = {
+    id: string,
+    name: string,
+    description: string,
+    price: number,
+    imageUrl: string
+}
+
+export type ProductTableRows = {
+    id: string,
+    product: string,
+    description: string,
+    price: number
+}
