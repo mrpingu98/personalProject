@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { useQueryClient } from "@tanstack/react-query";
 import { ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { get } from '../../Store/apiStore';
@@ -35,11 +35,18 @@ const DataTable: React.FC = () => {
     }, [queryClient])
 
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'Id', width: 70 },
+        { field: 'id', headerName: 'Id', filterable: false, width: 70 },
         { field: 'product', headerName: 'Product', width: 400 },
         { field: 'description', headerName: 'Description', width: 400 },
         { field: 'price', headerName: 'Price', width: 400 },
     ];
+
+    const hiddenFields = ['id'];
+    const getTogglableColumns = (columns: GridColDef[]) => {
+        return columns
+          .filter((column) => !hiddenFields.includes(column.field))
+          .map((column) => column.field);
+      };
 
     return (
         <div style={{ height: 400, width: 'fit-content' }}>
@@ -52,6 +59,14 @@ const DataTable: React.FC = () => {
                     },
                 }}
                 checkboxSelection
+                columnVisibilityModel={{id: false}}
+                slots={{toolbar: GridToolbar}}
+                slotProps={{
+                    columnsManagement: {
+                      getTogglableColumns,
+                    },
+                  }}
+                disableColumnSelector
             />
         </div>
     );
