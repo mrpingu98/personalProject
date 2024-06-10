@@ -4,6 +4,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { get } from '../../Store/apiStore';
 import { apiEndpoints } from '../../Store/Endpoints';
+import { Box } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from '../../Components/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const DataTable: React.FC = () => {
     const queryClient = useQueryClient()
@@ -39,6 +43,21 @@ const DataTable: React.FC = () => {
         { field: 'product', headerName: 'Product', width: 400 },
         { field: 'description', headerName: 'Description', width: 400 },
         { field: 'price', headerName: 'Price', width: 400 },
+        { field: 'editDelete', headerName: 'Edit / Delete', filterable: false, width: 400, renderCell:() => {
+            return (
+            <>
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+            <IconButton 
+            icon={<EditIcon />}
+            onClick={() => console.log('click')}
+            />
+            <IconButton 
+            icon={<DeleteIcon />}
+            onClick={() => console.log('click')}
+            />
+            </Box>
+            </>)
+        }},
     ];
 
     const hiddenFields = ['id'];
@@ -58,7 +77,6 @@ const DataTable: React.FC = () => {
                         paginationModel: { page: 0, pageSize: 5 },
                     },
                 }}
-                checkboxSelection
                 columnVisibilityModel={{id: false}}
                 slots={{toolbar: GridToolbar}}
                 slotProps={{
@@ -67,6 +85,13 @@ const DataTable: React.FC = () => {
                     },
                   }}
                 disableColumnSelector
+                disableColumnMenu
+                disableRowSelectionOnClick
+                sx={{
+                    "& .MuiDataGrid-row:hover": {
+                      backgroundColor: "inherit"
+                    }
+                  }}
             />
         </div>
     );
