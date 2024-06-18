@@ -1,17 +1,29 @@
 import * as React from 'react';
-import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel, GridToolbar, useGridApiRef } from '@mui/x-data-grid';
 import { useQueryClient } from "@tanstack/react-query";
-import { ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
+import { EditDialogInitialValues, ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { get } from '../../Store/apiStore';
 import { apiEndpoints } from '../../Store/Endpoints';
-import { Box } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from '../../Components/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useQueryGetProducts } from '../../Hooks/useQueryGet';
 
-const DataTable: React.FC = () => {
+
+interface TableProps {
+    setSelectedRowData: React.Dispatch<React.SetStateAction<EditDialogInitialValues>>,
+}
+
+const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
     const queryClient = useQueryClient()
     const [rows, setRows] = React.useState<ProductTableRows[]>([])
+    const [selectedRowId, setSelectedRowId] = React.useState<GridRowSelectionModel>()
+    const apiRef = useGridApiRef();
+
+    const columns: GridColDef[] = [
+        { field: 'id', headerName: 'Id', filterable: false, width: 70 },
+        { field: 'product', headerName: 'Product', width: 300 },
+        { field: 'description', headerName: 'Description', width: 300 },
+        { field: 'price', headerName: 'Price', width: 300 },
+        { field: 'imageUrl', headerName: 'Image Url', width: 300}
+    ];
 
     const getProducts = async () => {
         try {
@@ -22,6 +34,8 @@ const DataTable: React.FC = () => {
             console.log(error)
         }}
 
+        const { data } = useQueryGetProducts();
+
     React.useEffect(() => {
         const fetchProducts = async () => {
             const productsCache: Promise<ProductResponse[]> = queryClient.ensureQueryData({ queryKey: ['getProducts'], queryFn: getProducts })
@@ -31,34 +45,18 @@ const DataTable: React.FC = () => {
                     id: product.id,
                     product: product.name,
                     description: product.description,
-                    price: product.price
+                    price: product.price,
+                    imageUrl: product.imageUrl
                 })))
-            console.log('hit')
         }
         fetchProducts()
-    }, [queryClient])
+    }, [data])
+    //will need to check if a double api request is sent (the original invalidate query, and then this one)
 
-    const columns: GridColDef[] = [
-        { field: 'id', headerName: 'Id', filterable: false, width: 70 },
-        { field: 'product', headerName: 'Product', width: 400 },
-        { field: 'description', headerName: 'Description', width: 400 },
-        { field: 'price', headerName: 'Price', width: 400 },
-        { field: 'editDelete', headerName: 'Edit / Delete', filterable: false, width: 400, renderCell:() => {
-            return (
-            <>
-            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
-            <IconButton 
-            icon={<EditIcon />}
-            onClick={() => console.log('click')}
-            />
-            <IconButton 
-            icon={<DeleteIcon />}
-            onClick={() => console.log('click')}
-            />
-            </Box>
-            </>)
-        }},
-    ];
+    React.useEffect (() => {
+        const row = apiRef.current.getRow(selectedRowId ? selectedRowId[0] : '')
+        setSelectedRowData(row)
+    },[selectedRowId])
 
     const hiddenFields = ['id'];
     const getTogglableColumns = (columns: GridColDef[]) => {
@@ -66,9 +64,12 @@ const DataTable: React.FC = () => {
           .filter((column) => !hiddenFields.includes(column.field))
           .map((column) => column.field);
       };
+      //make sure to explain this in english to myself - this is for hidden columns
+
+
 
     return (
-        <div style={{ height: 400, width: 'fit-content' }}>
+        <div style={{ height: 400 }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -79,20 +80,24 @@ const DataTable: React.FC = () => {
                 }}
                 columnVisibilityModel={{id: false}}
                 slots={{toolbar: GridToolbar}}
-                slotProps={{
-                    columnsManagement: {
-                      getTogglableColumns,
-                    },
-                  }}
                 disableColumnSelector
                 disableColumnMenu
+                disableMultipleRowSelection
+                onRowSelectionModelChange={(newRowSelectionModel) => {
+                    setSelectedRowId(newRowSelectionModel)
+                  }}
+                rowSelectionModel={selectedRowId}
+                checkboxSelection
                 disableRowSelectionOnClick
                 sx={{
                     "& .MuiDataGrid-row:hover": {
                       backgroundColor: "inherit"
-                    }
+                    },
+                    "& .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
+                        outline: "none"},
                   }}
-            />
+                  apiRef={apiRef}
+            />         
         </div>
     );
 }

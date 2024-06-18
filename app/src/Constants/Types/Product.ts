@@ -7,10 +7,10 @@ export type AddProductPayload = {
 
 export type EditProductPayload = {
     name: string,
-    newName?: string,
-    description?: string,
-    price?: number,
-    imageUrl?: string
+    newName: string | null,
+    description: string | null,
+    price: number | null,
+    imageUrl: string | null
 }
 
 export type DeleteProductPayload = {
@@ -30,4 +30,12 @@ export type ProductTableRows = {
     product: string,
     description: string,
     price: number
+}
+
+export type EditDialogInitialValues = {
+    id: string,
+    product: string,
+    description: string,
+    price: number,
+    imageUrl: string
 }

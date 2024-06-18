@@ -8,11 +8,21 @@ import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Box } from "@mui/material";
 import { DataTable } from "./Table";
+import { EditDialog } from "./EditDialog";
+import { EditDialogInitialValues } from "../../Constants/Types/Product";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const MerchandiseAdmin: React.FC = () => {
   const [openLogin, setOpenLogin] = React.useState<boolean>(false)
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
+  const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
+  const [snackbar, setSnackbar] = React.useState<boolean>(false);
+  const [selectedRowData, setSelectedRowData] = React.useState<EditDialogInitialValues>({ id: '',
+    product: '',
+    description: '',
+    price: 0,
+    imageUrl: ''})
   
   const onClickLogin = () => {
     setOpenLogin(true)
@@ -20,6 +30,7 @@ const MerchandiseAdmin: React.FC = () => {
   const onClickLogout = () => {
     mutationLogout.mutate()
   }
+
 
   return (
     <>
@@ -36,7 +47,16 @@ const MerchandiseAdmin: React.FC = () => {
         open={openLogin}
         setOpen={setOpenLogin}
       />
-      <DataTable />
+      <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true) }/>
+      <DataTable 
+      setSelectedRowData={setSelectedRowData}
+      />
+      <EditDialog 
+            open={editDialogOpen}
+            setOpen={setEditDialogOpen}
+            selectedItemInitialValues={selectedRowData}
+            setSnackbarActive = {setSnackbar}
+            />
     </>
   )
 }

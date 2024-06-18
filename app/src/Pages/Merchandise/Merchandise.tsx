@@ -8,13 +8,15 @@ import { LoadingCircle } from "../../Components/LoadingCircle";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
 import { routes } from "../../Constants/Routes/RoutesEndpoints";
+import { useQueryGetProducts } from "../../Hooks/useQueryGet";
 
 
 const Merchandise: React.FC = () => {
   const { t } = useTranslation("merchandise");
   const {t: tkey} = useTranslation("queryKeys")
   
-  const { data: products, error, isPending } = useQueryGet({url: apiEndpoints.products, key: tkey('getProducts')});
+  const { data: products, error, isPending } = useQueryGetProducts();
+
   if (isPending) return <LoadingCircle />
   if (error) return <Error />
 
