@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 import { DataTable } from "./Table";
 import { EditDialog } from "./EditDialog";
 import { EditDialogInitialValues } from "../../Constants/Types/Product";
-import { useQueryClient } from "@tanstack/react-query";
+import { SnackBar } from "../../Components/SnackBar";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -18,19 +18,14 @@ const MerchandiseAdmin: React.FC = () => {
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
-  const [selectedRowData, setSelectedRowData] = React.useState<EditDialogInitialValues>({ id: '',
-    product: '',
-    description: '',
-    price: 0,
-    imageUrl: ''})
-  
+  const [selectedRowData, setSelectedRowData] = React.useState<any>()
+
   const onClickLogin = () => {
     setOpenLogin(true)
   }
   const onClickLogout = () => {
     mutationLogout.mutate()
   }
-
 
   return (
     <>
@@ -47,16 +42,21 @@ const MerchandiseAdmin: React.FC = () => {
         open={openLogin}
         setOpen={setOpenLogin}
       />
-      <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true) }/>
-      <DataTable 
-      setSelectedRowData={setSelectedRowData}
+      <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
+      <DataTable
+        setSelectedRowData={setSelectedRowData}
       />
-      <EditDialog 
-            open={editDialogOpen}
-            setOpen={setEditDialogOpen}
-            selectedItemInitialValues={selectedRowData}
-            setSnackbarActive = {setSnackbar}
-            />
+      <EditDialog
+        open={editDialogOpen}
+        setOpen={setEditDialogOpen}
+        selectedItemInitialValues={selectedRowData}
+        setSnackbarActive={setSnackbar}
+      />
+      <SnackBar
+        snackbarActive={snackbar}
+        setSnackbarActive={setSnackbar}
+        message={'Product Updated'}
+      />
     </>
   )
 }
