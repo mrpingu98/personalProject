@@ -42,6 +42,9 @@ const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInit
     const onClose = () => {
         setOpen(false)
         setError(false)
+        formik.resetForm({
+            values: { ...selectedItemInitialValues, newName: '' }
+        });
     }
 
     const formik = useFormik({
@@ -52,6 +55,9 @@ const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInit
                 setOpen(false)
                 setError(false)
                 setSnackbarActive(true)
+                formik.resetForm({
+                    values: { ...selectedItemInitialValues, newName: '' }
+                })
             } catch (error) {
                 setError(true)
             }
