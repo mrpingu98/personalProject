@@ -1,19 +1,17 @@
 import React from "react";
-import { EditProduct } from "./EditProduct";
-import { AddProduct } from "./AddProduct";
-import { DeleteProduct } from "./DeleteProduct";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { LoginDialog } from "../../Components/LoginDialog";
 import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { DataTable } from "./Table";
 import { EditDialog } from "./EditDialog";
-import { EditDialogInitialValues } from "../../Constants/Types/Product";
 import { SnackBar } from "../../Components/SnackBar";
+import { useTranslation } from "react-i18next";
 
 
 const MerchandiseAdmin: React.FC = () => {
+  const {t} = useTranslation('merchandiseAdmin')
   const [openLogin, setOpenLogin] = React.useState<boolean>(false)
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
@@ -29,22 +27,37 @@ const MerchandiseAdmin: React.FC = () => {
 
   return (
     <>
-      <Box display='flex' flexDirection='row' justifyContent='flex-end'>
-        <Box marginRight={4}>
-          <PrimaryButton onClick={onClickLogin} text="Admin Login" />
+      <Box display='flex' flexDirection='row' justifyContent='space-between'>
+        <Box display='flex' flexDirection='column'>
+          <Typography variant="h1">{t('pmc')}</Typography>
         </Box>
-        <PrimaryButton onClick={onClickLogout} text="Admin Logout" />
+        <Box display='flex' flexDirection='column'>
+          <Box display="flex" flexDirection="row" marginTop={2}>
+            <Box marginRight={4}>
+              <PrimaryButton onClick={onClickLogin} text={t('adminLogin')} />
+            </Box>
+            <PrimaryButton onClick={onClickLogout} text={t('adminLogout')} />
+          </Box>
+        </Box>
       </Box>
-      <AddProduct />
-      <EditProduct />
-      <DeleteProduct />
+      <Box marginTop={4}>
+        <DataTable
+        setSelectedRowData={setSelectedRowData}
+        />
+      </Box>
+      <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
+        <Box marginRight={10}>
+          <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} />
+        </Box>
+        <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
+        <Box marginLeft={10}>
+          <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
+        </Box>
+      </Box>
+
       <LoginDialog
         open={openLogin}
         setOpen={setOpenLogin}
-      />
-      <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
-      <DataTable
-        setSelectedRowData={setSelectedRowData}
       />
       <EditDialog
         open={editDialogOpen}
@@ -55,7 +68,7 @@ const MerchandiseAdmin: React.FC = () => {
       <SnackBar
         snackbarActive={snackbar}
         setSnackbarActive={setSnackbar}
-        message={'Product Updated'}
+        message={t('changesSaved')}
       />
     </>
   )

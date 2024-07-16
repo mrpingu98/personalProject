@@ -9,6 +9,12 @@ export const merchandiseAdmin = {
     deleteProduct: 'Delete Product',
     productAdded: 'Product added',
     productUpdated: 'Product Updated',
-    productDeleted: 'Product Deleted'
+    productDeleted: 'Product Deleted',
+    edit: 'Edit',
+    changesSaved: 'Changes saved',
+    pmc: 'Product Management Centre',
+    adminLogin: 'Admin Login',
+    adminLogout: 'Admin Logout'
+
 
 }

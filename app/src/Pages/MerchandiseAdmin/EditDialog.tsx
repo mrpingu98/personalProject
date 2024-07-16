@@ -30,22 +30,7 @@ const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInit
     const [error, setError] = React.useState<boolean>(false)
     const { darkTheme } = React.useContext(DarkThemeContext)
     const { t } = useTranslation('merchandiseAdmin')
-
-    React.useEffect(() => {
-        formik.resetForm({
-            values: { ...selectedItemInitialValues, newName: '' }
-        });
-    }, [selectedItemInitialValues])
-
     const {mutation} = useMutationEditProducts();
-
-    const onClose = () => {
-        setOpen(false)
-        setError(false)
-        formik.resetForm({
-            values: { ...selectedItemInitialValues, newName: '' }
-        });
-    }
 
     const formik = useFormik({
         initialValues: { ...selectedItemInitialValues, newName: '' },
@@ -63,6 +48,20 @@ const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInit
             }
         },
     });
+
+    const onClose = () => {
+        setOpen(false)
+        setError(false)
+        formik.resetForm({
+            values: { ...selectedItemInitialValues, newName: '' }
+        });
+    }
+
+    React.useEffect(() => {
+        formik.resetForm({
+            values: { ...selectedItemInitialValues, newName: '' }
+        });
+    }, [selectedItemInitialValues])
 
     return (
         <>
