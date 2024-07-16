@@ -44,8 +44,10 @@ const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
     React.useEffect (() => {
         const row = apiRef.current.getRow(selectedRowId ? selectedRowId[0] : '')
         setSelectedRowData(row)
-    },[selectedRowId])
+    },[selectedRowId, rows])
+    //added in rows as a depedency - so when you edit a product, if you reoopen the dialog, it will have updated the selectedRowData
 
+    //pass through slected row id, when it's an empty array, the edit/delete button should be disabled - maybe use useContext
 
     return (
         <div style={{ height: 400 }}>
