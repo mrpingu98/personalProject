@@ -16,7 +16,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DarkThemeContextProvider from "./Components/DarkThemeContextProvider";
 import { TechnicalRoute } from "./Constants/Routes/TechnicalRoute";
-import ProductTableContextProvider from "./Components/ProductTableSelectedRowContextProvider";
+import ProductTableContextProvider from "./Components/ProductTableContextProvider";
 
 const queryClient = new QueryClient();
 
