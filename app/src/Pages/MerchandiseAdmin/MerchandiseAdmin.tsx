@@ -5,7 +5,7 @@ import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Box, Typography } from "@mui/material";
 import { ProductTable } from "./ProductTable";
-import { EditDialog } from "./EditDialog";
+import { EditProductDialog } from "./EditProductDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
 import { ProductTableContext } from "../../Constants/Contexts";
@@ -17,7 +17,6 @@ const MerchandiseAdmin: React.FC = () => {
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
-  const [selectedRowData, setSelectedRowData] = React.useState<any>()
   const { isRowSelected } = React.useContext(ProductTableContext);
 
   const onClickLogin = () => {
@@ -44,7 +43,6 @@ const MerchandiseAdmin: React.FC = () => {
       </Box>
       <Box marginTop={4}>
         <ProductTable
-        setSelectedRowData={setSelectedRowData}
         />
       </Box>
       <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
@@ -61,10 +59,9 @@ const MerchandiseAdmin: React.FC = () => {
         open={openLogin}
         setOpen={setOpenLogin}
       />
-      <EditDialog
+      <EditProductDialog
         open={editDialogOpen}
         setOpen={setEditDialogOpen}
-        selectedItemInitialValues={selectedRowData}
         setSnackbarActive={setSnackbar}
       />
       <SnackBar

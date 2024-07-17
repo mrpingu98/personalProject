@@ -9,7 +9,8 @@ interface ProductTableContextProviderProps {
 
 const ProductTableContextProvider: React.FC<ProductTableContextProviderProps> = ({children}) => {
   const [isRowSelected, setIsRowSelected] = React.useState<GridRowSelectionModel>();
-  const value = { isRowSelected, setIsRowSelected };
+  const [selectedRowData, setSelectedRowData] = React.useState<any>()
+  const value = { isRowSelected, setIsRowSelected, selectedRowData, setSelectedRowData };
 
   return (
     <div>

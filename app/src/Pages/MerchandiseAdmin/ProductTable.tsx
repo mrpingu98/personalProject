@@ -6,18 +6,13 @@ import { useQueryGetProducts } from '../../Hooks/useQueryGet';
 import { getProducts } from '../../Constants/QueryFunctions/QueryFunctions';
 import { ProductTableContext } from '../../Constants/Contexts';
 
-
-interface ProductTableProps {
-    setSelectedRowData: React.Dispatch<React.SetStateAction<EditDialogInitialValues>>,
-}
-
-const ProductTable: React.FC<ProductTableProps> = ({setSelectedRowData}) => {
+const ProductTable: React.FC = () => {
     const queryClient = useQueryClient()
     const [rows, setRows] = React.useState<ProductTableRows[]>([])
     const [selectedRowId, setSelectedRowId] = React.useState<GridRowSelectionModel>()
     const apiRef = useGridApiRef();
     const { data } = useQueryGetProducts();
-    const{setIsRowSelected} = React.useContext(ProductTableContext)
+    const{setIsRowSelected, setSelectedRowData} = React.useContext(ProductTableContext)
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'Id', filterable: false, width: 70 },
@@ -42,6 +37,11 @@ const ProductTable: React.FC<ProductTableProps> = ({setSelectedRowData}) => {
         }
         fetchProducts()
     }, [data])
+
+    //query will become invalidated when put request goes through. The invalidation will cause the query to be refetched instantly. And as such, the cached data changes 
+    //when this data changes, the useEffect runs again - it ensures that the getProduct query has been run (will fetch its cache, if no cache exists will run the query)
+    //in this case a cache exists, so fetches this cache - we then reset the values for the rows in the table 
+    //why do we need the esnure bit - incase someone refreshed the page while on the merchandise page 
 
     React.useEffect (() => {
         const row = apiRef.current.getRow(selectedRowId ? selectedRowId[0] : '')

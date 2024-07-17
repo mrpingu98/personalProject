@@ -1,5 +1,5 @@
-import React from "react";
-import { DarkThemeContext } from "../../Constants/Contexts";
+import React, { useContext } from "react";
+import { DarkThemeContext, ProductTableContext } from "../../Constants/Contexts";
 import { Box, Dialog, DialogContent, TextField, Typography } from "@mui/material";
 import { ErrorHandling } from "../../Components/MutationErrorHandling";
 import { PrimaryButton } from "../../Components/PrimaryButton";
@@ -10,10 +10,9 @@ import { useMutationEditProducts } from "../../Hooks/useMutations";
 
 
 
-interface EditDialogProps {
+interface EditProductDialogProps {
     open: boolean,
     setOpen: (newState: boolean | ((prevState: boolean) => boolean)) => void,
-    selectedItemInitialValues: EditDialogInitialValues,
     setSnackbarActive: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
@@ -26,11 +25,12 @@ interface PayloadProps {
     newName: string
 }
 
-const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInitialValues, setSnackbarActive }) => {
+const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, setSnackbarActive }) => {
     const [error, setError] = React.useState<boolean>(false)
     const { darkTheme } = React.useContext(DarkThemeContext)
     const { t } = useTranslation('merchandiseAdmin')
     const {mutation} = useMutationEditProducts();
+    const {selectedRowData: selectedItemInitialValues} = React.useContext(ProductTableContext)
 
     const formik = useFormik({
         initialValues: { ...selectedItemInitialValues, newName: '' },
@@ -128,4 +128,4 @@ const EditDialog: React.FC<EditDialogProps> = ({ open, setOpen, selectedItemInit
     )
 }
 
-export { EditDialog }
+export { EditProductDialog }
