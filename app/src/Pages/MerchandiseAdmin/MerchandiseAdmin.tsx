@@ -4,7 +4,7 @@ import { LoginDialog } from "../../Components/LoginDialog";
 import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
 import { Box, Typography } from "@mui/material";
-import { DataTable } from "./Table";
+import { ProductTable } from "./ProductTable";
 import { EditDialog } from "./EditDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
@@ -43,7 +43,7 @@ const MerchandiseAdmin: React.FC = () => {
         </Box>
       </Box>
       <Box marginTop={4}>
-        <DataTable
+        <ProductTable
         setSelectedRowData={setSelectedRowData}
         />
       </Box>

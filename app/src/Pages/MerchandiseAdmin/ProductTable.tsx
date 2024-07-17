@@ -7,11 +7,11 @@ import { getProducts } from '../../Constants/QueryFunctions/QueryFunctions';
 import { ProductTableContext } from '../../Constants/Contexts';
 
 
-interface TableProps {
+interface ProductTableProps {
     setSelectedRowData: React.Dispatch<React.SetStateAction<EditDialogInitialValues>>,
 }
 
-const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
+const ProductTable: React.FC<ProductTableProps> = ({setSelectedRowData}) => {
     const queryClient = useQueryClient()
     const [rows, setRows] = React.useState<ProductTableRows[]>([])
     const [selectedRowId, setSelectedRowId] = React.useState<GridRowSelectionModel>()
@@ -84,4 +84,4 @@ const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
     );
 }
 
-export { DataTable }
+export { ProductTable }
