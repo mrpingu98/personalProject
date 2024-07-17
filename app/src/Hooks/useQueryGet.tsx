@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { get } from "../Store/apiStore";
 import { spotifyUserData, spotifyUserPlaylists, spotifyUserTopArtist, spotifyUserTopTracks } from "../Constants/Types/Spotify";
+import { apiEndpoints } from "../Store/Endpoints";
+import { getProducts } from "../Constants/QueryFunctions/QueryFunctions";
 
 interface UseQueryGet {
   data: any;
@@ -18,18 +20,19 @@ interface Props {
 
 
 export const useQueryGet = ({ url, key, enabled = true, header }: Props): UseQueryGet => {
-  const getRequest = async () => 
-    {
+  const getRequest = async () => {
       try{
         const data = await get(url, header)
         return data
       }
       catch(error: any){
-        // console.log(error)
-      }
-    }
-
+        console.log(error)
+      }}
   return useQuery({ queryKey: [key], queryFn: getRequest, enabled: enabled, refetchOnMount: false, refetchOnWindowFocus: false });
+}
+
+export const useQueryGetProducts = (): UseQueryGet => {
+  return useQuery({ queryKey: ['getProducts'], queryFn: getProducts, enabled: true, refetchOnMount: false, refetchOnWindowFocus: false });
 }
 
 

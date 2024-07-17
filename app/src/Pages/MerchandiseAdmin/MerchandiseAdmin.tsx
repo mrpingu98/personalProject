@@ -1,18 +1,24 @@
 import React from "react";
-import { EditProduct } from "./EditProduct";
-import { AddProduct } from "./AddProduct";
-import { DeleteProduct } from "./DeleteProduct";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { LoginDialog } from "../../Components/LoginDialog";
 import { useMutationPostLogout } from "../../Hooks/useMutations";
 import { apiEndpoints } from "../../Store/Endpoints";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { ProductTable } from "./ProductTable";
+import { EditProductDialog } from "./EditProductDialog";
+import { SnackBar } from "../../Components/SnackBar";
+import { useTranslation } from "react-i18next";
+import { ProductTableContext } from "../../Constants/Contexts";
 
 
 const MerchandiseAdmin: React.FC = () => {
+  const {t} = useTranslation('merchandiseAdmin')
   const [openLogin, setOpenLogin] = React.useState<boolean>(false)
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
-  
+  const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
+  const [snackbar, setSnackbar] = React.useState<boolean>(false);
+  const { isRowSelected } = React.useContext(ProductTableContext);
+
   const onClickLogin = () => {
     setOpenLogin(true)
   }
@@ -20,21 +26,48 @@ const MerchandiseAdmin: React.FC = () => {
     mutationLogout.mutate()
   }
 
-
   return (
     <>
-      <Box display='flex' flexDirection='row' justifyContent='flex-end'>
-        <Box marginRight={4}>
-          <PrimaryButton onClick={onClickLogin} text="Admin Login" />
+      <Box display='flex' flexDirection='row' justifyContent='space-between'>
+        <Box display='flex' flexDirection='column'>
+          <Typography variant="h1">{t('pmc')}</Typography>
         </Box>
-        <PrimaryButton onClick={onClickLogout} text="Admin Logout" />
+        <Box display='flex' flexDirection='column'>
+          <Box display="flex" flexDirection="row" marginTop={2}>
+            <Box marginRight={4}>
+              <PrimaryButton onClick={onClickLogin} text={t('adminLogin')} />
+            </Box>
+            <PrimaryButton onClick={onClickLogout} text={t('adminLogout')} />
+          </Box>
+        </Box>
       </Box>
-      <AddProduct />
-      <EditProduct />
-      <DeleteProduct />
+      <Box marginTop={4}>
+        <ProductTable
+        />
+      </Box>
+      <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
+        <Box marginRight={10}>
+          <PrimaryButton text='Add'/>
+        </Box>
+        <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
+        <Box marginLeft={10}>
+          <PrimaryButton text='Delete' disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
+        </Box>
+      </Box>
+
       <LoginDialog
         open={openLogin}
         setOpen={setOpenLogin}
+      />
+      <EditProductDialog
+        open={editDialogOpen}
+        setOpen={setEditDialogOpen}
+        setSnackbarActive={setSnackbar}
+      />
+      <SnackBar
+        snackbarActive={snackbar}
+        setSnackbarActive={setSnackbar}
+        message={t('changesSaved')}
       />
     </>
   )

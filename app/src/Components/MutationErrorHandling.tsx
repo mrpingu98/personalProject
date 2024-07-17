@@ -49,16 +49,16 @@ const ErrorHandling: React.FC<ErrorProps> = React.memo(({ mutation }) => {
     return (
         <>
             {networkError &&
-                <Typography color={'red'} marginTop={4}>{t('networkError')}</Typography>
+                <Typography variant='body2' color={'red'} marginTop={4}>{t('networkError')}</Typography>
             }
             {customError &&
-                <Typography color={'red'} marginTop={4}>{customError}</Typography>
+                <Typography variant='body2' color={'red'} marginTop={4}>{customError}</Typography>
             }
             {generalError &&
-                <Typography color={'red'} marginTop={4}>{t('generalError')}</Typography>
+                <Typography variant='body2' color={'red'} marginTop={4}>{t('generalError')}</Typography>
             }
             {unauthorisedError && 
-                <Typography color={'red'} marginTop={4}>{t('unauthorisedError')}</Typography>
+                <Typography variant='body2' color={'red'} marginTop={4}>{t('unauthorisedError')}</Typography>
             }
         </>
     )
