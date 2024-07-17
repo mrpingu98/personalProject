@@ -47,11 +47,11 @@ const MerchandiseAdmin: React.FC = () => {
       </Box>
       <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
         <Box marginRight={10}>
-          <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
+          <PrimaryButton text='Add'/>
         </Box>
-        <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
+        <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         <Box marginLeft={10}>
-          <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
+          <PrimaryButton text='Delete' disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         </Box>
       </Box>
 

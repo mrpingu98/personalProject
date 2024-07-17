@@ -19,7 +19,7 @@ const ProductTable: React.FC = () => {
         { field: 'name', headerName: 'Product', width: 300 },
         { field: 'description', headerName: 'Description', width: 300 },
         { field: 'price', headerName: 'Price', width: 300 },
-        { field: 'imageUrl', headerName: 'Image Url', width: 300}
+        { field: 'imageUrl', headerName: 'Image Url', width: 200}
     ];
 
     React.useEffect(() => {

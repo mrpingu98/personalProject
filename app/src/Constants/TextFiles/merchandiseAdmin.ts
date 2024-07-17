@@ -15,7 +15,9 @@ export const merchandiseAdmin = {
     pmc: 'Product Management Centre',
     adminLogin: 'Admin Login',
     adminLogout: 'Admin Logout',
-    tableError: 'There was an error loading the table. Please try again later.'
+    tableError: 'There was an error loading the table. Please try again later.',
+    submit: "Submit",
+    close: "Close"
 
 
 }

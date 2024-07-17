@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { DarkThemeContext, ProductTableContext } from "../../Constants/Contexts";
 import { Box, Dialog, DialogContent, TextField, Typography } from "@mui/material";
 import { ErrorHandling } from "../../Components/MutationErrorHandling";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { useTranslation } from "react-i18next";
-import { EditDialogInitialValues } from "../../Constants/Types/Product";
 import { useFormik } from 'formik';
 import { useMutationEditProducts } from "../../Hooks/useMutations";
 
@@ -24,6 +23,8 @@ interface PayloadProps {
     imageUrl: string,
     newName: string
 }
+//id isn't used atm - but can restructure back-end to use id to lookup product rather than using the name
+//and remove 'newName' variable 
 
 const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, setSnackbarActive }) => {
     const [error, setError] = React.useState<boolean>(false)
@@ -74,7 +75,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
 
                     <Box display='flex' flexDirection='column' alignItems='center'>
                         <form onSubmit={formik.handleSubmit}>
-                            <Typography variant='body1' marginTop='2%'>{t('name')}</Typography>
+                            <Typography variant='body1' marginTop='5%'>{t('name')}</Typography>
                             <TextField
                                 id="name"
                                 name="name"
@@ -82,7 +83,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
                                 value={formik.values.name}
                             />
 
-                            <Typography variant='body1' marginTop='2%'>{t('newName')}</Typography>
+                            <Typography variant='body1' marginTop='10%'>{t('newName')}</Typography>
                             <TextField
                                 id="newName"
                                 name="newName"
@@ -90,7 +91,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
                                 value={formik.values.newName}
                             />
 
-                            <Typography variant='body1' marginTop='2%'>{t('description')}</Typography>
+                            <Typography variant='body1' marginTop='10%'>{t('description')}</Typography>
                             <TextField
                                 id="description"
                                 name="description"
@@ -98,7 +99,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
                                 value={formik.values.description}
                             />
 
-                            <Typography variant='body1' marginTop='2%'>{t('price')}</Typography>
+                            <Typography variant='body1' marginTop='10%'>{t('price')}</Typography>
                             <TextField
                                 id="price"
                                 name="price"
@@ -106,7 +107,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
                                 value={formik.values.price}
                             />
 
-                            <Typography variant='body1' marginTop='2%'>{t('imageUrl')}</Typography>
+                            <Typography variant='body1' marginTop='10%'>{t('imageUrl')}</Typography>
                             <TextField
                                 id="imageUrl"
                                 name="imageUrl"
@@ -115,9 +116,9 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
                             />
                             {error && <ErrorHandling mutation={mutation} />}
                             <Box marginTop={2} display='flex' flexDirection='row' alignItems='center'>
-                                <PrimaryButton text='Submit' type='submit' />
+                                <PrimaryButton text={t('submit')} type='submit' />
                                 <Box marginLeft={12}>
-                                <PrimaryButton onClick={onClose} text='Close' />
+                                <PrimaryButton onClick={onClose} text={t('close')} />
                                 </Box>
                             </Box>
                         </form>
