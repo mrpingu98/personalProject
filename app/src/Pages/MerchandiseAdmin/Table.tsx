@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { EditDialogInitialValues, ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { useQueryGetProducts } from '../../Hooks/useQueryGet';
 import { getProducts } from '../../Constants/QueryFunctions/QueryFunctions';
+import { ProductTableContext } from '../../Constants/Contexts';
 
 
 interface TableProps {
@@ -16,6 +17,7 @@ const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
     const [selectedRowId, setSelectedRowId] = React.useState<GridRowSelectionModel>()
     const apiRef = useGridApiRef();
     const { data } = useQueryGetProducts();
+    const{setIsRowSelected} = React.useContext(ProductTableContext)
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'Id', filterable: false, width: 70 },
@@ -47,8 +49,6 @@ const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
     },[selectedRowId, rows])
     //added in rows as a depedency - so when you edit a product, if you reoopen the dialog, it will have updated the selectedRowData
 
-    //pass through slected row id, when it's an empty array, the edit/delete button should be disabled - maybe use useContext
-
     return (
         <div style={{ height: 400 }}>
             <DataGrid
@@ -66,6 +66,7 @@ const DataTable: React.FC<TableProps> = ({setSelectedRowData}) => {
                 disableMultipleRowSelection
                 onRowSelectionModelChange={(newRowSelectionModel) => {
                     setSelectedRowId(newRowSelectionModel)
+                    setIsRowSelected(newRowSelectionModel)
                   }}
                 rowSelectionModel={selectedRowId}
                 checkboxSelection

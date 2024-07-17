@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DarkThemeContextProvider from "./Components/DarkThemeContextProvider";
 import { TechnicalRoute } from "./Constants/Routes/TechnicalRoute";
+import ProductTableContextProvider from "./Components/ProductTableSelectedRowContextProvider";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +30,9 @@ function AppRoutes() {
       <MyProfileRoute />
       <ErrorRoute />
       <MerchandiseRoute />
-      <MerchandiseAdminRoute />
+      <ProductTableContextProvider>
+        <MerchandiseAdminRoute />
+      </ProductTableContextProvider>
       <TechnicalRoute />
     </>
   );

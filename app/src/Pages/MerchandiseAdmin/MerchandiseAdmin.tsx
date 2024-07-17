@@ -8,6 +8,7 @@ import { DataTable } from "./Table";
 import { EditDialog } from "./EditDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
+import { ProductTableContext } from "../../Constants/Contexts";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -17,6 +18,7 @@ const MerchandiseAdmin: React.FC = () => {
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
   const [selectedRowData, setSelectedRowData] = React.useState<any>()
+  const { isRowSelected } = React.useContext(ProductTableContext);
 
   const onClickLogin = () => {
     setOpenLogin(true)
@@ -47,7 +49,7 @@ const MerchandiseAdmin: React.FC = () => {
       </Box>
       <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
         <Box marginRight={10}>
-          <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} />
+          <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         </Box>
         <PrimaryButton text='Edit' onClick={() => setEditDialogOpen(true)} />
         <Box marginLeft={10}>
