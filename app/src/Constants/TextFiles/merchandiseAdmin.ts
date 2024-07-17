@@ -14,7 +14,8 @@ export const merchandiseAdmin = {
     changesSaved: 'Changes saved',
     pmc: 'Product Management Centre',
     adminLogin: 'Admin Login',
-    adminLogout: 'Admin Logout'
+    adminLogout: 'Admin Logout',
+    tableError: 'There was an error loading the table. Please try again later.'
 
 
 }
