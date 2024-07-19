@@ -1,5 +1,6 @@
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { createContext } from "react";
+import { ProductTableRows } from "./Types/Product";
 
 interface DarkThemeContextProps {
     darkTheme: boolean,
@@ -14,8 +15,16 @@ export const DarkThemeContext = createContext<DarkThemeContextProps>({darkTheme:
 interface ProductTableContextProps {
     isRowSelected: GridRowSelectionModel | undefined,
     setIsRowSelected: React.Dispatch<React.SetStateAction<GridRowSelectionModel | undefined>>,
-    selectedRowData: any,
-    setSelectedRowData: React.Dispatch<React.SetStateAction<any>>
+    selectedRowData: ProductTableRows,
+    setSelectedRowData: React.Dispatch<React.SetStateAction<ProductTableRows>>
 }
 
-export const ProductTableContext = createContext<ProductTableContextProps>({isRowSelected: [], setIsRowSelected: () => undefined, selectedRowData: {}, setSelectedRowData: () => {}})
+const initialValues = {
+    id: '',
+    name: '',
+    description: '',
+    price: 0,
+    imageUrl: ''
+}
+
+export const ProductTableContext = createContext<ProductTableContextProps>({isRowSelected: [], setIsRowSelected: () => undefined, selectedRowData: initialValues, setSelectedRowData: () => {}})
