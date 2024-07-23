@@ -9,6 +9,7 @@ import { EditProductDialog } from "./EditProductDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
 import { ProductTableContext } from "../../Constants/Contexts";
+import { DeleteProductDialog } from "./DeleteProductDialog";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -16,6 +17,7 @@ const MerchandiseAdmin: React.FC = () => {
   const [openLogin, setOpenLogin] = React.useState<boolean>(false)
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
   const { isRowSelected } = React.useContext(ProductTableContext);
 
@@ -51,7 +53,7 @@ const MerchandiseAdmin: React.FC = () => {
         </Box>
         <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         <Box marginLeft={10}>
-          <PrimaryButton text='Delete' disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
+          <PrimaryButton onClick={() => setDeleteDialogOpen(true)} text='Delete' disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         </Box>
       </Box>
 
@@ -63,6 +65,11 @@ const MerchandiseAdmin: React.FC = () => {
         open={editDialogOpen}
         setOpen={setEditDialogOpen}
         setSnackbarActive={setSnackbar}
+      />
+      <DeleteProductDialog 
+      open={deleteDialogOpen}
+      setOpen={setDeleteDialogOpen}
+      setSnackbarActive={setSnackbar}
       />
       <SnackBar
         snackbarActive={snackbar}

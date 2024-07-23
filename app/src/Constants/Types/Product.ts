@@ -29,7 +29,8 @@ export type ProductTableRows = {
     id: string,
     name: string,
     description: string,
-    price: number
+    price: number,
+    imageUrl: string
 }
 
 export type EditDialogInitialValues = {

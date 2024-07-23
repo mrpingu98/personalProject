@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridToolbar, useGridApiRef } from '@mui/x-data-grid';
-import { ProductTableRows } from '../../Constants/Types/Product';
+import { ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { useQueryGetProducts } from '../../Hooks/useQueryGet';
 import { ProductTableContext } from '../../Constants/Contexts';
 import { Typography } from '@mui/material';
@@ -26,7 +26,7 @@ const ProductTable: React.FC = () => {
         const fetchProducts = async () => {
             const response = await data
                 if(response){
-                    setRows(response.map((product: any) => ({
+                    setRows(response.map((product: ProductResponse) => ({
                         id: product.id,
                         name: product.name,
                         description: product.description,
