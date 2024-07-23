@@ -10,6 +10,7 @@ import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
 import { ProductTableContext } from "../../Constants/Contexts";
 import { DeleteProductDialog } from "./DeleteProductDialog";
+import { AddProductDialog } from "./AddProductDialog";
 
 
 const MerchandiseAdmin: React.FC = () => {
@@ -18,6 +19,7 @@ const MerchandiseAdmin: React.FC = () => {
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
   const [editDialogOpen, setEditDialogOpen] = React.useState<boolean>(false)
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState<boolean>(false)
+  const [addDialogOpen, setAddDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
   const { isRowSelected } = React.useContext(ProductTableContext);
 
@@ -49,11 +51,11 @@ const MerchandiseAdmin: React.FC = () => {
       </Box>
       <Box display='flex' flexDirection='row' justifyContent='center' marginTop={4}>
         <Box marginRight={10}>
-          <PrimaryButton text='Add'/>
+          <PrimaryButton text={t('add')} onClick={() => setAddDialogOpen(true)}/>
         </Box>
         <PrimaryButton text={t('edit')} onClick={() => setEditDialogOpen(true)} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         <Box marginLeft={10}>
-          <PrimaryButton onClick={() => setDeleteDialogOpen(true)} text='Delete' disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
+          <PrimaryButton onClick={() => setDeleteDialogOpen(true)} text={t('delete')} disabled={(isRowSelected == undefined ||isRowSelected?.length == 0) ? true : false}/>
         </Box>
       </Box>
 
@@ -70,6 +72,11 @@ const MerchandiseAdmin: React.FC = () => {
       open={deleteDialogOpen}
       setOpen={setDeleteDialogOpen}
       setSnackbarActive={setSnackbar}
+      />
+      <AddProductDialog 
+       open={addDialogOpen}
+       setOpen={setAddDialogOpen}
+       setSnackbarActive={setSnackbar}
       />
       <SnackBar
         snackbarActive={snackbar}

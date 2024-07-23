@@ -5,6 +5,7 @@ import { spotifyPost } from "../Store/apiStore";
 import { put, post, deletes } from "../Store/apiStore";
 import { CustomError } from "../Constants/Types/ErrorHandling";
 import { apiEndpoints } from "../Store/Endpoints";
+import { AddProductPayload } from "../Constants/Types/Product";
 
 
 interface Props {
@@ -61,6 +62,19 @@ export const useMutationAuthorisedPost = ({url, payload, key} : Props) => {
             onSuccess: () => {queryClient.invalidateQueries({queryKey: [key], refetchType: 'all'}), setSnackbar(true)}
         })
     return {mutation, snackbar, setSnackbar}
+}
+
+export const useMutationAddProducts = () => {
+    const queryClient = useQueryClient()
+    const accessToken = localStorage.getItem('loginAccessToken')
+    const header = { Authorization: "Bearer " + accessToken }
+    const mutation = useMutation<AxiosResponse, CustomError, any, unknown>({
+        mutationFn: async (payload: AddProductPayload) => await post(apiEndpoints.products, payload, header),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['getProducts'], refetchType: 'all' })
+        }
+    })
+    return {mutation}
 }
 
 export const useMutationEditProducts = () => {

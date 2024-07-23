@@ -20,5 +20,6 @@ export const merchandiseAdmin = {
     close: "Close",
     delete: 'Delete',
     deleteMessage: 'Are you sure you want to delete ',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    add: 'Add'
 }
