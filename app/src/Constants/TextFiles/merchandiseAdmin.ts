@@ -17,7 +17,8 @@ export const merchandiseAdmin = {
     adminLogout: 'Admin Logout',
     tableError: 'There was an error loading the table. Please try again later.',
     submit: "Submit",
-    close: "Close"
-
-
+    close: "Close",
+    delete: 'Delete',
+    deleteMessage: 'Are you sure you want to delete ',
+    cancel: 'Cancel'
 }

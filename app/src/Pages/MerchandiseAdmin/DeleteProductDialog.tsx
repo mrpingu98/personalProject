@@ -1,11 +1,8 @@
-import { Typography, TextField, Button, Box, Dialog, DialogContent } from '@mui/material';
+import { Typography, Box, Dialog, DialogContent } from '@mui/material';
 import React, { useContext } from 'react';
-import { LoadingCircle } from '../../Components/LoadingCircle';
-import { SnackBar } from '../../Components/SnackBar';
 import { useMutationAuthorisedDelete, useMutationDelete } from '../../Hooks/useMutations';
 import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
-import { DeleteProductPayload } from '../../Constants/Types/Product';
 import { ErrorHandling } from '../../Components/MutationErrorHandling';
 import { PrimaryButton } from '../../Components/PrimaryButton';
 import { DarkThemeContext, ProductTableContext } from '../../Constants/Contexts';
@@ -48,21 +45,17 @@ const DeleteProductDialog: React.FC<DeleteDialogProps> = ({open, setOpen, setSna
                 open={open}
             >
                 <DialogContent>
-                    <Typography variant='h1'>Delete Product</Typography>
-                    <Box display='flex' flexDirection='column' alignItems='center' marginTop={2}>
-                    <Typography variant='body1'>Are you sure you want to delete "{selectedRowData && selectedRowData.name}"?</Typography>
+                    <Box display='flex' flexDirection='column' alignItems='center'>
+                    <Typography variant='body1'>{t('deleteMessage')}"{selectedRowData && selectedRowData.name}"?</Typography>
                     {error && <ErrorHandling mutation={mutationDeleteProduct}/>}
                     <Box display='flex' flexDirection='row' justifyContent='space-between' marginTop={2}>
-                    <Button onClick={onClose}>Cancel</Button>
+                    <PrimaryButton text={t('cancel')} onClick={onClose} />
                     <Box marginLeft={4}>
-                    <Button onClick={onDelete}>Delete</Button>
+                    <PrimaryButton text={t('delete')} onClick={onDelete} />
                     </Box>
                     </Box>
                     </Box>           
                 </DialogContent>
-          
-                
-            
             </Dialog>
     </>
   )
