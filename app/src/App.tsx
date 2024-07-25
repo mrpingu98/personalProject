@@ -14,7 +14,7 @@ import { MerchandiseRoute } from "./Constants/Routes/MerchandiseRoute";
 import { MerchandiseAdminRoute } from "./Constants/Routes/MerchandiseAdminRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import DarkThemeContextProvider from "./Components/DarkThemeContextProvider";
+// import DarkThemeContextProvider from "./Components/DarkThemeContextProvider";
 import { TechnicalRoute } from "./Constants/Routes/TechnicalRoute";
 import ProductTableContextProvider from "./Components/ProductTableContextProvider";
 
@@ -43,12 +43,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Provider store={store}>
-          <DarkThemeContextProvider>
+          {/* <DarkThemeContextProvider> */}
           <Layout>
               <AppRoutes />
               <ReactQueryDevtools initialIsOpen={false} />
           </Layout>
-          </DarkThemeContextProvider>
+          {/* </DarkThemeContextProvider> */}
         </Provider>
       </BrowserRouter>
     </QueryClientProvider>

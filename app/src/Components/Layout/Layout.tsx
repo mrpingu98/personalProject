@@ -1,15 +1,16 @@
 import * as React from "react";
 import NavBar from "./Navbar";
 import { ReactNode } from "react";
-import { DarkThemeContext } from "../../Constants/Contexts";
+import { DarkThemeContext } from "../../Contexts/DarkThemeContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTypographyOverrides } from "../../Hooks/useTypographyOverrides";
+import DarkThemeContextProvider from "../../Contexts/DarkThemeContext";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Inner: React.FC<LayoutProps> = ({ children }) => {
   const { darkTheme } = React.useContext(DarkThemeContext);
   const { overrides } = useTypographyOverrides();
 
@@ -43,6 +44,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     </div>
   );
 };
+
+
+const Layout: React.FC<LayoutProps> = ({children}) => {
+  return(
+    <DarkThemeContextProvider>
+      <Inner children={children}/>
+    </DarkThemeContextProvider>
+
+  )
+}
+
+//promoting context creation where it is used (rather than wrapping povider around a component, wrap it within a component)
+
 
 export default Layout;
 
