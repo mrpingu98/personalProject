@@ -4,7 +4,7 @@ import { Button, DialogContent, TextField, Typography } from '@mui/material';
 import { UseMutationResult } from '@tanstack/react-query';
 import { CustomError } from '../Constants/Types/ErrorHandling';
 import { ErrorHandling } from './MutationErrorHandling';
-import { DarkThemeContext } from '../Constants/Contexts';
+import { DarkThemeContext } from '../Contexts/DarkThemeContext';
 
 
 interface Props {

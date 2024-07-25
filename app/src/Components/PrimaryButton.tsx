@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { DarkThemeContext } from "../Constants/Contexts";
+import { DarkThemeContext } from "../Contexts/DarkThemeContext";
 
 interface PrimaryButtonProps {
   onClick?: () => void;

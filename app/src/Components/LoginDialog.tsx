@@ -5,7 +5,7 @@ import { useMutationPostLogin } from '../Hooks/useMutations';
 import { apiEndpoints } from '../Store/Endpoints';
 import { ErrorHandling } from './MutationErrorHandling';
 import { PrimaryButton } from './PrimaryButton';
-import { DarkThemeContext } from '../Constants/Contexts';
+import { DarkThemeContext } from '../Contexts/DarkThemeContext';
 import { useTranslation } from 'react-i18next';
 
 

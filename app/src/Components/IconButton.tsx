@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { ReactNode } from "react";
-import { DarkThemeContext } from "../Constants/Contexts";
+import { DarkThemeContext } from "../Contexts/DarkThemeContext";
 
 interface IconButtonProps {
   icon: ReactNode,

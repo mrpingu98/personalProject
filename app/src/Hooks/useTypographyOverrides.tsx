@@ -1,5 +1,5 @@
 import React from "react"
-import { DarkThemeContext } from "../Constants/Contexts"
+import { DarkThemeContext } from "../Contexts/DarkThemeContext"
 
 export const useTypographyOverrides = () => {
 

@@ -5,7 +5,8 @@ import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
 import { ErrorHandling } from '../../Components/MutationErrorHandling';
 import { PrimaryButton } from '../../Components/PrimaryButton';
-import { DarkThemeContext, ProductTableContext } from '../../Constants/Contexts';
+import { ProductTableContext } from '../../Constants/Contexts';
+import { DarkThemeContext } from '../../Contexts/DarkThemeContext';
 
 interface DeleteDialogProps {
     open: boolean,
