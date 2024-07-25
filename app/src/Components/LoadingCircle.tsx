@@ -1,7 +1,7 @@
 
 import { Box, CircularProgress } from "@mui/material";
 import React from "react";
-import { DarkThemeContext } from "../Constants/Contexts";
+import { DarkThemeContext } from "../Contexts/DarkThemeContext";
 
 const LoadingCircle: React.FC = () => {
     const {darkTheme} = React.useContext(DarkThemeContext)

@@ -3,7 +3,7 @@ import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 import { TopSongsListItem } from "./TopSongsListItem";
 import { Typography } from "@mui/material";
-import { DarkThemeContext } from "../../Constants/Contexts";
+import { DarkThemeContext } from "../../Contexts/DarkThemeContext";
 
 interface TopSongsListProps {
   songUrlList: string[];

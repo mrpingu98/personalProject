@@ -8,12 +8,13 @@ import { ProductTable } from "./ProductTable";
 import { EditProductDialog } from "./EditProductDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
-import { ProductTableContext } from "../../Constants/Contexts";
+import { MerchandiseAdminContext } from "../../Contexts/MerchandiseAdminContext";
 import { DeleteProductDialog } from "./DeleteProductDialog";
 import { AddProductDialog } from "./AddProductDialog";
+import MerchandiseAdminContextProvider from "../../Contexts/MerchandiseAdminContext";
 
 
-const MerchandiseAdmin: React.FC = () => {
+const Inner: React.FC = () => {
   const {t} = useTranslation('merchandiseAdmin')
   const [openLogin, setOpenLogin] = React.useState<boolean>(false)
   const { mutation: mutationLogout } = useMutationPostLogout({ url: apiEndpoints.logout, payload: {} })
@@ -21,7 +22,7 @@ const MerchandiseAdmin: React.FC = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState<boolean>(false)
   const [addDialogOpen, setAddDialogOpen] = React.useState<boolean>(false)
   const [snackbar, setSnackbar] = React.useState<boolean>(false);
-  const { isRowSelected } = React.useContext(ProductTableContext);
+  const { isRowSelected } = React.useContext(MerchandiseAdminContext);
 
   const onClickLogin = () => {
     setOpenLogin(true)
@@ -84,6 +85,14 @@ const MerchandiseAdmin: React.FC = () => {
         message={t('changesSaved')}
       />
     </>
+  )
+}
+
+const MerchandiseAdmin: React.FC = () => {
+  return(
+  <MerchandiseAdminContextProvider>
+    <Inner />
+  </MerchandiseAdminContextProvider>
   )
 }
 

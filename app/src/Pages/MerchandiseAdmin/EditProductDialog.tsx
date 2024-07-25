@@ -1,11 +1,12 @@
 import React from "react";
-import { DarkThemeContext, ProductTableContext } from "../../Constants/Contexts";
+import { DarkThemeContext } from "../../Contexts/DarkThemeContext";
 import { Box, Dialog, DialogContent, TextField, Typography } from "@mui/material";
 import { ErrorHandling } from "../../Components/MutationErrorHandling";
 import { PrimaryButton } from "../../Components/PrimaryButton";
 import { useTranslation } from "react-i18next";
 import { useFormik } from 'formik';
 import { useMutationEditProducts } from "../../Hooks/useMutations";
+import { MerchandiseAdminContext } from "../../Contexts/MerchandiseAdminContext";
 
 
 
@@ -31,7 +32,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, setOpen, se
     const { darkTheme } = React.useContext(DarkThemeContext)
     const { t } = useTranslation('merchandiseAdmin')
     const {mutation} = useMutationEditProducts();
-    const {selectedRowData: selectedItemInitialValues} = React.useContext(ProductTableContext)
+    const {selectedRowData: selectedItemInitialValues} = React.useContext(MerchandiseAdminContext)
 
     const formik = useFormik({
         initialValues: { ...selectedItemInitialValues, newName: '' },

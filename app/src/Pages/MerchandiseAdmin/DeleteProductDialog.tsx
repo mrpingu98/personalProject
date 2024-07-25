@@ -5,7 +5,8 @@ import { apiEndpoints } from '../../Store/Endpoints';
 import { useTranslation } from 'react-i18next';
 import { ErrorHandling } from '../../Components/MutationErrorHandling';
 import { PrimaryButton } from '../../Components/PrimaryButton';
-import { DarkThemeContext, ProductTableContext } from '../../Constants/Contexts';
+import { MerchandiseAdminContext } from '../../Contexts/MerchandiseAdminContext';
+import { DarkThemeContext } from '../../Contexts/DarkThemeContext';
 
 interface DeleteDialogProps {
     open: boolean,
@@ -17,7 +18,7 @@ const DeleteProductDialog: React.FC<DeleteDialogProps> = ({open, setOpen, setSna
   const { t } = useTranslation('merchandiseAdmin')
   const { t: queryKey } = useTranslation('queryKeys')
   const {darkTheme} = useContext(DarkThemeContext)
-  const {selectedRowData} = useContext(ProductTableContext)
+  const {selectedRowData} = useContext(MerchandiseAdminContext)
   const [error, setError] = React.useState<boolean>(false)
   const { mutation: mutationDeleteProduct } = useMutationAuthorisedDelete({url: apiEndpoints.products, payload:{name: selectedRowData && selectedRowData.name}, key: queryKey('getProducts')})
 

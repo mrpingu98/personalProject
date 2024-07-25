@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { DarkThemeContext } from "../Constants/Contexts";
+import { DarkThemeContext } from "../Contexts/DarkThemeContext";
 
 interface LinkButtonProps {
   text?: string;

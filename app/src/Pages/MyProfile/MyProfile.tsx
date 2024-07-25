@@ -5,7 +5,7 @@ import { PrimaryButton } from "../../Components/PrimaryButton";
 import { authorisationRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/authorisationRequest";
 import { fetchTokenRequest } from "../../Store/SpotifyAPI/AuthorisationAndToken/fetchTokenRequest";
 import { styled } from '@mui/system';
-import { DarkThemeContext } from "../../Constants/Contexts";
+import { DarkThemeContext } from "../../Contexts/DarkThemeContext";
 
 export const MyProfile: React.FC = () => {
   const { t } = useTranslation("myProfile");
