@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridRowSelectionModel, GridToolbar, useGridApiRef } from '@mui/x-data-grid';
 import { ProductResponse, ProductTableRows } from '../../Constants/Types/Product';
 import { useQueryGetProducts } from '../../Hooks/useQueryGet';
-import { ProductTableContext } from '../../Constants/Contexts';
+import { MerchandiseAdminContext } from '../../Contexts/MerchandiseAdminContext';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ const ProductTable: React.FC = () => {
     const {t} = useTranslation('merchandiseAdmin')
     const apiRef = useGridApiRef();
     const { data, error } = useQueryGetProducts();
-    const{setIsRowSelected, setSelectedRowData} = React.useContext(ProductTableContext)
+    const{setIsRowSelected, setSelectedRowData} = React.useContext(MerchandiseAdminContext)
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'Id', filterable: false, width: 70 },
