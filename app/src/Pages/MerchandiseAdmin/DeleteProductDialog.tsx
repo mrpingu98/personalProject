@@ -14,7 +14,7 @@ interface DeleteDialogProps {
     setSnackbarActive: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const DeleteProductDialog: React.FC<DeleteDialogProps> = ({open, setOpen, setSnackbarActive}) => {
+const DeleteProductDialog: React.FC<DeleteDialogProps & WithDeleteDialogProps> = ({open, setOpen, setSnackbarActive, counter, toggle}) => {
   const { t } = useTranslation('merchandiseAdmin')
   const { t: queryKey } = useTranslation('queryKeys')
   const {darkTheme} = useContext(DarkThemeContext)
@@ -62,4 +62,39 @@ const DeleteProductDialog: React.FC<DeleteDialogProps> = ({open, setOpen, setSna
   )
 }
 
-export { DeleteProductDialog }
+interface WithDeleteDialogProps {
+  counter?: number;
+  toggle?: () => void;
+}
+
+// WithHomeProps Interface: Defines the additional props (counter and toggle) that the HOC will inject.
+
+// const withDeleteDialog = (Component: React.ComponentType<WithDeleteDialogProps>) => {
+//   const WrappedComponent: React.FC = (props) => {
+//     const  [counter, setCounter] = React.useState<number>(0)
+//     return (
+//       <Component 
+//       {...props}
+//       counter = {counter}
+//       toggle = {() => setCounter(counter + 1)}
+//       />
+//     )
+//   }
+//   return WrappedComponent
+// }
+
+const withDeleteDialog = <P extends object>(Component: React.ComponentType<P & WithDeleteDialogProps>): React.FC<P & WithDeleteDialogProps> => {
+  const WrappedComponent: React.FC<P & WithDeleteDialogProps> = (props) => {
+    const [counter, setCounter] = React.useState<number>(0);
+    return (
+      <Component
+        {...props}
+        counter={counter}
+        toggle={() => setCounter(counter + 1)}
+      />
+    );
+  };
+  return WrappedComponent;
+}
+
+export default withDeleteDialog(DeleteProductDialog)

@@ -9,7 +9,7 @@ import { EditProductDialog } from "./EditProductDialog";
 import { SnackBar } from "../../Components/SnackBar";
 import { useTranslation } from "react-i18next";
 import { MerchandiseAdminContext } from "../../Contexts/MerchandiseAdminContext";
-import { DeleteProductDialog } from "./DeleteProductDialog";
+import DeleteProductDialog from "./DeleteProductDialog";
 import { AddProductDialog } from "./AddProductDialog";
 import MerchandiseAdminContextProvider from "../../Contexts/MerchandiseAdminContext";
 
