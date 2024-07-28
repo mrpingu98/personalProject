@@ -7,6 +7,8 @@ import { ErrorHandling } from '../../Components/MutationErrorHandling';
 import { PrimaryButton } from '../../Components/PrimaryButton';
 import { MerchandiseAdminContext } from '../../Contexts/MerchandiseAdminContext';
 import { DarkThemeContext } from '../../Contexts/DarkThemeContext';
+import { withDeleteDialog } from '../../HOC\'s/DeletDialogHoc';
+import { WithDeleteDialogProps } from '../../Constants/Types/HOC';
 
 interface DeleteDialogProps {
     open: boolean,
@@ -60,41 +62,6 @@ const DeleteProductDialog: React.FC<DeleteDialogProps & WithDeleteDialogProps> =
             </Dialog>
     </>
   )
-}
-
-interface WithDeleteDialogProps {
-  counter?: number;
-  toggle?: () => void;
-}
-
-// WithHomeProps Interface: Defines the additional props (counter and toggle) that the HOC will inject.
-
-// const withDeleteDialog = (Component: React.ComponentType<WithDeleteDialogProps>) => {
-//   const WrappedComponent: React.FC = (props) => {
-//     const  [counter, setCounter] = React.useState<number>(0)
-//     return (
-//       <Component 
-//       {...props}
-//       counter = {counter}
-//       toggle = {() => setCounter(counter + 1)}
-//       />
-//     )
-//   }
-//   return WrappedComponent
-// }
-
-const withDeleteDialog = <P extends object>(Component: React.ComponentType<P & WithDeleteDialogProps>): React.FC<P & WithDeleteDialogProps> => {
-  const WrappedComponent: React.FC<P & WithDeleteDialogProps> = (props) => {
-    const [counter, setCounter] = React.useState<number>(0);
-    return (
-      <Component
-        {...props}
-        counter={counter}
-        toggle={() => setCounter(counter + 1)}
-      />
-    );
-  };
-  return WrappedComponent;
 }
 
 export default withDeleteDialog(DeleteProductDialog)
