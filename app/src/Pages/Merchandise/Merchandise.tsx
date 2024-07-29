@@ -7,7 +7,7 @@ import { useQueryGet } from "../../Hooks/useQueryGet"
 import { LoadingCircle } from "../../Components/LoadingCircle";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
-import { routes } from "../../Constants/Routes/RoutesEndpoints";
+import { routes } from "../../Constants/routes";
 import { useQueryGetProducts } from "../../Hooks/useQueryGet";
 
 

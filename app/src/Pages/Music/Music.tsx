@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { TopSongsList } from "./TopSongsList";
 import { useTranslation } from "react-i18next";
 import { LinkButton } from "../../Components/LinkButton";
-import { routes } from "../../Constants/Routes/RoutesEndpoints";
+import { routes } from "../../Constants/routes";
 import useTopSongsList from "../../Hooks/useTopSongsList";
 import { styled } from '@mui/system';
 

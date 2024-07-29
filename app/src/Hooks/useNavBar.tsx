@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { routes } from "../Constants/Routes/RoutesEndpoints";
+import { routes } from "../Constants/routes";
 
 const useNavBar = () => {
     const navigate = useNavigate();
@@ -16,9 +16,6 @@ const useNavBar = () => {
       }
       if (page === t("technical")) {
         navigate(routes.technical);
-      }
-      else {
-        console.log(`Page URL not found for: ${page}`);
       }
     };
 
